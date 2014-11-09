@@ -34,5 +34,9 @@
     "url": "git://github.com/shupengfei/meetup2.git"
   },
   "author": "shupengfei",
-  "license": ""
+  "license": "",
+  "devDependencies": {
+    "sails-memory": "~0.10.3",
+    "supertest": "~0.14.0"
+  }
 }

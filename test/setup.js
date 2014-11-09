@@ -6,7 +6,16 @@ before(function(done) {
   Sails.lift({
     log: {
       noShip: true
+    },
+    connections: {
+      memory: {
+        adapter: 'sails-memory'
+      }
+    },
+    models: {
+      connection: 'memory'
     }
+
   }, done);
 });
 
