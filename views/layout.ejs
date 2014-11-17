@@ -38,17 +38,14 @@
   </head>
 
   <body>
-
-
-
-  <% include component/navbar %>
-
-  <% include component/promote %>
-  <div  class="container">
+    <% include component/navbar %>
     <div id ="main">
-      <%- body %>
+
+      <% include component/promote %>
+      <div  class="container">
+        <%- body %>
+      </div>
     </div>
-  </div>
 
     <!--
         Client-side Templates
@@ -72,7 +69,7 @@
     -->
 
     <!--TEMPLATES-->
-
+    
     <!--TEMPLATES END-->
 
 
