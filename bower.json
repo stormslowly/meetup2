@@ -1,0 +1,24 @@
+{
+  "name": "meetup2",
+  "version": "0.0.1",
+  "homepage": "https://github.com/stormslowly/meetup2",
+  "authors": [
+    "stormslowly <stormslowly@gmail.com>"
+  ],
+  "description": "meetup clone",
+  "keywords": [
+    "meetup"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.1"
+  }
+}

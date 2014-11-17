@@ -21,6 +21,5 @@ before(function(done) {
 
 
 after(function(done) {
-
   Sails.lower(done);
 });
