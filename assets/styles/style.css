@@ -1,25 +1,65 @@
 #main {
   margin-top: 50px;
 }
-
-#what-is-it{
+#what-is-it {
   width: 1000px;
   margin: 50px auto;
-  color:#fff;
+  color: #fff;
 }
-
-#what-is-it h1{
+#what-is-it h1 {
   font-size: 75px;
 }
-
-#what-is-it span{
+.small-desc {
   display: block;
   width: 500px;
   font-size: 22px;
 }
-
-#what-is-it a{
+#what-is-it a {
+  padding: 5px;
   border-radius: 3px;
+  border: #fff 2px solid;
   color: #fff;
-  font-size: 50px;
+  font-size: 30px;
+}
+#what-is-it a:hover {
+  text-decoration: blink;
+  background: #fff;
+  color: #000;
+  border-radius: 3px;
+  border: #fff 2px solid;
+  font-size: 30px;
+}
+.meetup-card {
+  background-size: cover;
+  height: 300px;
+  width: 100%;
+  background-image: url(http://photos4.meetupstatic.com/photo_api/event/rx226x172/sg4497365dbe/301245092.jpeg);
+  position: relative;
+}
+.meetups-members {
+  height: 80px;
+  border-left: 1px #ddd solid;
+  border-right: 1px #ddd solid;
+  border-bottom: 1px #ddd solid;
+}
+.nametag-card-name {
+  background: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0%, rgba(22, 24, 27, 0)), color-stop(72px, rgba(22, 24, 27, .7)), color-stop(100%, rgba(22, 24, 27, .9)));
+  background: -webkit-linear-gradient(top, rgba(22, 24, 27, 0), rgba(22, 24, 27, .7) 72px, rgba(22, 24, 27, .9));
+  background: -moz-linear-gradient(top, rgba(22, 24, 27, 0), rgba(22, 24, 27, .7) 72px, rgba(22, 24, 27, .9));
+  background: -o-linear-gradient(top, rgba(22, 24, 27, 0), rgba(22, 24, 27, .7) 72px, rgba(22, 24, 27, .9));
+  background: -ms-linear-gradient(top, rgba(22, 24, 27, 0), rgba(22, 24, 27, .7) 72px, rgba(22, 24, 27, .9));
+  background: linear-gradient(top, rgba(22, 24, 27, 0), rgba(22, 24, 27, .7) 72px, rgba(22, 24, 27, .9));
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  line-height: 27px;
+  display: block;
+  color: #fff;
+  padding: 81px 18px 0;
+  orphans: 2;
+  vertical-align: bottom;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0
 }

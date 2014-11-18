@@ -6,6 +6,11 @@
  */
 
 module.exports = {
-	
-};
 
+  find: function(req, res) {
+    return res.view('meetups', {
+      meetups: ['nokia', 'nodejs', 'python', 'lua', 'Golag']
+    });
+  }
+
+};
