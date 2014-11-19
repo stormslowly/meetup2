@@ -1,3 +1,4 @@
+'use strict';
 /**
  * MeetController
  *
@@ -5,12 +6,4 @@
  * @help        :: See http://links.sailsjs.org/docs/controllers
  */
 
-module.exports = {
-
-  find: function(req, res) {
-    return res.view('meetups', {
-      meetups: ['nokia', 'nodejs', 'python', 'lua', 'Golag']
-    });
-  }
-
-};
+module.exports = {};
