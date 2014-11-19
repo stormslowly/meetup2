@@ -33,15 +33,39 @@
   background-size: cover;
   height: 300px;
   width: 100%;
-  background-image: url(http://photos4.meetupstatic.com/photo_api/event/rx226x172/sg4497365dbe/301245092.jpeg);
+  background-image: url(/images/meetup-bg.jpeg);
   position: relative;
 }
-.meetups-members {
+.meetups-info {
   height: 80px;
   border-left: 1px #ddd solid;
   border-right: 1px #ddd solid;
   border-bottom: 1px #ddd solid;
+  font-size: 18px;
 }
+
+.meetups-info .meetup-members{
+  padding-top: 20px;
+  padding-left: 20px;
+}
+
+.meetup-members span{
+  font-size: 15px;
+  color: #878787;
+  color: rgba(0,0,0,.47);
+}
+
+.meetup-date {
+  font-size: 13px;
+  color: #878787;
+  color: rgba(0,0,0,.47);
+  padding-left:40px;
+}
+.nametag-card-name:hover {
+  text-decoration: blink;
+  color:#fff;
+}
+
 .nametag-card-name {
   background: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0%, rgba(22, 24, 27, 0)), color-stop(72px, rgba(22, 24, 27, .7)), color-stop(100%, rgba(22, 24, 27, .9)));
   background: -webkit-linear-gradient(top, rgba(22, 24, 27, 0), rgba(22, 24, 27, .7) 72px, rgba(22, 24, 27, .9));
@@ -62,4 +86,9 @@
   position: absolute;
   bottom: 0;
   left: 0
+}
+
+.nametag-card-name h3{
+  margin-bottom: 30px;
+  line-height: 1.2;
 }

@@ -1,21 +1,18 @@
 
 <div class="container">
   <div class="row">
-
     <% for(var i=0; i<meetups.length; i++) {%>
-
       <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-
           <div class="meetup-card">
-
             <a href ="#" class="nametag-card-name">
-
-            <%= meetups[i] %>
+              <h3>
+                <%= meetups[i] %>
+              </h3>
             </a>
-
           </div>
-          <div class="meetups-members">
-              150 rockers
+          <div class="meetups-info">
+              <div class="meetup-members">150 <span>rockers</span></div>
+              <div class="meetup-date">Meetup At: Dec 27</div>
           </div>
       </div>
     <% } %>
