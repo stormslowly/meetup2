@@ -35,6 +35,11 @@ module.exports.routes = {
   '/': {
     'controller': 'Home',
     'action': 'index'
+  },
+
+  'POST /mailhook': {
+    'controller': 'Mailhook',
+    'action': 'hook'
   }
 
   /***************************************************************************

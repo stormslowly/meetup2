@@ -7,6 +7,9 @@ before(function(done) {
     log: {
       noShip: true
     },
+    hooks: {
+      grunt: false
+    },
     connections: {
       memory: {
         adapter: 'sails-memory'

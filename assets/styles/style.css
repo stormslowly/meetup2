@@ -30,6 +30,7 @@
   font-size: 30px;
 }
 .meetup-card {
+  margin-top: 15px;
   background-size: cover;
   height: 300px;
   width: 100%;
