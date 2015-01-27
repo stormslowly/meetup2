@@ -1,1 +1,1 @@
-nodemon -w api -w config  --ext js,ejs,css  --exec run.bat
+nodemon -w api -w config  --ext js,less  --exec run.bat

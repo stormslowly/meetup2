@@ -12,4 +12,8 @@ module.exports = {
           meetups: ['nokia', 'nodejs', 'python', 'lua', 'Golag']
     });
   },
+
+  calender:function function_name (req,res) {
+    return res.view('calender');
+  }
 };
