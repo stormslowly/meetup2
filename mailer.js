@@ -1,3 +1,4 @@
+'use strict';
 var mailin = require('mailin');
 
 /* Start the Mailin server. The available options are:
@@ -15,7 +16,11 @@ var mailin = require('mailin');
  * parsed message. */
 
 /* Access simplesmtp server instance. */
-mailin.on('authorizeUser', function(connection, username, password, done) {
+mailin.on('validateRecipient', function(connection, toEmail, done) {
+  done(null, true);
+});
+
+mailin.on('validateSender', function(connection, fromEmail, done) {
   done(null, true);
 });
 
@@ -32,21 +37,20 @@ mailin.on('startMessage', function(connection) {
 });
 
 /* Event emitted after a message was received and parsed. */
-mailin.on('message', function(connection, data, content) {
+mailin.on('message', function(connection, data) {
   console.log(data);
-  /* Do something useful with the parsed message here.
-   * Use parsed message `data` directly or use raw message `content`. */
 });
 
 mailin.on('dataReady', function(connection) {
   console.log('end data');
-})
+
+});
 
 mailin.start({
   port: 25,
   disableWebhook: true, // Disable the webhook posting.
-  logLevel: 'debug',
-  debug: 'true',
+  // logLevel: 'debug',
+  // debug: 'true',
   smtpOptions: {
     disableDNSValidation: true
   }
