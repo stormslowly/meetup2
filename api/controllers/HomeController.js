@@ -9,11 +9,18 @@
 module.exports = {
   index: function(req, res) {
     return res.view('meetups', {
-          meetups: ['nokia', 'nodejs', 'python', 'lua', 'Golag']
+          meetups: ['nokia', 'nodejs', 'python', 'lua', 'Golag', 'Linux']
     });
   },
 
   calender:function function_name (req,res) {
     return res.view('calender');
+  },
+
+  show: function function_name (req, res) {
+  	console.log('come to showlayner');
+  	return res.view('detail', {layout:null});
+
   }
+
 };
