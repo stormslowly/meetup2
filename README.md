@@ -2,11 +2,13 @@
 
 a [Sails](http://sailsjs.org) application
 
-To run this App, You also need run below commands to install other packages:
+First sails shall be installed with npm.
+
+Second you also need run below commands to install other packages, it is because in this project we also used some third part package. Bower is an enhanced package
+management tool which can handle the package dependience well. 
 
 - npm i bower -g
 - bower i
-- npm i
 
 And before installing those package, you need config proxy in system environment, git, npm and bower as well.
 
