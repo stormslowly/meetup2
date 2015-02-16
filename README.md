@@ -10,7 +10,6 @@ management tool which can handle the package dependience well.
 - `npm i bower -g`
 - `bower i`
 - `npm i`
-- `npm install sails-disk`
 
 And before installing those package, you need config proxy in system environment, `git`, `npm` and `bower` as well.
 
