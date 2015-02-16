@@ -11,7 +11,8 @@ management tool which can handle the package dependience well.
 - `bower i`
 - `npm i`
 
-And before installing those package, you need config proxy in system environment, `git`, `npm` and `bower` as well.
+## NOTE:
+There might be problem during install the package in office networks environment, especially in Mainland China where is under GFW. Before installing those package, you need config proxy in system environment, `git`, `npm` and `bower` as well.
 
 The command to set git proxy:
 
