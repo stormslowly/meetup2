@@ -23,7 +23,7 @@ The command to set npm proxy is:
 - `npm config set proxy http://proxy.company.com:8080`
 - `npm config set https-proxy http://proxy.company.com:8080`
 
-And you can edit .bowerrc to set the proxy for bower, below is one example:
+And you can edit `.bowerrc` to set the proxy for `bower`, below is one example:
 
 ```
 {
