@@ -4,7 +4,7 @@ a [Sails](http://sailsjs.org) application
 
 First sails shall be installed with npm.
 
-Second you also need run below commands to install other packages, it is because in this project we also used some third part package. Bower is an enhanced package
+Second you also need run below commands to install other packages, it is because in this project we also used some third-party package. **Bower** is an enhanced package
 management tool which can handle the package dependience well. 
 
 - `npm i bower -g`
@@ -12,7 +12,7 @@ management tool which can handle the package dependience well.
 - `npm i`
 - `npm install sails-disk`
 
-And before installing those package, you need config proxy in system environment, git, npm and bower as well.
+And before installing those package, you need config proxy in system environment, `git`, `npm` and `bower` as well.
 
 The command to set git proxy:
 
