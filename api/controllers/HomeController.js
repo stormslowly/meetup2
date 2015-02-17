@@ -9,7 +9,7 @@
 module.exports = {
   index: function(req, res) {
     return res.view('meetups', {
-          meetups: ['nokia', 'nodejs', 'python', 'lua', 'Golag', 'Linux']
+          meetups: ['nokia', 'nodejs', 'python', 'lua', 'Golag', 'Linux'], linkname: 'show'
     });
   },
 
@@ -19,7 +19,15 @@ module.exports = {
 
   show: function function_name (req, res) {
   	console.log('come to showlayner');
-  	return res.view('detail', {layout:null});
+    Event.create({name:'WangGang'}, function(err, evt){
+      if (err) console.log(err);
+      console.log("database insert OK:" + JSON.stringify(evt));
+    });
+
+    Event.find({}, function (err, events) {
+      console.log(events);
+      res.view('detail', {events:events});
+    });
 
   }
 

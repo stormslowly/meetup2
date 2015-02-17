@@ -438,6 +438,10 @@
     </div>
 
     <div id="fb_root" class="fb_reset"></div>
+    <% events.forEach(function(event){ %>
+        <li><%= event.name %></li>
+    <% }); %>
+
 </body>
 
 </html>
