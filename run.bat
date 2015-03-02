@@ -1,1 +1,1 @@
-node_modules\.bin\sails.cmd lift
+node_modules\.bin\sails.cmd console

@@ -23,7 +23,8 @@
     "grunt-contrib-less": "0.11.1",
     "grunt-contrib-coffee": "~0.10.1",
     "chai": "~1.9.2",
-    "mailin": "~1.0.0"
+    "mailin": "~1.0.0",
+    "ldapjs": "~0.7.1"
   },
   "scripts": {
     "start": "node app.js",

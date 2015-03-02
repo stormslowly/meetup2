@@ -37,13 +37,23 @@ module.exports.routes = {
     'action': 'index'
   },
 
-  '/calender':{
-    'controller':'Home',
+  'GET /login': {
+    'controller': 'Landing',
+    'action': 'login'
+  },
+
+  'POST /auth/login': {
+    'controller': 'Auth',
+    'action': 'login'
+  },
+
+  '/calender': {
+    'controller': 'Home',
     'action': 'calender'
   },
 
-  '/show':{
-    'controller':'Home',
+  '/show': {
+    'controller': 'Home',
     'action': 'show'
   },
 
