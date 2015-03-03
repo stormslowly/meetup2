@@ -3,6 +3,15 @@
 something
 
 
+  <ul>
+    <% req.flash('error').forEach(function(error){ %>
+      <li ><%= error %></li>
+    <% }) %>
+  </ul>
+
+
+
+
 <form action="/auth/login" method="POST">
 
 UID  <input type="text" name="uid" />

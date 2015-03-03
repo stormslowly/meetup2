@@ -13,10 +13,8 @@ module.exports = {
       url: sails.config.ldap.server
     });
 
-    client.bind('', '', function(err) {
-      if (err) {
-        return callback(err);
-      }
+    client.bind(dn, password, function(err) {
+      return callback(err);
     });
 
   },
@@ -47,7 +45,9 @@ module.exports = {
         });
 
         response.on('end', function() {
-          console.log('logs', entrys[0]);
+          if (entrys.length === 0) {
+            return callback(Error('NO SUCH uid'), null);
+          }
           var entry = entrys[0];
           return callback(null, entry);
         });

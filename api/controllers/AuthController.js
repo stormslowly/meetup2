@@ -1,12 +1,5 @@
 'use strict';
 /* global User, LDAPUtils*/
-/**
- * AuthController
- *
- * @description :: Server-side logic for managing auths
- * @help        :: See http://links.sailsjs.org/docs/controllers
- */
-
 
 module.exports = {
 
@@ -37,8 +30,9 @@ module.exports = {
         LDAPUtils.auth(user.dn, req.body.password, function(error) {
 
           if (error) {
-
-            return res.negoation(error);
+            req.flash('error', 'bad user name or password');
+            req.flash('error', 'server just dont like you');
+            return res.redirect('/login');
           }
 
           return res.json(user);
@@ -50,7 +44,8 @@ module.exports = {
         LDAPUtils.searchByUID(req.body.uid, function(err, entry) {
 
           if (err) {
-            return res.redirect('/');
+            req.flash('error', 'bad uid');
+            return res.redirect('/login');
           }
 
           User.create({

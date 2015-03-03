@@ -2,7 +2,7 @@
 
 var supertest = require('supertest');
 
-describe.only('LDAP auth', function() {
+describe('LDAP auth', function() {
   it('should log faile with empty uid either password', function(done) {
 
     supertest(sails.hooks.http.app)
@@ -25,12 +25,12 @@ describe.only('LDAP auth', function() {
       });
   });
 
-  it('should log failed with wrong password ', function(done) {
+  it.skip('should log failed with wrong password ', function(done) {
     supertest(sails.hooks.http.app)
       .post('/auth/login')
       .send({
         uid: 'pshu',
-        password: 'Dongguan99'
+        password: 'somepassword'
       })
       .expect(200)
       .end(function(err) {
@@ -42,7 +42,7 @@ describe.only('LDAP auth', function() {
           .post('/auth/login')
           .send({
             uid: 'pshu',
-            password: 'XDongguan99'
+            password: 'Xsomepassword'
           })
           .expect(200)
           .end(function(err) {
