@@ -11,6 +11,10 @@ management tool which can handle the package dependience well.
 - `bower i`
 - `npm i`
 
+Third, mysql is used in this app. So both Mysql and sails-mysql shall be installed.
+
+- `npm install sails-mysql`
+
 ## NOTE:
 There might be problem during install the package in office networks environment, especially in Mainland China where is behind GFW. Before installing those package, you need config proxy in system environment, `git`, `npm` and `bower` as well.
 
