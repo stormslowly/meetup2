@@ -12,8 +12,8 @@ module.exports = {
   tableName: 'event',
 
   config: {
-      user: 'root',
-      password: '',
+      user: 'meetup_root',
+      password: 'coach1234',
       database: 'meetup',
       host: '127.0.0.1'
 
