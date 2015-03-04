@@ -19,16 +19,34 @@ module.exports = {
 
   show: function function_name (req, res) {
   	console.log('come to showlayner');
-    Event.create({name:'WangGang'}, function(err, evt){
-      if (err) console.log(err);
-      console.log("database insert OK:" + JSON.stringify(evt));
-    });
-
+    
     Event.find({}, function (err, events) {
       console.log(events);
-      res.view('detail', {events:events});
+      res.view('detail', {events:events, layout:null});
     });
 
+  },
+
+  createEvent: function function_name(req, res){
+
+    console.log('create some event');
+    
+    var newEvent = {
+      name: 'Clean Code Contest 2015',
+      topic:' Clean Code Contest', 
+      coach:'Shu Pengfei',
+      address: "Boston@16F",
+      EventDate: 2015-3-4
+    };
+
+    Event.create(newEvent, function(err, evt){
+      if (err) console.log(err);
+      console.log("Event create successfully" + JSON.stringify(evt));
+      res.view('EventCreated', {events: evt, layout:null});
+
+    });
+
+    
   }
 
 };
