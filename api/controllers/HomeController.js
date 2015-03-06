@@ -8,8 +8,11 @@
 
 module.exports = {
   index: function(req, res) {
+
+
     return res.view('meetups', {
-          meetups: ['nokia', 'nodejs', 'python', 'lua', 'Golag', 'Linux'], linkname: 'show'
+      meetups: ['nokia', 'nodejs', 'python', 'lua', 'Golag', 'Linux'],
+      linkname: 'show'
     });
   },
 
@@ -22,20 +25,24 @@ module.exports = {
     
   },
 
-  show: function function_name (req, res) {
-  	console.log('come to showlayner');
-    
-    Event.find({}, function (err, events) {
+
+  show: function function_name(req, res) {
+    console.log('come to showlayner');
+
+    Event.find({}, function(err, events) {
       console.log(events);
-      res.view('detail', {events:events, layout:null});
+      res.view('detail', {
+        events: events,
+        layout: null
+      });
     });
 
   },
 
-  createEvent: function function_name(req, res){
+  createEvent: function function_name(req, res) {
 
     console.log('create some event');
-    
+
     var newEvent = {
       eventTopic: 'Clean Code Contest 2015',
       eventDesc:' Clean Code Contest', 
@@ -44,24 +51,25 @@ module.exports = {
       eventDate: 2015-3-4
     };
 
-    Event.create(newEvent, function(err, evt){
-      if (err) console.log(err);
-      console.log("Event create successfully" + JSON.stringify(evt));
-      res.view('EventCreated', {events: evt, layout:null});
+    Event.create(newEvent, function(err, evt) {
+      if (err) {
+        console.log(err);
+      }
+      console.log('Event create successfully' + JSON.stringify(evt));
+      res.view('EventCreated', {
+        events: evt,
+        layout: null
+      });
 
     });
-
     
   },
 
   cleanEvent: function function_name(req, res){
 
-    Event.destroy({eventDesc: 'Clean Code Contest'}).exec(function deleteCB(err){
-      console.log(' The record has been deleted');
+    Event.destroy({id:{'>':1}}).exec(function deleteCB(err){
+      console.log(' records has been deleted');
     });
-    Event.destroy({id:1}).exec(function deleteCB(err){
-      console.log(' id 1 record has been deleted');
-    });
-  }
+  },
 
 };

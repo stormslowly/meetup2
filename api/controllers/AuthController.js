@@ -16,6 +16,12 @@ module.exports = {
 
   login: function(req, res) {
 
+    var loginFailed = function() {
+      req.flash('error', 'bad user name or password');
+      req.flash('error', 'server just dont like you');
+      res.redirect('/login');
+    };
+
     req.validate({
       uid: 'string',
       password: 'string'
@@ -30,12 +36,12 @@ module.exports = {
         LDAPUtils.auth(user.dn, req.body.password, function(error) {
 
           if (error) {
-            req.flash('error', 'bad user name or password');
-            req.flash('error', 'server just dont like you');
-            return res.redirect('/login');
+            return loginFailed();
           }
 
-          return res.json(user);
+          req.session.user = user;
+
+          return res.ok(user);
 
         });
 
@@ -56,8 +62,16 @@ module.exports = {
           }, function(err, user) {
 
             if (err) {
-              res.redirect('/');
+              req.flash('error', 'Server got sick');
+              res.redirect(500, '/login');
             }
+
+            LDAPUtils.auth(entry.uid, req.body.password,
+              function(err) {
+                if (err) {
+                  return loginFailed();
+                }
+              });
             res.ok(user);
           });
         });
