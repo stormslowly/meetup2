@@ -57,6 +57,11 @@ module.exports.routes = {
     'action': 'show'
   },
 
+  '/createEvent': {
+    'controller': 'Home',
+    'action': 'createEvent'
+  },
+
   'POST /mailhook': {
     'controller': 'Mailhook',
     'action': 'hook'
