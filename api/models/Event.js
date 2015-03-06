@@ -8,11 +8,11 @@
 module.exports = {
 
   attributes: {
-    name: 'string',
-    topic: 'string',
-    coach: 'string',
-    address: 'string',
-    EventDate: 'date',
+    eventTopic: 'string',
+    eventDesc: 'string',
+    eventOrganizer: 'string',
+    eventAddress: 'string',
+    eventDate: 'date',
   }
 
 };

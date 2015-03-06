@@ -14,7 +14,12 @@ module.exports = {
   },
 
   calender:function function_name (req,res) {
-    return res.view('calender');
+    
+    Event.find({}, function (err, events) {
+      console.log(events);
+      res.view('calender', {events:events});
+    });
+    
   },
 
   show: function function_name (req, res) {
@@ -32,11 +37,11 @@ module.exports = {
     console.log('create some event');
     
     var newEvent = {
-      name: 'Clean Code Contest 2015',
-      topic:' Clean Code Contest', 
-      coach:'Shu Pengfei',
-      address: "Boston@16F",
-      EventDate: 2015-3-4
+      eventTopic: 'Clean Code Contest 2015',
+      eventDesc:' Clean Code Contest', 
+      eventOrganizer:'Shu Pengfei',
+      eventAddress: "Boston@16F",
+      eventDate: 2015-3-4
     };
 
     Event.create(newEvent, function(err, evt){
@@ -47,6 +52,16 @@ module.exports = {
     });
 
     
+  },
+
+  cleanEvent: function function_name(req, res){
+
+    Event.destroy({eventDesc: 'Clean Code Contest'}).exec(function deleteCB(err){
+      console.log(' The record has been deleted');
+    });
+    Event.destroy({id:1}).exec(function deleteCB(err){
+      console.log(' id 1 record has been deleted');
+    });
   }
 
 };

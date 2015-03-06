@@ -8,6 +8,22 @@
         Thirday JAN 1
       </div>
       <ul>
+      <% for(var i=0; i<events.length; i++) {%>
+
+        <li class="meetup-calender">
+
+          <div class="meetup-time col-xs-2 col-sm-2 col-md-2 col-lg-2">
+            7:00 PM
+          </div>
+          <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+            <div class="meetup-localtion"><%= events[i].eventAddress %></div>
+            <div class="meetup-title"><%= events[i].eventTopic %></div>
+            <div class="meetup-members">7 <span>hacks Going</span>
+            </div>
+          </div>
+        </li>
+
+      <% } %>
         <li class="meetup-calender">
 
           <div class="meetup-time col-xs-2 col-sm-2 col-md-2 col-lg-2">
