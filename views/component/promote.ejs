@@ -8,8 +8,10 @@
         <span class='small-desc'>designed for us to find the interesting meeting for sharing and Learning
         </span>
       </h1>
-      <a href="#">Login as Intra ...
-      </a>
+      <% if (!req.session.user) { %>
+        <a href="/login">Login as Intra ...
+        </a>
+      <% } %>
     </div>
   </div>
 </div>

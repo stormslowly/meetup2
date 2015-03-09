@@ -16,17 +16,18 @@ module.exports = {
     });
   },
 
-  calender:function function_name (req,res) {
-    
-    Event.find({}, function (err, events) {
+  calender: function(req, res) {
+
+    Event.find({}, function(err, events) {
       console.log(events);
-      res.view('calender', {events:events});
+      res.view('calender', {
+        events: events
+      });
     });
-    
+
   },
 
-
-  show: function function_name(req, res) {
+  show: function(req, res) {
     console.log('come to showlayner');
 
     Event.find({}, function(err, events) {
@@ -39,16 +40,16 @@ module.exports = {
 
   },
 
-  createEvent: function function_name(req, res) {
+  createEvent: function(req, res) {
 
     console.log('create some event');
 
     var newEvent = {
       eventTopic: 'Clean Code Contest 2015',
-      eventDesc:' Clean Code Contest', 
-      eventOrganizer:'Shu Pengfei',
-      eventAddress: "Boston@16F",
-      eventDate: 2015-3-4
+      eventDesc: ' Clean Code Contest',
+      eventOrganizer: 'Shu Pengfei',
+      eventAddress: 'Boston@16F',
+      eventDate: 2015 - 3 - 4
     };
 
     Event.create(newEvent, function(err, evt) {
@@ -62,14 +63,6 @@ module.exports = {
       });
 
     });
-    
-  },
 
-  cleanEvent: function function_name(req, res){
-
-    Event.destroy({id:{'>':1}}).exec(function deleteCB(err){
-      console.log(' records has been deleted');
-    });
-  },
-
+  }
 };

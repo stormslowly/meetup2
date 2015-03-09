@@ -14,12 +14,20 @@ module.exports = {
     }
   },
 
-  login: function(req, res) {
+  logout: function(req, res) {
+    var fullname = req.session.user.fullname;
+    req.session.user = null;
 
+    res.view('logout', {
+      who: fullname
+    });
+  },
+
+  login: function(req, res) {
     var loginFailed = function() {
       req.flash('error', 'bad user name or password');
       req.flash('error', 'server just dont like you');
-      res.redirect('/login');
+      return res.redirect('/login');
     };
 
     req.validate({
@@ -32,28 +40,19 @@ module.exports = {
     }, function(err, user) {
 
       if (user) {
-
         LDAPUtils.auth(user.dn, req.body.password, function(error) {
-
           if (error) {
             return loginFailed();
           }
-
           req.session.user = user;
-
           return res.ok(user);
-
         });
-
       } else {
-
         LDAPUtils.searchByUID(req.body.uid, function(err, entry) {
-
           if (err) {
             req.flash('error', 'bad uid');
             return res.redirect('/login');
           }
-
           User.create({
             uid: entry.uid,
             dn: entry.dn,
@@ -78,5 +77,4 @@ module.exports = {
       }
     });
   }
-
 };
