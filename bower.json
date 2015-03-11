@@ -20,6 +20,7 @@
   ],
   "dependencies": {
     "bootstrap": "~3.3.1",
-    "waypoints": "~3.1.0"
+    "waypoints": "~3.1.0",
+    "react": "0.13.0"
   }
 }
