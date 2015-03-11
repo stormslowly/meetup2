@@ -27,13 +27,14 @@ module.exports.routes = {
   },
 
   '/show': {
-    'controller': 'Home',
+    'controller': 'Event',
     'action': 'show'
   },
 
   '/createEvent': {
-    'controller': 'Home',
-    'action': 'createEvent'
+    'controller': 'Event',
+    'action': 'create'
+
   },
 
   'POST /mailhook': {

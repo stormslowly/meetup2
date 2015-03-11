@@ -23,6 +23,12 @@ module.exports = {
 
     email: {
       type: 'email'
-    }
+    },
+
+    group: {
+      collection: 'Group',
+      via: 'user'
+
+    },
   }
 };
