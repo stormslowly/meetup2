@@ -19,7 +19,6 @@ module.exports = {
   calender: function(req, res) {
 
     Event.find({}, function(err, events) {
-      console.log(events);
       res.view('calender', {
         events: events
       });

@@ -18,7 +18,7 @@ describe('Mail hook Util', function() {
       body:text
     });
 
-    console.log(invitation._header);
+    // console.log(invitation._header);
   });
 
 
