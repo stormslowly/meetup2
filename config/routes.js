@@ -53,18 +53,13 @@ module.exports.routes = {
   },
 
   '/show': {
-    'controller': 'Home',
+    'controller': 'Event',
     'action': 'show'
   },
 
   '/createEvent': {
-    'controller': 'Home',
-    'action': 'createEvent'
-  },
-
-  '/cleanEvent': {
-    'controller': 'Home',
-    'action': 'cleanEvent'
+    'controller': 'Event',
+    'action': 'create'
   },
 
   'POST /mailhook': {

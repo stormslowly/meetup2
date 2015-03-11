@@ -13,6 +13,7 @@ module.exports = {
     eventOrganizer: 'string',
     eventAddress: 'string',
     eventDate: 'date',
+    eventGroup: {model: 'Group' },
   }
 
 };
