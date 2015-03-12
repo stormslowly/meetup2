@@ -8,12 +8,13 @@
 module.exports = {
 
   attributes: {
-    eventTopic: 'string',
-    eventDesc: 'string',
-    eventAddress: 'string',
-    eventDate: 'date',
-    eventGroup: {model: 'Group' },
+
+    topic: 'string',
+    desc: 'string',
+    address: 'string',
+    date: 'date',
+    group: {
+      model: 'group'
+    },
   }
-
 };
-

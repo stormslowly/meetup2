@@ -1,19 +1,22 @@
 /**
-* Group.js
-*
-* @description :: TODO: You might write a short summary of how this model works and what it represents here.
-* @docs        :: http://sailsjs.org/#!documentation/models
-*/
+ * Group.js
+ *
+ * @description :: TODO: You might write a short summary of how this model works and what it represents here.
+ * @docs        :: http://sailsjs.org/#!documentation/models
+ */
 
 module.exports = {
 
   attributes: {
-  	name: {type:'string', unique: true},
+    name: {
+      type: 'string',
+      unique: true
+    },
     owner: 'string',
     createDate: 'string',
     user: {
-    	collection: 'User', 
-    	via: 'group'}
+      collection: 'User',
+      via: 'group'
+    }
   }
 };
-

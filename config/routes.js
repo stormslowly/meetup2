@@ -7,6 +7,10 @@ module.exports.routes = {
     'action': 'index'
   },
 
+  '/chat': {
+    view: 'askingRoom'
+  },
+
   'GET /login': {
     'controller': 'Landing',
     'action': 'login'
