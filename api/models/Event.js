@@ -10,7 +10,6 @@ module.exports = {
   attributes: {
     eventTopic: 'string',
     eventDesc: 'string',
-    eventOrganizer: 'string',
     eventAddress: 'string',
     eventDate: 'date',
     eventGroup: {model: 'Group' },

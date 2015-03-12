@@ -20,27 +20,36 @@ module.exports = {
 
     },
 
-    createEvent: function(req, res) {
+    newEvent: function(req, res) {
 
         console.log('create some event');
 
-        var newEvent = {
-            eventTopic: 'Clean Code Contest 2015',
-            eventDesc: ' Clean Code Contest',
-            eventOrganizer: 'Shu Pengfei',
-            eventAddress: 'Boston@16F',
-            eventDate: 2015 - 3 - 4
-        };
+        var newEvent = require('../models/Event');
+
+        newEvent.eventTopic = req.param('Topic');
+        newEvent.eventDesc = req.param('Event');
+        newEvent.eventDate = req.param('Date');
+        newEvent.eventAddress = req.param('Address');
+        newEvent.eventGroup = req.param('Group');
+
 
         Event.create(newEvent, function(err, evt) {
             if (err) {
                 console.log(err);
+            };
+            if (evt.length) {
+                console.log('evt[0].eventTopic:' + evt[0].eventTopic);
+                res.view('calender', {
+                events: evt
+                });
             }
-            console.log('Event create successfully' + JSON.stringify(evt));
-            res.view('EventCreated', {
-                events: evt,
-                layout: null
-            });
+            else{
+                var events = new Array(evt);
+                res.view('calender', {
+                events: events
+                });
+            };
+            
 
         });
 

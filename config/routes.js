@@ -33,6 +33,11 @@ module.exports.routes = {
 
   },
 
+  'POST /newEvent': {
+    'controller': 'Event',
+    'action': 'newEvent'
+  },
+
   'POST /mailhook': {
     'controller': 'Mailhook',
     'action': 'hook'
