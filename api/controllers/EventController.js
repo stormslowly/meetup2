@@ -29,19 +29,21 @@ module.exports = {
 
     var newEvent = require('../models/Event');
 
-    newEvent.eventTopic = req.param('Topic');
-    newEvent.eventDesc = req.param('Event');
-    newEvent.eventDate = req.param('Date');
-    newEvent.eventAddress = req.param('Address');
-    newEvent.eventGroup = req.param('Group');
+    newEvent.topic = req.param('Topic');
+    newEvent.desc = req.param('Event');
+    newEvent.date = req.param('Date');
+    newEvent.address = req.param('Address');
+    newEvent.group = req.param('Group');
 
 
     Event.create(newEvent, function(err, evt) {
       if (err) {
         console.log(err);
       };
+
+
       if (evt.length) {
-        console.log('evt[0].eventTopic:' + evt[0].eventTopic);
+        console.log('evt[0].topic:' + evt[0].topic);
         res.view('calender', {
           events: evt
         });
