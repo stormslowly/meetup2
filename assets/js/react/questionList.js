@@ -20,6 +20,7 @@ var QuestionRow = React.createClass({
 
 var QuetsionList = React.createClass({
     displayName: 'QuetsionList',
+
     render: function () {
 
         var list = this.props.qas.map(function(qa){
@@ -27,7 +28,6 @@ var QuetsionList = React.createClass({
                 React.createElement(QuestionRow, {qa: qa})
             );
         });
-
 
         return (
             React.createElement("div", null, 
@@ -39,6 +39,9 @@ var QuetsionList = React.createClass({
         );
     }
 });
+
+
+
 
 var qas = [
 {
@@ -54,8 +57,54 @@ var qas = [
     id:3
 }]
 
+var QAHolder = React.createClass({
+    displayName: 'QAHolder',
+
+    onMessage:function(qas){
+      var arr ;
+      if(!$.isArray(qas)){
+        arr = [qas];
+      }
+
+      this.setState({
+        qas :arr,
+        connected:true
+      })
+    },
+
+
+    getInitialState: function () {
+      var connected = false;
+      try{
+        connected = io.socket.socket.connected;
+      }catch(e){
+
+      }
+
+      var onMessage = this.onMessage.bind(this);
+
+      io.socket.get('/chat',onMessage);
+
+      io.socket.on('message',onMessage);
+
+      console.log('xx');
+
+      return {
+        qas:[],
+        status:'disconnect'
+      };
+    },
+    render: function () {
+        return (
+            React.createElement(QuetsionList, {qas: this.state.qas})
+        );
+    }
+});
 
 
 
-React.render(React.createElement(QuetsionList, {qas: qas}),
+$(function(){
+
+React.render(React.createElement(QAHolder, null),
  document.getElementById('myroom'));
+})
