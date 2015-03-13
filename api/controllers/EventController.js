@@ -27,7 +27,7 @@ module.exports = {
 
     console.log('create some event');
 
-    var newEvent = require('../models/Event');
+    var newEvent = {};
 
     newEvent.topic = req.param('Topic');
     newEvent.desc = req.param('Event');
@@ -35,29 +35,12 @@ module.exports = {
     newEvent.address = req.param('Address');
     newEvent.group = req.param('Group');
 
-
-    Event.create(newEvent, function(err, evt) {
+    Event.create(newEvent, function(err) {
       if (err) {
-        console.log(err);
-      };
-
-
-      if (evt.length) {
-        console.log('evt[0].topic:' + evt[0].topic);
-        res.view('calender', {
-          events: evt
-        });
-      } else {
-        var events = new Array(evt);
-        res.view('calender', {
-          events: events
-        });
-      };
-
-
+        sails.log.error(err);
+        return res.negotiate(err);
+      }
+      res.redirect(200, '/calender');
     });
-
   }
-
-
 };
