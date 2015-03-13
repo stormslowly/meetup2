@@ -11,7 +11,6 @@ module.exports = {
   },
 
   show: function(req, res) {
-    console.log('come to showlayner');
 
     Event.find({}, function(err, events) {
       console.log(events);
@@ -24,8 +23,6 @@ module.exports = {
   },
 
   newEvent: function(req, res) {
-
-    console.log('create some event');
 
     var newEvent = {};
 

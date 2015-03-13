@@ -34,11 +34,21 @@
     background-color: #fff;
   }
 
+
   li{
     display: inline-block;
     min-height: 100px;
     padding: 10px 0;
-    border: 1px rgba(0,0,0,0.5) solid;
+    border-top: 1px rgba(0,0,0,0.5) solid;
+    border-left: 1px rgba(0,0,0,0.5) solid;
+    border-right: 1px rgba(0,0,0,0.5) solid;
+  }
+
+  li:last-of-type{
+    border-top: 1px rgba(0,0,0,0.5) solid;
+    border-left: 1px rgba(0,0,0,0.5) solid;
+    border-right: 1px rgba(0,0,0,0.5) solid;
+    border-bottom: 1px rgba(0,0,0,0.5) solid;
   }
 
   .meetup-calender{

@@ -12,7 +12,8 @@ module.exports = {
 
     return res.view('meetups', {
       meetups: ['nokia', 'nodejs', 'python', 'lua', 'Golag', 'Linux'],
-      linkname: 'show'
+      linkname: 'show',
+      layout: 'layoutPromote.ejs'
     });
   },
 
