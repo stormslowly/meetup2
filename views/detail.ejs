@@ -19,7 +19,7 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-default">
+  <nav class="navbar navbar-default" style="margin-bottom:0px;">
     <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
@@ -70,7 +70,7 @@
         <div id="chapterHeader" style="margin-bottom:20px">
           <h1 id="group_h1" style="text-align:center;  padding-top:30px; padding-bottom:30px; background-color:#4C2099; margin-bottom:0px">
             <a href="" title="Clean Code Hangzhou - Hangzhou, China">
-                <span style="font-size: 42.0px">Clean Code Contest Hangzhou</span>
+                <span style="font-size: 42.0px"><%= events[0].group %></span>
             </a>
           </h1>
           <div id="chapter-navigation" style="width:100%; background-color:#ffffff">
@@ -144,21 +144,20 @@
           <div id="C_Content" class="col-md-7" style="padding-left:0px">
             <div id="event-details" style="background-color:#ffffff">
               <div id="event_title">
-                <h2 style="margin-top:1px"> Hang Zhou TC 2015 Clean Code Contest </h2>
+                <h2 style="margin-top:1px"> <%= events[0].topic %></h2>
               </div>
               <div id="event-content">
                 <div id="event_when">
                   <time itemprop="startDate" datetime="2015-03-14T09:30:00+08:00">
                     <h3>Saturday, March 14, 2015</h3>
-                    <p class="subtext">9:30 AM</p>
+                    <p class="subtext"><%= events[0].date %></p>
                   </time>
                 </div>
                 <div id="event_where">
-                  <h3>19 Floor</h3>
+                  <h3><%= events[0].address %></h3>
                 </div>
                 <div id="event_detail_content">
-                  <p> Clean code contest is a contest regarding clean code promotion. Clean Code now is becoming more and more important compared before. We need spend more effort to improve our sw skill to pusure the ambition to be a world level SW power house.</p>
-                  <p> This time we will invite all the employees in HZ site to join this contest. And the coach and judge from each BL will host this contest. Finally the winner will be awarded.
+                  <p> <%= events[0].desc %>
                   </p>
 
                 </div>
@@ -209,7 +208,7 @@
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="/vender/jquery/dist/jquery.min.js"></script>
   <!-- Include all compiled plugins (below), or include individual files as needed -->
-  <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="/vender/bootstrap/dist/js/bootstrap.min.js"></script>
 </body>
 
 </html>

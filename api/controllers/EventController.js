@@ -11,8 +11,14 @@ module.exports = {
   },
 
   show: function(req, res) {
+    var strPath= req.path;
+    var pos1 = strPath.indexOf('/show/') + 6;
+    var pos2 = strPath.length;
+    var eventId= strPath.slice(pos1, pos2);
 
-    Event.find({}, function(err, events) {
+    console.log("eventId is:", eventId);
+
+    Event.find({id: eventId}, function(err, events) {
       console.log(events);
       res.view('detail', {
         events: events,
