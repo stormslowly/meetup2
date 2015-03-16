@@ -1,282 +1,215 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Event Public</title>
 
-    <link rel="stylesheet" href="/styles/chapterbase.css">
-    <link rel="stylesheet" href="/styles/meetup-modern.css">
-    <title> SRAN SW3</title>
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="/vender/bootstrap/dist/css/bootstrap.min.css">
 
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
 </head>
 
-<body id="meetupBody" class="humble hasJS" data-feedly-mini="yes">
+<body>
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Brand</a>
+      </div>
 
-    <div id="C_header">
-        <div id="C_headerBody">
-            <div id="C_logo">
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li><a href="#">Start</a>
+          </li>
+        </ul>
+        <form class="navbar-form navbar-left" role="search">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Search Group">
+          </div>
+          <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#">Log out</a>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Me <span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="#">My Group</a>
+              </li>
+              <li><a href="#">My Event</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+  </nav>
 
-                <a href="">
-                    <img src="http://img2.meetupstatic.com/img/8308650022681532654/header/logo-2x.png" width="68" height="45" alt="Meetup">
-                </a>
+  <div id="C_page" style="background-color:#f4f4f4">
+    <div id="page_content" class="container">
+      <div class="row">
 
-            </div>
-            <div id="C_userNav">
+        <div id="chapterHeader" style="margin-bottom:20px">
+          <h1 id="group_h1" style="text-align:center;  padding-top:30px; padding-bottom:30px; background-color:#4C2099; margin-bottom:0px">
+            <a href="" title="Clean Code Hangzhou - Hangzhou, China">
+                <span style="font-size: 42.0px">Clean Code Contest Hangzhou</span>
+            </a>
+          </h1>
+          <div id="chapter-navigation" style="width:100%; background-color:#ffffff">
+            <div class="btn-group btn-group-lg" role="group" aria-label="..." style="width:100%;">
+              <button type="button" class="btn btn-default" style="width:15%; border-color:#ffffff; color:#888">Home</button>
+              <button type="button" class="btn btn-default" style="width:15%; border-color:#ffffff; color:#888">Members</button>
+              <button type="button" class="btn btn-default" style="width:15%; border-color:#ffffff; color:#888">Photos</button>
+              <button type="button" class="btn btn-default" style="width:15%; border-color:#ffffff; color:#888">Pages</button>
+              <button type="button" class="btn btn-default" style="width:15%; border-color:#ffffff; color:#888">Discussions</button>
 
-                <ul id="C_userLinks" class="inlineblockList">
 
-                    <li class="C_userNavItem C_userTopNavItem C_userTopNavButtonItem">
-                        <a class="omnCamp omnrg_signup nav-button--red" href="">Sign up</a>
-                    </li>
-
-                    <li class="C_userNavItem C_userTopNavItem C_userTopNavButtonItem"><a href="" class="nav-button--white ">Log in</a>
-                    </li>
-                    
+              <div class="btn-group btn-group-lg" role="group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false" style="border-color:#ffffff; color:#888">
+                  More
+                  <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="#">Dropdown link</a>
+                  </li>
+                  <li><a href="#">Dropdown link</a>
+                  </li>
                 </ul>
-
+              </div>
             </div>
+          </div>
 
-            <div id="C_globalNav">
-                <div id="C_tabs">
-                    <a href="">
-                        <span class="C_tabContent">
-                            <span class="C_topBig">Find</span>
-                        <span class="C_topSm">a Meetup Group</span>
-                        </span>
-                    </a>
-                    <a id="tabs_start" class="omnCamp omnic_sn3" href="">
-                        <span class="C_startContainer C_tabContent">
-                            <span class="C_topBig">Start</span>
-                        <span class="C_topSm">a Meetup Group</span>
-                        </span>
-                    </a>
-                </div>
-            </div>
         </div>
-    </div>
+        <div id="C_context" style="min-height:2015px;">
+
+          <div id="C_Nav" class="col-md-3" style="border-left-width: 1px;border-left-style: solid;border-left-color: #000022; padding-left: 0px;">
+            <div id="nav_content" style="background-color:#ffffff;border-top-width: 1px; border-top-style: solid;border-top-color: #000022; border-bottom-width: 1px; border-bottom-style: solid;border-bottom-color: #000022;border-right-width: 1px; border-right-style: solid;border-right-color: #000022; padding-left:15px; padding-right:10px">
+              <div id="group-info" style="padding-bottom:10px; padding-top:10px;">
+                <span>TC coach network is for everything related to competence </span>
+              </div>
+
+              <ul class="dividedList" style="list-style-type:none; padding:0px;">
+                <li style="border-top-width:1px; border-top-style:solid; border-top-color:#eee; padding-top:6px; margin-left:0px;">
+                  <a href="">
+                    <span style="width:71%; float:left;">Members</span>
+                    <span style="text-align:right; float:none"> "28" </span>
+                  </a>
+                </li>
+                <li style="border-top-width:1px; border-top-style:solid; border-top-color:#eee; padding-top:6px; margin-left:0px;">
+                  <a href="">
+                    <span style="width:71%; float:left;">Past Event</span>
+                    <span style="text-align:right; float:none">3</span>
+                  </a>
+                </li>
+                <li style="border-top-width:1px; border-top-style:solid; border-top-color:#eee; padding-top:6px; margin-left:0px;">
+                  <a href="">
+                    <span style="width:71%; float:left;">Our calender</span>
+                  </a>
+                </li>
 
 
-    <div id="C_page" class=" lt">
-        <div id="C_pageBody">
-            <div id="chapterHeader" class="doc-box">
-                <div id="chapter-banner" class="doc-content">
+              </ul>
 
-                    <h1>
-                        <a href="" title="Docker Hangzhou - Hangzhou, China">
-                        <span style="font-size: 42.0px">Clean Code Contest Hangzhou</span>
-                        </a>
-                    </h1>
-                </div>
-
-                <div id="chapter-navigation" class="clearfix">
-                    <ul id="group-links" class="chapter-menu inlineblockList">
-
-                        <li class=" selected">
-                            <a href="">Home</a>
-                        </li>
-
-                        <li class=" ">
-                            <a href="">Members</a>
-
-                        </li>
-
-                        <li class="">
-                            <a href="">Sponsors</a>
-                        </li>
-
-                        <li>
-                            <a href="">Photos</a>
-                        </li>
-
-                        <li>
-                            <a href="">Discussions</a>
-                        </li>
-
-                        <li aria-haspopup="true" class=" dropdown">
-                            <a href="#" onclick="return false;" class="withKids">More</a>
-                            <ul class="resetList dropdown-menu">
-
-                                <li class="">
-                                    <a href="">Polls</a>
-                                </li>
-                                <li class="">
-                                    <a href="">Files</a>
-                                </li>
-
-                                <li class="">
-                                    <a href="">Report this group</a>
-                                </li>
-                            </ul>
-                        </li>
-
-                    </ul>
-                    <ul id="my-links" class="chapter-menu inlineblockList">
-
-
-                        <li id="join-link">
-
-                            <a id="gh-topnav-join" href="" class="J_signupLink J_onClick omnCamp omnrg_joinus topNavJoinus button primary inline joinGroupButton">Join us!</a>
-
-                        </li>
-
-                    </ul>
-                </div>
+              <div id="meta-organizers" style="padding-top:30px;">
+                <h4><span>Organizer: </span></h4>
+                <h5><a href="">Wang Gang-Layner</a></h5>
+                <button type="button" class="btn btn-default" aria-label="Contact">
+                  <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+                </button>
+              </div>
+              <div id="event-tag" style="padding-top:30px;">
+                <h5>We're about:</h5>
+              </div>
             </div>
-            <div id="C_context" style="min-height:2015px; ">
-                <div id="C_document" class>
-                    <div id="urf-chapter-description" class="docBox">
-                        <p> Hello NOKIA SRAN SW3
-                    </div>
-                    <div id="join-or-connect" clas="docBox"></div>
-                    <div class="v4-gh-main-column memberinfo-widget-root" id="v4-gh-main-column" data-original-title></div>
-                    <div class="v4-gh-last-column" id="v4-gh-last-column"></div>
-                    <input type="hidden" id="_GrouphomeForceReload" name="_GrouphomeForceReload" value="0">
+
+          </div>
+          <div id="C_Content" class="col-md-7" style="padding-left:0px">
+            <div id="event-details" style="background-color:#ffffff">
+              <div id="event_title">
+                <h2 style="margin-top:1px"> Hang Zhou TC 2015 Clean Code Contest </h2>
+              </div>
+              <div id="event-content">
+                <div id="event_when">
+                  <time itemprop="startDate" datetime="2015-03-14T09:30:00+08:00">
+                    <h3>Saturday, March 14, 2015</h3>
+                    <p class="subtext">9:30 AM</p>
+                  </time>
                 </div>
-                <div id="C_nav">
-                    <div id="C_metabox" class="doc-box ">
-
-
-
-                        <a class="block meta-gphoto align-center margin-top" href="http://www.meetup.com/docker-hangzhou/photos/24717632/413521112/">
-                            <img src="http://photos3.meetupstatic.com/photos/event/4/5/8/global_413521112.jpeg" alt="" class="photo">
-                        </a>
-
-                        <div class="doc-content">
-
-                            <div itemscope="" itemtype="http://schema.org/Organization">
-                                <span class="display-none" itemprop="name">CleanCode Contest Hangzhou</span>
-                                <span class="display-none" itemprop="url">http://www.meetup.com/docker-hangzhou/</span>
-                                <span class="display-none" itemprop="image">http://photos3.meetupstatic.com/photos/event/4/5/8/global_413521112.jpeg</span>
-                                <div class="adr" itemprop="address" itemscope="" itemtype="http://schema.org/PostalAddress">
-                                    <h3><a href="http://www.meetup.com/cities/cn/hangzhou/">
-                                        <span class="locality" itemprop="addressLocality">Hangzhou</span>,
-                                        <span class="region" itemprop="addressCountry">China</span>
-                                        </a>
-                                    </h3>
-
-                                </div>
-                                <div class="small margin-bottom">
-                                    Founded Aug 21, 2014
-                                    <br>
-                                </div>
-                                <span class="display-none" itemprop="foundingDate">20140820</span>
-                            </div>
-
-                            <ul class="dividedList small">
-
-
-                                <li class="line">
-
-                                    <a href="" class="block"><span class="unit size5of7 wrapNice">Dockers</span>
-                                        <span class="lastUnit align-right">171</span>
-                                    </a>
-
-                                </li>
-
-                                <li class="line">
-                                    <a href="" class="bottom block">
-                                        <span class="unit size5of7">Group reviews</span>
-                                        <span class="lastUnit align-right">1</span>
-                                    </a>
-                                </li>
-
-                                <li class="line">
-
-                                    <a href="" data-pageto="0" data-op="" data-append="false" data-scroll="true" class="page-meetups block">
-                                        <span class="unit size5of7">Upcoming Meetups</span>
-                                        <span class="lastUnit align-right">1</span>
-                                    </a>
-
-                                </li>
-
-                                <li class="line">
-
-                                    <a href="" data-pageto="0" data-append="false" data-op="past" data-scroll="true" class="page-meetups block">
-                                        <span class="unit size5of7">Past Meetups</span>
-                                        <span class="lastUnit align-right">3</span>
-                                    </a>
-
-                                </li>
-
-                                <li class="line">
-                                    <a href="http://www.meetup.com/docker-hangzhou/events/" class="block">
-                                        <span class="unit size5of7">Our calendar</span>
-                                        <span class="lastUnit align-right"><i class="icon icon-meetups"></i></span>
-                                    </a>
-                                </li>
-
-                            </ul>
-
-                        </div>
-
-                        <div id="meta-organizers" class="doc-content memberinfo-widget-root" data-original-title="">
-
-
-                            <h4>
-                                <a href="http://www.meetup.com/docker-hangzhou/members/?op=leaders">Organizers:</a>
-                            </h4>
-                            <div class="clearfix">
-                                <div id="meta-org-photo">
-
-                                    <a href="http://www.meetup.com/docker-hangzhou/members/42668472/" class="memberinfo-widget block" data-memberid="42668472"><img src="http://photos4.meetupstatic.com/photos/member/b/b/3/7/thumb_241427927.jpeg" alt="" class="orgboxImg">
-                                    </a>
-
-                                </div>
-                                
-                            </div>
-
-                            <div class="bottomStop" style="display:none;">
-
-                                <a href="http://www.meetup.com/docker-hangzhou/members/?op=leaders">View The Leadership Team</a>
-                                <br>
-
-                            </div>
-
-                            <a href="http://www.meetup.com/messages/?new_convo=true" class="rounded-all metaButton" id="contactOrg" data-org="true"><i class="icon-s icon-email"></i> Contact</a>
-
-                        </div>
-                        <div class="doc-content">
-                            <div id="topic-box-2012" data-original-title="" class="topic-widget-root">
-                                <h5>We're about:</h5>
-
-                                <div class="meta-topics-block small margin-bottom">
-
-                                    <div id="topicList7" class="small">
-
-                                        <a href="" class="topic-id-563 topic-widget" data-topic="opensource" data-topicid="563">Open Source</a> ·
-
-                                        <a href="" class="topic-id-3833 topic-widget" data-topic="softwaredev" data-topicid="3833">Software Development</a> ·
-
-                                        <a href="" class="topic-id-9696 topic-widget" data-topic="newtech" data-topicid="9696">New Technology</a> ·
-
-                                        <a href="" class="topic-id-15167 topic-widget" data-topic="cloud-computing" data-topicid="15167">Cloud Computing</a> ·
-
-
-                                        <a href="" class="topic-id-15582 topic-widget" data-topic="web-development" data-topicid="15582">Web Development</a> ·
-
-                                        <a href="" class="topic-id-17627 topic-widget" data-topic="programming" data-topicid="17627">Programming</a> ·
-
-                                        <a href="" class="topic-id-1454542 topic-widget" data-topic="docker" data-topicid="1454542">docker</a>
-
-                                    </div>
-
-
-                                </div>
-
-                            </div>
-                        </div>
-
-                    </div>
+                <div id="event_where">
+                  <h3>19 Floor</h3>
                 </div>
+                <div id="event_detail_content">
+                  <p> Clean code contest is a contest regarding clean code promotion. Clean Code now is becoming more and more important compared before. We need spend more effort to improve our sw skill to pusure the ambition to be a world level SW power house.</p>
+                  <p> This time we will invite all the employees in HZ site to join this contest. And the coach and judge from each BL will host this contest. Finally the winner will be awarded.
+                  </p>
+
+                </div>
+              </div>
             </div>
+          </div>
+
+          <div id="C_Attendees" class="col-md-2" style="background-color:#ffffff">
+            <div id="response_box">
+              <h3>Welcome</h3>
+              <button id="rspYes" style="background-color:#E0393E; width:90%">Join</button>
+            </div>
+            <div id="join_list">
+              <h3>
+              <span> 5 </span>
+              <span> going </span> 
+            </h3>
+              <div class="rsp_line" id="rsp_line" style="color: #EC1212; padding-bottom:4px; display:block; width:90%; line-height:38px; height:0px; border-top-width: thin;border-top-color: rgb(55, 52, 52);border-top-style: solid;">
+              </div>
+              <ul style="list-style-type:none; padding:0px">
+                <li>
+                  <h5><a href="">Wang Gang-Layner</a></h5>
+                </li>
+                <li>
+                  <h5><a href="">Shu Pengfei</a></h5>
+                </li>
+                <li>
+                  <h5><a href="">Zhang Eric</a></h5>
+                </li>
+                <li>
+                  <h5><a href="">Shi Yuanming</a></h5>
+                </li>
+                <li>
+                  <h5><a href="">Zhang Yu</a></h5>
+                </li>
+              </ul>
+
+            </div>
+          </div>
         </div>
-
+      </div>
     </div>
+  </div>
 
-    <div id="fb_root" class="fb_reset"></div>
-    <% events.forEach(function(event){ %>
-        <li><%= event.name %></li>
-    <% }); %>
 
+
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="/vender/jquery/dist/jquery.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 </body>
 
 </html>
