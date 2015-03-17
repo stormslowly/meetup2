@@ -20,10 +20,20 @@ module.exports = {
 
     Event.find({id: eventId}, function(err, events) {
       console.log(events);
-      res.view('detail', {
-        events: events,
+      var eve = new Object();
+      eve = events[0];
+      var groupid = eve.group;
+      
+      Group.find({id:groupid}, function(err,groups){
+        var gro = new Object();
+        gro = groups[0];
+        res.view('detail', {
+        eventobj: eve,
+        groupobj: gro,
         layout: null
-      });
+        });
+      });  
+      
     });
 
   },
@@ -37,6 +47,7 @@ module.exports = {
     newEvent.date = req.param('Date');
     newEvent.address = req.param('Address');
     newEvent.group = req.param('Group');
+    console.log(newEvent.group);
 
     Event.create(newEvent, function(err) {
       if (err) {

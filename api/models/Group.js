@@ -17,6 +17,6 @@ module.exports = {
     user: {
       collection: 'User',
       via: 'group'
-    }
+    },
   }
 };
