@@ -32,7 +32,17 @@ module.exports = {
     Event.find({
       id: eventId
     }, function(err, events) {
+
+      if (err) {
+        sails.log.error(err);
+        return res.negotiate(err);
+      }
       console.log(events);
+      if (events.length == 0){
+        err = 'no event is found with the event id:' + eventId;
+        sails.log.error(err);
+        return res.negotiate(err);
+      }
       var eve = new Object();
       eve = events[0];
       var groupid = eve.group;
@@ -40,6 +50,15 @@ module.exports = {
       Group.find({
         id: groupid
       }, function(err, groups) {
+        if (err) {
+          sails.log.error(err);
+          return res.negotiate(err);
+        }
+        if (groups.length==0){
+          err = 'no group is found for the event'
+          sails.log.error(err);
+          return res.negotiate(err);
+        }
         var gro = new Object();
         gro = groups[0];
         res.view('detail', {
@@ -89,5 +108,5 @@ module.exports = {
 
 
   }
-  
+
 };
