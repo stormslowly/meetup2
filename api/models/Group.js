@@ -13,10 +13,10 @@ module.exports = {
       unique: true
     },
     owner: 'string',
-    createDate: 'string',
+    createDate: 'date',
     user: {
       collection: 'User',
       via: 'group'
-    }
+    },
   }
 };

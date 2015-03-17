@@ -28,7 +28,6 @@ module.exports = {
     group: {
       collection: 'Group',
       via: 'user'
-
     },
   }
 };

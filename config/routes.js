@@ -32,7 +32,7 @@ module.exports.routes = {
     'action': 'calender'
   },
 
-  '/show': {
+  '/show/*': {
     'controller': 'Event',
     'action': 'show'
   },
@@ -51,6 +51,11 @@ module.exports.routes = {
   'POST /mailhook': {
     'controller': 'Mailhook',
     'action': 'hook'
-  }
+  },
+
+  '/group': {
+    'controller': 'Group',
+    'action': 'search'
+  },
 
 };
