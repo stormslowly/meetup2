@@ -12,7 +12,12 @@
         <div class="form-group">
             <label for="inputOrganizer" class="col-sm-2 control-label">Organizer</label>
             <div class="col-sm-8">
-                <input type="text" class="form-control" id="inputOrganizer" name="Group" placeholder="">
+                <select class="form-control" id="inputOrganizer" name="Group" placeholder="">
+                    <% for(var i=0; i<groups.length; i++) {%>
+                    <option><%= groups[i].name %></option>
+                    <% } %>
+                </select>
+                
             </div>
         </div>
 
