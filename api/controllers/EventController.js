@@ -91,6 +91,12 @@ module.exports = {
         return res.negotiate(err);
       }
 
+      if (found.length == 0){
+        err = 'no group is found with the group name:' + groupname;
+        sails.log.error(err);
+        return res.negotiate(err);
+      }
+
       var groupid = found[0].id;
       console.log('groupis is: ', groupid);
       newEvent.group = groupid;
