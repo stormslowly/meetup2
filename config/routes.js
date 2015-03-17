@@ -32,7 +32,7 @@ module.exports.routes = {
     'action': 'calender'
   },
 
-  '/show/*': {
+  '/showevent/:id': {
     'controller': 'Event',
     'action': 'show'
   },

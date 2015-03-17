@@ -62,7 +62,7 @@ module.exports = {
 
             if (err) {
               req.flash('error', 'Server got sick');
-              res.redirect(500, '/login');
+              return res.redirect(500, '/login');
             }
 
             LDAPUtils.auth(entry.uid, req.body.password,
@@ -70,8 +70,10 @@ module.exports = {
                 if (err) {
                   return loginFailed();
                 }
+              
+                return res.ok(user);
+
               });
-            res.ok(user);
           });
         });
       }

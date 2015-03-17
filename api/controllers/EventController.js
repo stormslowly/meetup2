@@ -23,10 +23,9 @@ module.exports = {
 
   show: function(req, res) {
     var strPath = req.path;
-    var pos1 = strPath.indexOf('/show/') + 6;
-    var pos2 = strPath.length;
-    var eventId = strPath.slice(pos1, pos2);
-
+    
+    var eventId = req.param('id');
+    
     console.log("eventId is:", eventId);
 
     Event.find({
@@ -37,7 +36,7 @@ module.exports = {
         sails.log.error(err);
         return res.negotiate(err);
       }
-      console.log(events);
+      sails.log(events);
       if (events.length == 0){
         err = 'no event is found with the event id:' + eventId;
         sails.log.error(err);
@@ -59,11 +58,12 @@ module.exports = {
           sails.log.error(err);
           return res.negotiate(err);
         }
+
         var gro = new Object();
         gro = groups[0];
         res.view('detail', {
-          eventobj: eve,
-          groupobj: gro,
+          event: eve,
+          group: gro,
           layout: null
         });
       });

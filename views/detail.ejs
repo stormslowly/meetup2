@@ -70,7 +70,7 @@
         <div id="chapterHeader" style="margin-bottom:20px">
           <h1 id="group_h1" style="text-align:center;  padding-top:30px; padding-bottom:30px; background-color:#4C2099; margin-bottom:0px">
             <a href="" title="Clean Code Hangzhou - Hangzhou, China">
-                <span style="font-size: 42.0px"><%= groupobj.name %></span>
+                <span style="font-size: 42.0px"><%= group.name %></span>
             </a>
           </h1>
           <div id="chapter-navigation" style="width:100%; background-color:#ffffff">
@@ -144,20 +144,20 @@
           <div id="C_Content" class="col-md-7" style="padding-left:0px">
             <div id="event-details" style="background-color:#ffffff">
               <div id="event_title">
-                <h2 style="margin-top:1px"> <%= eventobj.topic %></h2>
+                <h2 style="margin-top:1px"> <%= event.topic %></h2>
               </div>
               <div id="event-content">
                 <div id="event_when">
                   <time itemprop="startDate" datetime="2015-03-14T09:30:00+08:00">
                     <h3>Saturday, March 14, 2015</h3>
-                    <p class="subtext"><%= eventobj.date %></p>
+                    <p class="subtext"><%= event.date %></p>
                   </time>
                 </div>
                 <div id="event_where">
-                  <h3><%= eventobj.address %></h3>
+                  <h3><%= event.address %></h3>
                 </div>
                 <div id="event_detail_content">
-                  <p> <%= eventobj.desc %>
+                  <p> <%= event.desc %>
                   </p>
 
                 </div>
