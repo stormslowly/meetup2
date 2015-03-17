@@ -53,6 +53,7 @@ module.exports = {
         });
 
         response.on('error', function(error) {
+          console.log('xxerr',error.messsage);
           return callback(error);
         });
       });
