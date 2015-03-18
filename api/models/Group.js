@@ -12,6 +12,7 @@ module.exports = {
       type: 'string',
       unique: true
     },
+    desc: 'string',
     owner: 'string',
     createDate: 'date',
     user: {

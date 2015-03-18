@@ -37,6 +37,17 @@ module.exports.routes = {
     'action': 'show'
   },
 
+  '/group/new': {
+    'controller': 'Group',
+    'action': 'create'
+
+  },
+
+  'POST /newGroup': {
+    'controller': 'Group',
+    'action': 'newGroup'
+  },
+
   '/group/:id': {
     'controller': 'Group',
     'action': 'show'
