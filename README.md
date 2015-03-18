@@ -5,11 +5,18 @@ a [Sails](http://sailsjs.org) application
 First sails shall be installed with npm.
 
 Second you also need run below commands to install other packages, it is because in this project we also used some third-party package. **Bower** is an enhanced package
-management tool which can handle the package dependience well. 
+management tool which can handle the package dependence well.
 
-- `npm i bower -g`
-- `bower i`
-- `npm i`
+``` bash
+$ npm i
+```
+
+> deploy it under `root` is really a bad idea, but in case you're basted, try:
+
+``` bash
+# npm install --unsafe-perm
+# bower i --allow-root
+```
 
 Third, mysql is used in this app. So both Mysql and sails-mysql shall be installed.
 
