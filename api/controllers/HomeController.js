@@ -10,11 +10,14 @@ module.exports = {
   index: function(req, res) {
 
 
-    return res.view('meetups', {
-      meetups: ['nokia', 'nodejs', 'python', 'lua', 'Golag', 'Linux'],
+    Group.find({},function(err, groups){
+
+      return res.view('meetups', {
+      meetups:groups,
       linkname: 'show',
       layout: 'layoutPromote.ejs'
-    });
+      });
+    });   
   },
 
   calender: function(req, res) {

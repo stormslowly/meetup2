@@ -4,9 +4,9 @@
     <% for(var i=0; i<meetups.length; i++) {%>
       <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
         <div class="meetup-card">
-          <a href = <%= linkname %> class="nametag-card-name">
+          <a href = <%= meetups[i].id %> class="nametag-card-name">
             <h3>
-              <%= meetups[i] %>
+              <%= meetups[i].name %>
             </h3>
           </a>
         </div>
@@ -16,5 +16,21 @@
         </div>
       </div>
     <% } %>
+<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+<div class="meetup-card-add">
+  <a href = "/group/add" class="nametag-card-name-add">
+    <h3>
+      Start a new group!
+    </h3>
+  </a>
+</div>
+<div class="meetups-info">
+    <div class="meetup-members"><span>rockers</span></div>
+    <div class="meetup-date"></div>
+</div>
+</div>
+
+
+
   </div>
 </div>
