@@ -14,7 +14,7 @@
           <div class="meetup-time col-xs-3 col-sm-3 col-md-3 col-lg-3">
             <% var dd= events[i].date; %>
             <h5><%= dd.toLocaleDateString() %></h5>
-            <h5><%= dd.getHours() %>:<%= dd.getMinutes() %>:<%= dd.getSeconds() %></h5>
+            <h5><%= dd.getHours() %>:<%= dd.getMinutes() %></h5>
           </div>
           <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
             <div class="meetup-localtion"><%= events[i].address %></div>

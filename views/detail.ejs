@@ -149,8 +149,9 @@
               <div id="event-content">
                 <div id="event_when">
                   <time itemprop="startDate" datetime="2015-03-14T09:30:00+08:00">
-                    <h3>Saturday, March 14, 2015</h3>
-                    <p class="subtext"><%= event.date %></p>
+                    <% var dd = event.date %>
+                    <h3><%= dd.toLocaleDateString() %></h3>
+                    <p class="subtext"><%= dd.getHours() %>:<%= dd.getMinutes() %></p>
                   </time>
                 </div>
                 <div id="event_where">
