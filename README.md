@@ -15,6 +15,13 @@ Third, mysql is used in this app. So both Mysql and sails-mysql shall be install
 
 - `npm install sails-mysql`
 
+## Running by [pm2](https://github.com/Unitech/pm2)
+
+``` bash
+$ sudo npm install pm2 -g
+$ NODE_ENV=production pm2 -i 1 --name persona start app.js
+```
+
 ## NOTE:
 There might be problem during install the package in office networks environment, especially in Mainland China where is behind GFW. Before installing those package, you need config proxy in system environment, `git`, `npm` and `bower` as well.
 
