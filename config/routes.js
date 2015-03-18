@@ -37,12 +37,12 @@ module.exports.routes = {
     'action': 'show'
   },
 
-'/group/:id': {
+  '/group/:id': {
     'controller': 'Group',
     'action': 'show'
   },
 
-  '/createEvent': {
+  '/event/new': {
     'controller': 'Event',
     'action': 'create'
 

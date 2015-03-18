@@ -106,7 +106,7 @@ module.exports = {
           sails.log.error(err);
           return res.negotiate(err);
         }
-        var linkid = '/show/' + created.id;
+        var linkid = 'event/show/' + created.id;
         res.redirect(linkid);
       });
 

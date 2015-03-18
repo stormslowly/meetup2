@@ -10,7 +10,7 @@ module.exports = {
 
 
   /**
-   * `GroupController.crate()`
+   * `GroupController.create()`
    */
   create: function (req, res) {
     return res.json({
