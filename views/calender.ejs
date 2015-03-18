@@ -1,6 +1,6 @@
 <div class="container">
 
-  <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+  <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
 
     <div id="meetup-day-group">
       <div class="meetup-date">
@@ -11,8 +11,10 @@
 
         <li class="meetup-calender">
 
-          <div class="meetup-time col-xs-2 col-sm-2 col-md-2 col-lg-2">
-            7:00 PM
+          <div class="meetup-time col-xs-3 col-sm-3 col-md-3 col-lg-3">
+            <% var dd= events[i].date; %>
+            <h5><%= dd.toLocaleDateString() %></h5>
+            <h5><%= dd.getHours() %>:<%= dd.getMinutes() %>:<%= dd.getSeconds() %></h5>
           </div>
           <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
             <div class="meetup-localtion"><%= events[i].address %></div>

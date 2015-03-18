@@ -75,7 +75,7 @@
           </h1>
           <div id="chapter-navigation" style="width:100%; background-color:#ffffff">
             <div class="btn-group btn-group-lg" role="group" aria-label="..." style="width:100%;">
-              <button type="button" class="btn btn-default" style="width:15%; border-color:#ffffff; color:#888">Home</button>
+              <button type="button" class="btn btn-default" style="width:15%; border-color:#ffffff; color:#888" onClick="onChangePage()">Home</button>
               <button type="button" class="btn btn-default" style="width:15%; border-color:#ffffff; color:#888">Members</button>
               <button type="button" class="btn btn-default" style="width:15%; border-color:#ffffff; color:#888">Photos</button>
               <button type="button" class="btn btn-default" style="width:15%; border-color:#ffffff; color:#888">Pages</button>
@@ -202,7 +202,13 @@
     </div>
   </div>
 
+<script language="javascript">  
+ 
+ function onChangePage() {
+  window.location.href="/";
 
+}  
+</script> 
 
 
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

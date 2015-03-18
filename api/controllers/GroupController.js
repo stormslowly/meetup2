@@ -28,8 +28,14 @@ module.exports = {
 
     newGroup.name = req.param('Name');
     newGroup.desc = req.param('Desc');
+    newGroup.date = new Date();
+
+    console.log(newGroup.date);
+
+    console.log('To create new group');
 
     Group.create(newGroup, function(err, created) {
+
       if (err) {
         sails.log.error(err);
         return res.negotiate(err);
