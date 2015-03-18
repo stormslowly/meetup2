@@ -4,7 +4,10 @@
     <% for(var i=0; i<meetups.length; i++) {%>
       <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
         <div class="meetup-card">
-          <a href = <%= meetups[i].id %> class="nametag-card-name">
+          <% var strlink= '/group/';
+                strlink = strlink + meetups[i].id;
+                %>
+          <a href = <%= strlink %> class="nametag-card-name">
             <h3>
               <%= meetups[i].name %>
             </h3>

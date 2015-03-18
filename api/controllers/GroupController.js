@@ -12,7 +12,7 @@ module.exports = {
   /**
    * `GroupController.crate()`
    */
-  crate: function (req, res) {
+  create: function (req, res) {
     return res.json({
       todo: 'crate() is not implemented yet!'
     });
@@ -35,6 +35,14 @@ module.exports = {
   update: function (req, res) {
     return res.json({
       todo: 'update() is not implemented yet!'
+    });
+  },
+
+  show: function (req, res) {
+    Event.find({group:req.param('id') }, function(err, events) {
+      res.view('calender', {
+        events: events
+      });
     });
   },
 

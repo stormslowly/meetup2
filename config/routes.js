@@ -37,6 +37,11 @@ module.exports.routes = {
     'action': 'show'
   },
 
+'/group/:id': {
+    'controller': 'Group',
+    'action': 'show'
+  },
+
   '/createEvent': {
     'controller': 'Event',
     'action': 'create'
