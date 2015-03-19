@@ -28,6 +28,14 @@ module.exports = {
     
     console.log("eventId is:", eventId);
 
+    var user = req.session.user;
+
+    if (user==null){
+      console.log('user is null');
+    };
+
+    console.log("user is:", user);
+
     Event.find({
       id: eventId
     }, function(err, events) {
@@ -46,9 +54,7 @@ module.exports = {
       eve = events[0];
       var groupid = eve.group;
 
-      Group.find({
-        id: groupid
-      }, function(err, groups) {
+      Group.find({id: groupid}).populate('user').exec(function(err, groups) {
         if (err) {
           sails.log.error(err);
           return res.negotiate(err);
@@ -61,9 +67,13 @@ module.exports = {
 
         var gro = new Object();
         gro = groups[0];
+        var grousers = gro.user;
+        console.log('grousers is:', grousers);
         res.view('detail', {
           event: eve,
           group: gro,
+          user: user,
+          groupusers: grousers,
           layout: null
         });
       });
