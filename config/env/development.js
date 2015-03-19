@@ -21,4 +21,5 @@ module.exports = {
   //   connection: 'someMongodbServer'
   // }
 
+  port: process.env.MEETUP_PORT || 1337,
 };

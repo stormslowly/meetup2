@@ -28,6 +28,7 @@
   },
   "scripts": {
     "start": "node app.js",
+    "postinstall": "./node_modules/.bin/bower install",
     "debug": "node debug app.js"
   },
   "main": "app.js",
