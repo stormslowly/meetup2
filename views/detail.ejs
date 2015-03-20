@@ -49,11 +49,13 @@
           </li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+              <span id="username">
              <% if (user==null) { %>
              <%= "Anonymous" %>
              <% } else{ %>
              <%= user.fullname %>
              <% } %>
+           </span>
             <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
               <li><a href="#">My Group</a>
@@ -116,7 +118,7 @@
                 <li style="border-top-width:1px; border-top-style:solid; border-top-color:#eee; padding-top:6px; margin-left:0px;">
                   <a href="">
                     <span style="width:71%; float:left;">Members</span>
-                    <span style="text-align:right; float:none"> "28" </span>
+                    <span style="text-align:right; float:none"> <%= userNumber %></span>
                   </a>
                 </li>
                 <li style="border-top-width:1px; border-top-style:solid; border-top-color:#eee; padding-top:6px; margin-left:0px;">
@@ -207,7 +209,16 @@
 }
 
  function user_join() {
-  
+  var username= document.getElementById("username").innerHTML;
+
+  if ( username.indexOf("Anonymous")!=-1 ){
+    alert("You need login first");
+    window.location.href="/login";
+  }
+  else{
+    alert(username);
+    window.location.href="/event/userjoin";
+  }
  }
   
 </script> 

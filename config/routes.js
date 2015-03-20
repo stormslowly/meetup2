@@ -59,6 +59,13 @@ module.exports.routes = {
 
   },
 
+  '/event/userjoin': {
+    'controller': 'Event',
+    'action': 'newuser'
+
+  },
+
+
   'POST /newEvent': {
     'controller': 'Event',
     'action': 'newEvent'

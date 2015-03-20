@@ -68,12 +68,15 @@ module.exports = {
         var gro = new Object();
         gro = groups[0];
         var grousers = gro.user;
+        var userNumber = grousers.length;
+        console.log('userNumber is:', userNumber);
         console.log('grousers is:', grousers);
         res.view('detail', {
           event: eve,
           group: gro,
           user: user,
           groupusers: grousers,
+          userNumber: userNumber,
           layout: null
         });
       });
@@ -123,6 +126,28 @@ module.exports = {
     });
 
 
+  },
+
+
+  newuser: function(req, res) {
+    console.log('create new user for event');
+    var user= req.session.user;
+    console.log(user);
+    Group.find({id:4}).populate('user').exec(function (err, groups){
+      if(err){
+        console.log(err);
+
+      }
+      else{
+        groups[0].user.add(user);
+        groups[0].save(function(err,s){
+        console.log("record was saved:", s);
+      })
+
+      }
+      
+    });
+    res.redirect('event/show/');
   }
 
 };
