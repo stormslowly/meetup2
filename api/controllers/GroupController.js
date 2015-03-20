@@ -57,13 +57,45 @@ module.exports = {
   },
 
   show: function(req, res) {
-    Event.find({
-      group: req.param('id')
-    }, function(err, events) {
-      res.view('calender', {
-        events: events
+
+    var groupid = req.param('id');
+
+    Group.find({id: groupid}).populate('user').exec(function(err, groups) {
+      if (err) {
+        sails.log.error(err);
+        return res.negotiate(err);
+      }
+      if (groups.length == 0) {
+        err = 'no group is found for the event'
+        sails.log.error(err);
+        return res.negotiate(err);
+      }
+
+      var gro = new Object();
+      gro = groups[0];
+      var grousers = gro.user;
+      var userNumber = grousers.length;
+      var user = req.session.user;
+      console.log('userNumber is:', userNumber);
+      console.log('grousers is:', grousers);
+      
+      Event.find({group: groupid}).exec(function(err, events){
+        if (err) {
+          err = 'Failed to seach Event with groupid:' + groupid;
+          sails.log.error(err);
+          return res.negotiate(err);
+        }
+        res.view('GroupDetail', {
+        RecentEvent: events[0],
+        events: events,
+        group: gro,
+        user: user,
+        groupusers: grousers,
+        userNumber: userNumber,
+        layout: null
+        });
       });
-    });
+    }); 
   },
 
 
