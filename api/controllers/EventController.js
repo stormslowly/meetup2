@@ -60,7 +60,7 @@ module.exports = {
 
       Group.find({
         id: eve.group.id
-      }).populate('owner').exec(function(err, groups) {
+      }).populate('owner').populate('user').exec(function(err, groups) {
         if (err) {
           sails.log.error(err);
           return res.negotiate(err);

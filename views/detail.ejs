@@ -187,15 +187,15 @@
             </div>
             <div id="join_list">
               <h3>
-              <span> <%= group.user.length %> </span>
+              <span> <%= event.user.length %> </span>
               <span> going </span> 
             </h3>
               <div class="rsp_line" id="rsp_line" style="color: #EC1212; padding-bottom:4px; display:block; width:90%; line-height:38px; height:0px; border-top-width: thin;border-top-color: rgb(55, 52, 52);border-top-style: solid;">
               </div>
               <ul style="list-style-type:none; padding:0px">
-                <% for(var i=0; i<group.user.length; i++) {%>
+                <% for(var i=0; i<event.user.length; i++) {%>
                 <li>
-                  <h5><a href=""><%= group.users[i].fullname %></a></h5>
+                  <h5><a href=""><%= event.user[i].fullname %></a></h5>
                 </li>
                 <% } %>
               </ul>
