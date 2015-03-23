@@ -85,14 +85,14 @@
           </h1>
           <div id="chapter-navigation" style="width:100%; background-color:#ffffff">
             <div class="btn-group btn-group-lg" role="group" aria-label="..." style="width:100%;">
-              <button type="button" class="btn btn-default" style="width:15%; border-color:#ffffff; color:#888" onClick="onChangePage()">Home</button>
-              <button type="button" class="btn btn-default" style="width:15%; border-color:#ffffff; color:#888">Members</button>
-              <button type="button" class="btn btn-default" style="width:15%; border-color:#ffffff; color:#888">Photos</button>
-              <button type="button" class="btn btn-default" style="width:15%; border-color:#ffffff; color:#888">Pages</button>
-              <button type="button" class="btn btn-default" style="width:15%; border-color:#ffffff; color:#888">Discussions</button>
+              <button type="button" class="btn btn-default" style="width:12%; border-color:#ffffff; color:#888" onClick="onChangePage()">Home</button>
+              <button type="button" class="btn btn-default" style="width:12%; border-color:#ffffff; color:#888">Members</button>
+              <button type="button" class="btn btn-default" style="width:12%; border-color:#ffffff; color:#888">Photos</button>
+              <button type="button" class="btn btn-default" style="width:12%; border-color:#ffffff; color:#888">Pages</button>
+              <button type="button" class="btn btn-default" style="width:12%; border-color:#ffffff; color:#888">Discussions</button>
 
 
-              <div class="btn-group btn-group-lg" role="group">
+              <div class="btn-group btn-group-lg" role="group" style="width:15%;">
                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false" style="border-color:#ffffff; color:#888">
                   More
                   <span class="caret"></span>
@@ -104,6 +104,9 @@
                   </li>
                 </ul>
               </div>
+
+              <button type="button" class="btn btn-default" style=" float:right; width:15%; border-color:#ffffff; color:#ff0000">Join us!</button>
+
             </div>
           </div>
 
@@ -180,7 +183,7 @@
           <div id="C_Attendees" class="col-md-2" style="background-color:#ffffff">
             <div id="response_box">
               <h3>Welcome</h3>
-              <button id="rspYes" style="background-color:#75EA26; width:90%" onClick="user_join()">Join</button>
+              <button id="rspYes" style="background-color:#75EA26; width:90%" onClick="event_user_join()">Join</button>
             </div>
             <div id="join_list">
               <h3>
@@ -210,7 +213,7 @@
   window.location.href="/";
 }
 
- function user_join() {
+ function event_user_join() {
   var username= document.getElementById("username").innerHTML;
 
   if ( username.indexOf("Anonymous")!=-1 ){

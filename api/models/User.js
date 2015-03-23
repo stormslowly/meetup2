@@ -29,5 +29,11 @@ module.exports = {
       collection: 'Group',
       via: 'user'
     },
+
+    events: {
+      collection: 'Event',
+      via: 'user'
+    },
+
   }
 };

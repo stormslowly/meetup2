@@ -133,21 +133,21 @@ module.exports = {
     console.log('create new user for event');
     var user= req.session.user;
     console.log(user);
-    Group.find({id:4}).populate('user').exec(function (err, groups){
+    var eventid= req.param('eventid');
+    Event.find({id:eventid}).populate('user').exec(function (err, events){
       if(err){
         console.log(err);
-
       }
       else{
-        groups[0].user.add(user);
-        groups[0].save(function(err,s){
+        events[0].user.add(user);
+        events[0].save(function(err,s){
         console.log("record was saved:", s);
       })
 
       }
       
     });
-    res.redirect('event/show/');
+    res.redirect('event/show/'+ eventid);
   }
 
 };

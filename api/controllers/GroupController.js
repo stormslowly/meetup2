@@ -60,7 +60,9 @@ module.exports = {
 
     var groupid = req.param('id');
 
-    Group.find({id: groupid}).populate('user').exec(function(err, groups) {
+    Group.find({
+      id: groupid
+    }).populate('user').exec(function(err, groups) {
       if (err) {
         sails.log.error(err);
         return res.negotiate(err);
@@ -78,24 +80,38 @@ module.exports = {
       var user = req.session.user;
       console.log('userNumber is:', userNumber);
       console.log('grousers is:', grousers);
-      
-      Event.find({group: groupid}).exec(function(err, events){
+
+      Event.find({
+        group: groupid
+      }).exec(function(err, events) {
         if (err) {
           err = 'Failed to seach Event with groupid:' + groupid;
           sails.log.error(err);
           return res.negotiate(err);
         }
+        if (events.length == 0) {
+          return res.view('GroupDetail', {
+            RecentEvent: null,
+            events: null,
+            group: gro,
+            user: user,
+            groupusers: grousers,
+            userNumber: userNumber,
+            layout: null
+          });
+
+        }
         res.view('GroupDetail', {
-        RecentEvent: events[0],
-        events: events,
-        group: gro,
-        user: user,
-        groupusers: grousers,
-        userNumber: userNumber,
-        layout: null
+          RecentEvent: events[0],
+          events: events,
+          group: gro,
+          user: user,
+          groupusers: grousers,
+          userNumber: userNumber,
+          layout: null
         });
       });
-    }); 
+    });
   },
 
 
@@ -118,7 +134,29 @@ module.exports = {
 
     });
 
-  }
+  },
+
+  AddUser: function(req, res) {
+    console.log('create new user for event');
+    var user= req.session.user;
+    console.log(user);
+    var groupid= req.param('groupid');
+    Group.find({id:groupid}).populate('user').exec(function (err, groups){
+      if(err){
+        console.log(err);
+
+      }
+      else{
+        groups[0].user.add(user);
+        groups[0].save(function(err,s){
+        console.log("record was saved:", s);
+        })
+
+      }
+      
+    });
+    res.redirect('group/show/'+groupid);
+  },
 
 
 };

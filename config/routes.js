@@ -81,4 +81,9 @@ module.exports.routes = {
     'action': 'search'
   },
 
+  '/group/userjoin/:id': {
+    'controller': 'Group',
+    'action': 'AddUser'
+  },
+
 };

@@ -102,6 +102,13 @@
                   </li>
                 </ul>
               </div>
+              <ul id="my-links" style="float:right; margin-top:6px; margin-right:6px; margin-bottom:6px; margin-left:4px; font-size:0; padding-left:0; list-style-position:outside; display:block; ">
+              <li id="join-link" style="position:relative; line-height:32px;padding:0;font-size:16px;list-style:none;  ">
+              <a href="#" onClick= "group_user_add()" style="text-decoration:none; color:#932A2A; font-weight:bold; padding-top: 9px; padding-right: 18px; padding-bottom: 7px; padding-left: 18px; background-color: #198963;">Join us!
+              </a>
+              </li>
+              </ul>
+
             </div>
           </div>
 
@@ -150,14 +157,14 @@
 
           </div>
           <div id="C_Content" class="col-md-7" style="padding-left:0px">
-          	
+          	<% if (RecentEvent!= null) { %>
           	<ul id="groupTab" class="nav nav-tabs">
           		<li role="presentation" class="active"><a href="#RecentEvent" data-toggle="tab">Recent Event</a></li>
           		<li role="presentation"><a href="#GroupCalendar" data-toggle="tab">Calendar</a></li>
           	</ul>
           	<div id="groupTabContent" class="tab-content">
           		<div class ="tab-pane active" id="RecentEvent"  style="background-color:#ffffff">
-          			<div id="event_title">
+          			<div id="event_title">		    
           				<h2 style="margin-top:1px"> <%= RecentEvent.topic %></h2>
           			</div>
           			<div id="event-content">
@@ -210,12 +217,13 @@
 					</div>
                 </div>
             </div>
+            <% } %>
           </div>
 
           <div id="C_Attendees" class="col-md-2" style="background-color:#ffffff">
             <div id="response_box">
               <h3>Welcome</h3>
-              <button id="rspYes" style="background-color:#75EA26; width:90%" onClick="user_join()">Join</button>
+              <button id="rspYes" style="background-color:#75EA26; width:90%" onClick="event_user_join()">Join</button>
             </div>
             <div id="join_list">
               <h3>
@@ -226,7 +234,7 @@
               </div>
               <ul style="list-style-type:none; padding:0px">
                 <% for(var i=0; i<groupusers.length; i++) {%>
-                <li>
+                 <li>
                   <h5><a href=""><%= groupusers[i].fullname %></a></h5>
                 </li>
                 <% } %>
@@ -245,7 +253,7 @@
   window.location.href="/";
 }
 
- function user_join() {
+ function group_user_join() {
   var username= document.getElementById("username").innerHTML;
 
   if ( username.indexOf("Anonymous")!=-1 ){
@@ -254,7 +262,30 @@
   }
   else{
     alert(username);
-    window.location.href="/event/userjoin";
+    <% if (user!=null) { %>
+    window.location.href="/group/userjoin/" +<%= group.id %>; 	
+    <% }else{ %>
+    	window.location.href="/login";
+    <% } %>
+    
+  }
+ }
+
+ function event_user_join() {
+  var username= document.getElementById("username").innerHTML;
+
+  if ( username.indexOf("Anonymous")!=-1 ){
+    alert("You need login first");
+    window.location.href="/login";
+  }
+  else{
+    alert(username);
+    <% if (user!=null) { %>
+    window.location.href="/event/userjoin/" +<%= event.id %>; 	
+    <% }else{ %>
+    	window.location.href="/login";
+    <% } %>
+    
   }
  }
   
