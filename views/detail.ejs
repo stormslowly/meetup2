@@ -123,7 +123,7 @@
                 <li style="border-top-width:1px; border-top-style:solid; border-top-color:#eee; padding-top:6px; margin-left:0px;">
                   <a href="">
                     <span style="width:71%; float:left;">Members</span>
-                    <span style="text-align:right; float:none"> <%= userNumber %></span>
+                    <span style="text-align:right; float:none"> <%= group.user.length %></span>
                   </a>
                 </li>
                 <li style="border-top-width:1px; border-top-style:solid; border-top-color:#eee; padding-top:6px; margin-left:0px;">
@@ -143,7 +143,7 @@
 
               <div id="meta-organizers" style="padding-top:30px;">
                 <h4><span>Organizer: </span></h4>
-                <h5><a href="">Wang Gang-Layner</a></h5>
+                <h5><a href=""><%= group.owner.fullname %></a></h5>
                 <button type="button" class="btn btn-default" aria-label="Contact">
                   <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
                 </button>
@@ -187,15 +187,15 @@
             </div>
             <div id="join_list">
               <h3>
-              <span> <%= groupusers.length %> </span>
+              <span> <%= group.user.length %> </span>
               <span> going </span> 
             </h3>
               <div class="rsp_line" id="rsp_line" style="color: #EC1212; padding-bottom:4px; display:block; width:90%; line-height:38px; height:0px; border-top-width: thin;border-top-color: rgb(55, 52, 52);border-top-style: solid;">
               </div>
               <ul style="list-style-type:none; padding:0px">
-                <% for(var i=0; i<groupusers.length; i++) {%>
+                <% for(var i=0; i<group.user.length; i++) {%>
                 <li>
-                  <h5><a href=""><%= groupusers[i].fullname %></a></h5>
+                  <h5><a href=""><%= group.users[i].fullname %></a></h5>
                 </li>
                 <% } %>
               </ul>
@@ -214,15 +214,15 @@
 }
 
  function event_user_join() {
-  var username= document.getElementById("username").innerHTML;
 
-  if ( username.indexOf("Anonymous")!=-1 ){
+  
+  if ( user==null ){
     alert("You need login first");
     window.location.href="/login";
   }
   else{
-    alert(username);
-    window.location.href="/event/userjoin";
+    alert(user.fullname);
+    window.location.href="/event/userjoin/"+user.id;
   }
  }
   

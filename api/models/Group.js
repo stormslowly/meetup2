@@ -13,7 +13,9 @@ module.exports = {
       unique: true
     },
     desc: 'string',
-    owner: 'string',
+    owner: {
+      model: 'user'
+    },
     createDate: 'date',
     user: {
       collection: 'User',

@@ -32,37 +32,20 @@ module.exports.routes = {
     'action': 'calender'
   },
 
-  '/showevent/:id': {
+  '/event/show/:id': {
     'controller': 'Event',
     'action': 'show'
   },
-
-  '/group/new': {
-    'controller': 'Group',
-    'action': 'create'
-
-  },
-
-  'POST /newGroup': {
-    'controller': 'Group',
-    'action': 'newGroup'
-  },
-
-  '/group/:id': {
-    'controller': 'Group',
-    'action': 'show'
-  },
-
+  
   '/event/new': {
     'controller': 'Event',
     'action': 'create'
 
   },
 
-  '/event/userjoin': {
+  '/event/userjoin/:id': {
     'controller': 'Event',
     'action': 'newuser'
-
   },
 
 
@@ -79,6 +62,23 @@ module.exports.routes = {
   '/group': {
     'controller': 'Group',
     'action': 'search'
+  },
+
+  '/group/show/:id': {
+    'controller': 'Group',
+    'action': 'show'
+  },
+
+
+  '/group/new': {
+    'controller': 'Group',
+    'action': 'create'
+
+  },
+
+  'POST /newGroup': {
+    'controller': 'Group',
+    'action': 'newGroup'
   },
 
   '/group/userjoin/:id': {
