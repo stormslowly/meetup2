@@ -104,7 +104,7 @@
               </div>
               <ul id="my-links" style="float:right; margin-top:6px; margin-right:6px; margin-bottom:6px; margin-left:4px; font-size:0; padding-left:0; list-style-position:outside; display:block; ">
               <li id="join-link" style="position:relative; line-height:32px;padding:0;font-size:16px;list-style:none;  ">
-              <a href="#" onClick= "group_user_join()" style="text-decoration:none; color:#932A2A; font-weight:bold; padding-top: 9px; padding-right: 18px; padding-bottom: 7px; padding-left: 18px; background-color: #198963;">Join us!
+              <a href="#" onclick= "group_user_join()" style="text-decoration:none; color:#932A2A; font-weight:bold; padding-top: 10px; padding-right: 18px; padding-bottom: 10px; padding-left: 18px; background-color: #198963; border-radius:4px">Join us!
               </a>
               </li>
               </ul>
@@ -232,39 +232,29 @@
 }
 
  function group_user_join() {
-  var username= document.getElementById("username").innerHTML;
-
-  if ( username.indexOf("Anonymous")!=-1 ){
+  
+  <% if ((user==null) || (group==null)){ %>
     alert("You need login first");
     window.location.href="/login";
-  }
-  else{
-    alert(username);
-    <% if (user!=null) { %>
-    window.location.href="/group/userjoin/" +<%= group.id %>; 	
-    <% }else{ %>
-    	window.location.href="/login";
-    <% } %>
-    
-  }
+  <% } else{ %>
+    alert( <% user.fullname %>);
+    window.location.href="/group/userjoin/"+ <%= group.id %>;
+  <% } %>
+ 
  }
 
- function event_user_join() {
-  var username= document.getElementById("username").innerHTML;
 
-  if ( username.indexOf("Anonymous")!=-1 ){
-    alert("You need login first");
-    window.location.href="/login";
-  }
-  else{
-    alert(username);
+ function event_user_join() {
+  
+
     <% if ((user!=null)&&(events!=null)){ %>
-    window.location.href="/event/userjoin/" +<%= events[0].id %>; 	
+      alert( <% user.fullname %>);
+      window.location.href="/event/userjoin/" +<%= events[0].id %>; 	
     <% }else{ %>
+      alert("You need login first");
     	window.location.href="/login";
     <% } %>
-    
-  }
+
  }
   
 </script> 

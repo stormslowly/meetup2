@@ -124,7 +124,7 @@ module.exports = {
   },
 
 
-  newuser: function(req, res) {
+  AddUser: function(req, res) {
     console.log('create new user for event');
     var user = req.session.user;
     console.log(user);
@@ -133,17 +133,25 @@ module.exports = {
       id: eventid
     }).populate('user').exec(function(err, events) {
       if (err) {
-        console.log(err);
+        err = 'Failed to query database with eventid: ' + eventid;
+        sails.log.error(err);
+        return res.negotiate(err);
+
       } else {
-        events[0].user.add(user);
-        events[0].save(function(err, s) {
-          console.log("record was saved:", s);
-        })
-
+        if (events.length!=0){
+          events[0].user.add(user);
+          events[0].save(function(err, s) {
+          console.log("user was added to event successfully:", s);
+          return res.redirect('event/show/' + eventid);
+          });
+        }
+        else{
+          err = 'Failed to find event with eventid:' + eventid;
+          sails.log.error(err);
+          return res.negotiate(err);
+        }
       }
-
-    });
-    res.redirect('event/show/' + eventid);
-  }
-
+        
+        });
+      },
 };
