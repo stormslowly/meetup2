@@ -65,12 +65,13 @@ module.exports = {
               return res.redirect(500, '/login');
             }
 
-            LDAPUtils.auth(entry.uid, req.body.password,
+            LDAPUtils.auth(entry.dn, req.body.password,
               function(err) {
                 if (err) {
+                  console.log('logs', err.message);
                   return loginFailed();
                 }
-              
+
                 return res.ok(user);
 
               });

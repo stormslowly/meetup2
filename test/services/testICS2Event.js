@@ -16,14 +16,14 @@ describe('service ICS 2 Event', function() {
     expect(this.icsStringtoEvent).to.be.ok;
     var event = this.icsStringtoEvent(icsContent);
 
-    expect(event).to.have.keys(['topic', 'desc', 'end', 'start','address']);
+    expect(event).to.have.keys(['topic', 'desc', 'end', 'start',
+      'address'
+    ]);
     expect(event.start).to.deep.equal(new Date(2015, 3 - 1, 10, 17, 0));
     expect(event.end).to.deep.equal(new Date(2015, 3 - 1, 10, 16, 0));
 
     console.log('logs', event);
 
   });
-
-
 
 });
