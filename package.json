@@ -24,7 +24,8 @@
     "grunt-contrib-coffee": "~0.10.1",
     "chai": "~1.9.2",
     "mailin": "~1.0.0",
-    "ldapjs": "~0.7.1"
+    "ldapjs": "~0.7.1",
+    "vdata-parser": "git+https://github.com/stormslowly/vdata-parser.git"
   },
   "scripts": {
     "start": "node app.js",
@@ -40,6 +41,14 @@
   "license": "",
   "devDependencies": {
     "sails-memory": "~0.10.3",
-    "supertest": "~0.14.0"
+    "supertest": "~0.14.0",
+    "node-notifier": "~4.1.2",
+    "gulp-mocha": "~2.0.0",
+    "gulp-autoprefixer": "~2.1.0",
+    "gulp": "~3.8.11",
+    "gulp-util": "~3.0.4",
+    "gulp-less": "~3.0.2",
+    "gulp-notify": "~2.2.0",
+    "gulp-react": "~3.0.1"
   }
 }

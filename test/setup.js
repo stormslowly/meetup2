@@ -4,6 +4,7 @@ var Sails = require('sails');
 
 before(function(done) {
   Sails.lift({
+    port: 8989,
     log: {
       noShip: true
     },

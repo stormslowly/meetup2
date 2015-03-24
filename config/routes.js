@@ -27,6 +27,12 @@ module.exports.routes = {
     'action': 'login'
   },
 
+  '/auth/logout': {
+    'controller': 'Auth',
+    'action': 'logout'
+  },
+
+
   '/calender': {
     'controller': 'Home',
     'action': 'calender'
@@ -36,7 +42,7 @@ module.exports.routes = {
     'controller': 'Event',
     'action': 'show'
   },
-  
+
   '/event/new': {
     'controller': 'Event',
     'action': 'create'

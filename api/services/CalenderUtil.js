@@ -14,7 +14,6 @@ function Invitation(rawText) {
   this._header = this.getMailHeader();
 
 
-
 };
 Invitation.prototype.getMailHeader = function () {
   var header= this._mainMail.split(DELIMETER)

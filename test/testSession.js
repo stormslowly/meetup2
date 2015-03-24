@@ -8,7 +8,7 @@ describe('sails session hack', function() {
 
 
 
-  describe.only('should get to authed folder by session', function() {
+  describe('should get to authed folder by session', function() {
 
     var sessions, app;
 

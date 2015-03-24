@@ -16,7 +16,8 @@ module.exports = {
     group: {
       model: 'group'
     },
-    user: {collection: 'User',
+    user: {
+      collection: 'User',
       via: 'events',
       dominant: true
     }

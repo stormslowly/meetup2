@@ -1,1 +1,1 @@
--R spec  -t 9000
+--recursive -R spec  -t 9000
