@@ -51,7 +51,7 @@ module.exports.routes = {
 
   '/event/userjoin/:id': {
     'controller': 'Event',
-    'action': 'newuser'
+    'action': 'AddUser'
   },
 
 

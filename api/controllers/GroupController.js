@@ -137,7 +137,7 @@ module.exports = {
   },
 
   AddUser: function(req, res) {
-    console.log('create new user for event');
+    console.log('create new user for group');
     var user = req.session.user;
     console.log(user);
     var groupid = req.param('id');
@@ -145,15 +145,17 @@ module.exports = {
       id: groupid
     }).populate('user').exec(function(err, groups) {
       if (err) {
-        console.log(err);
+        err = 'Failed to query database with groupid: ' + groupid;
+        sails.log.error(err);
+        return res.negotiate(err);
 
       } else {
 
         if (groups.length != 0) {
           groups[0].user.add(user);
           groups[0].save(function(err, s) {
-            console.log("record was saved:", s);
-            res.redirect('group/show/' + groupid);
+            console.log("user was added to group:", s);
+            return res.redirect('group/show/' + groupid);
           })
 
         } else {
