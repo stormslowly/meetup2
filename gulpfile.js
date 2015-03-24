@@ -34,13 +34,21 @@ gulp.task('less', function() {
 });
 
 gulp.task('watch', function() {
-  gulp.watch('views/component/**/*.jsx', ['jsx']);
+  gulp.watch('views/jsx/component/**/*.jsx', ['jsx']);
   gulp.watch(['api/**/*.js', 'test/**/*.js'], ['mocha']);
 });
 
 gulp.task('jsx', function() {
-  return gulp.src('views/component/**/*.jsx')
+  return gulp.src('views/jsx/component/**/*.jsx')
     .pipe(react())
+    .on('error', notify.onError({
+      message: 'Error: <%= error.message %>',
+      emitError: true
+    }))
+    .on('error', function(e) {
+      gutil.log(e);
+      this.emit('end');
+    })
     .pipe(gulp.dest('assets/js/react/'));
 });
 

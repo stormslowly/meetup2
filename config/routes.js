@@ -7,6 +7,10 @@ module.exports.routes = {
     'action': 'index'
   },
 
+  '/sview': {
+    view: 'sEvent'
+  },
+
   'get /chat': {
     controller: 'Chat',
     action: 'get'

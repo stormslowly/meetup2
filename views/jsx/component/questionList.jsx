@@ -39,53 +39,52 @@ var QuetsionList = React.createClass({
 });
 
 var QAHolder = React.createClass({
-  displayName: 'QAHolder',
+      displayName: 'QAHolder',
 
-  onMessage: function(qas) {
-    var arr;
-    if (!$.isArray(qas)) {
-      arr = [qas];
-    }
+      onMessage: function(qas) {
+        var arr;
+        if (!$.isArray(qas)) {
+          arr = [qas];
+        }
 
-    this.setState({
-      qas: arr,
-      connected: true
+        this.setState({
+          qas: arr,
+          connected: true
+        })
+      },
+
+
+      getInitialState: function() {
+        var connected = false;
+        try {
+          connected = io.socket.socket.connected;
+        } catch (e) {
+
+        }
+
+        var onMessage = this.onMessage.bind(this);
+
+        io.socket.get('/chat', onMessage);
+
+        io.socket.on('message', onMessage);
+
+        return {
+          qas: [],
+          status: 'disconnect'
+        };
+      },
+      render: function() {
+        return ( < QuetsionList qas = {
+            this.state.qas
+          }
+          />);
+        }
+      });
+
+
+
+    $(function() {
+
+      React.render( < QAHolder / > ,
+        document.getElementById('myroom'));
     })
-  },
-
-
-  getInitialState: function() {
-    var connected = false;
-    try {
-      connected = io.socket.socket.connected;
-    } catch (e) {
-
-    }
-
-    var onMessage = this.onMessage.bind(this);
-
-    io.socket.get('/chat', onMessage);
-
-    io.socket.on('message', onMessage);
-
-    return {
-      qas: [],
-      status: 'disconnect'
-    };
-  },
-  render: function() {
-    return ( < QuetsionList qas = {
-        this.state.qas
-      }
-      />
-    );
-  }
-});
-
-
-
-$(function() {
-
-  React.render( < QAHolder / > ,
-    document.getElementById('myroom'));
-})
