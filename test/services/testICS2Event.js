@@ -3,7 +3,7 @@ var expect = require('chai').expect;
 var fs = require('fs');
 var path = require('path');
 
-describe('service ICS 2 Event', function() {
+describe('service ICS to Event', function() {
 
   before(function() {
     this.icsStringtoEvent = sails.services.icsparse.icsStringtoEvent;
