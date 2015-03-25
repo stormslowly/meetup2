@@ -136,32 +136,30 @@ module.exports = {
         return res.negotiate(err);
 
       } else {
-        if (events.length!=0){
-          for(var i=0; i<events[0].user.length; i++){
-            if (user.id == events[0].user[i].id){
+        if (events.length != 0) {
+          for (var i = 0; i < events[0].user.length; i++) {
+            if (user.id == events[0].user[i].id) {
               return res.redirect('event/show/' + eventid);
             }
           }
           events[0].user.add(user);
           events[0].save(function(err, s) {
-            if(err){
+            if (err) {
               sails.log.error(err);
               return res.negotiate(err);
-            }
-            else{
+            } else {
               console.log("user was added to event successfully:", s);
               return res.redirect('event/show/' + eventid);
             }
-            
+
           });
-        }
-        else{
+        } else {
           err = 'Failed to find event with eventid:' + eventid;
           sails.log.error(err);
           return res.negotiate(err);
         }
       }
-        
-        });
-      },
+
+    });
+  },
 };
