@@ -1,7 +1,7 @@
 'use strict';
 
-module.exports = {
 
+module.exports = {
 
   create: function(req, res) {
 
@@ -67,7 +67,7 @@ module.exports = {
         } else {
           console.log('group is', groups[0]);
 
-          res.view('detail', {
+          res.view('EventDetail', {
             event: eve,
             group: groups[0],
             user: user,

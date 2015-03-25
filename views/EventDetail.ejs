@@ -224,7 +224,6 @@ function group_user_join() {
     alert("You need login first");
     window.location.href="/login";
   <% } else{ %>
-    alert( <% user.fullname %>);
     window.location.href="/group/userjoin/"+ <%= group.id %>;
   <% } %>
  
@@ -235,7 +234,6 @@ function group_user_join() {
   
 
     <% if ((user!=null)&&(event!=null)){ %>
-    alert( <% user.fullname %>);
     window.location.href="/event/userjoin/" +<%= event.id %>;   
     <% }else{ %>
       alert("You need login first");
