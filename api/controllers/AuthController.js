@@ -45,7 +45,7 @@ module.exports = {
             return loginFailed();
           }
           req.session.user = user;
-          return res.ok(user);
+          return res.redirect('/');
         });
       } else {
         LDAPUtils.searchByUID(req.body.uid, function(err, entry) {
@@ -72,7 +72,7 @@ module.exports = {
                   return loginFailed();
                 }
 
-                return res.ok(user);
+                return res.redirect('/');
 
               });
           });

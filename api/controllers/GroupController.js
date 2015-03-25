@@ -207,9 +207,8 @@ module.exports = {
 
 
   addUser: function(req, res) {
-    console.log('create new user for group');
+
     var user = req.session.user;
-    console.log(user);
     var groupid = req.param('id');
 
     add_group_user(groupid, user,function(err){
