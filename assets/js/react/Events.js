@@ -19973,14 +19973,14 @@ var DropzoneDemo = React.createClass({displayName: "DropzoneDemo",
     console.log('logs',formData);
     $.ajax({
       type: 'POST',
-      url: '/uploader/event',
+      url: '/event/upload',
       data: formData,
       processData: false,
       contentType: false,
     }).done(function(msg) {
       console.log('msg', msg);
     }).fail(function() {
-      console.log('logs', 'failed');
+      console.log('logs', arguments);
     });
 
   },
@@ -19995,9 +19995,6 @@ var DropzoneDemo = React.createClass({displayName: "DropzoneDemo",
         )
       )
       );
-
-
-
     return uploadICS;
   }
 });
