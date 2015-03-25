@@ -22,6 +22,13 @@ var add_group_user = function(groupid, user,cb) {
       } else {
 
         if (groups.length != 0) {
+          for (i=0; i<groups[0].user.length; i++){
+            if (user.id == groups[0].user[i].id){
+              err = "user existed already";
+              console.log(err);
+              return cb(err);
+            }
+          }
           groups[0].user.add(user);
           groups[0].save(function(err, s) {
             if (err){
@@ -92,9 +99,27 @@ module.exports = {
         sails.log.error(err);
         return res.negotiate(err);
       }
-      var linkid = 'group/show/' + created.id;
-      res.redirect(linkid);
+      else{
+        add_group_user(created.id, req.session.user, function(err){
+          if (err) {
+            if(err=="user existed already"){
+              return res.redirect('group/show/' + created.id);
+            }
+            else{
+              err = 'Failed to add user to group:' + req.session.user;
+              sails.log.error(err);
+              return res.negotiate(err);
+            }
+            
+          }
+          else{
+            return res.redirect('group/show/' + created.id);
+          }
 
+        })
+        
+      }
+      
     });
   },
 
@@ -181,6 +206,8 @@ module.exports = {
 
   },
 
+
+
   addUser: function(req, res) {
     console.log('create new user for group');
     var user = req.session.user;
@@ -188,19 +215,19 @@ module.exports = {
     var groupid = req.param('id');
 
     add_group_user(groupid, user,function(err){
-
-        console.log(err);
-        console.log(user);
-
         if (err) {
 
-          err = 'Failed to add user to group:' + user;
-          sails.log.error(err);
-          return res.negotiate(err);
+          if(err=="user existed already"){
+              return res.redirect('group/show/' + groupid);
+          }
+          else{
+            err = 'Failed to add user to group:' + user;
+            sails.log.error(err);
+            return res.negotiate(err);
+          }
 
         }
-        else{
-          
+        else{  
           return res.redirect('group/show/' + groupid);
         }
 
