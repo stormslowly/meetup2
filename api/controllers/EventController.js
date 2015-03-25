@@ -1,11 +1,10 @@
 'use strict';
-
-
+/* global Group,ICSParse*/
 module.exports = {
 
   create: function(req, res) {
 
-    if (req.session.user != null) {
+    if (req.session.user !== null) {
       Group.find({}, function(err, found) {
         if (err) {
           console.log('Something is wrong:', err);
@@ -22,23 +21,20 @@ module.exports = {
       req.flash('error', 'User need login first');
       return res.redirect('/login');
     }
-
-
   },
 
   show: function(req, res) {
 
-
     var eventId = req.param('id');
-    console.log("eventId is:", eventId);
+    console.log('eventId is:', eventId);
 
     var user = req.session.user;
 
-    if (user == null) {
+    if (user === null) {
       console.log('session user is null');
-    };
+    }
 
-    console.log("user is:", user);
+    console.log('user is:', user);
 
     Event.find({
       id: eventId
@@ -49,35 +45,35 @@ module.exports = {
         return res.negotiate(err);
       }
       sails.log(events);
-      if (events.length == 0) {
+      if (events.length === 0) {
         err = 'no event is found with the event id:' + eventId;
         sails.log.error(err);
         return res.negotiate(err);
       }
 
-      var eve = new Object();
-      eve = events[0];
+      var eve = events[0];
 
       Group.find({
-        id: eve.group.id
-      }).populate('owner').populate('user').exec(function(err, groups) {
-        if (err) {
-          sails.log.error(err);
-          return res.negotiate(err);
-        } else {
-          console.log('group is', groups[0]);
+          id: eve.group.id
+        })
+        .populate('owner')
+        .populate('user')
+        .exec(function(err, groups) {
+          if (err) {
+            sails.log.error(err);
+            return res.negotiate(err);
+          } else {
+            console.log('group is', groups[0]);
 
-          res.view('EventDetail', {
-            event: eve,
-            group: groups[0],
-            user: user,
-            layout: null
-          });
-        }
-      });
+            res.view('detail', {
+              event: eve,
+              group: groups[0],
+              user: user,
+              layout: null
+            });
+          }
+        });
     });
-
-
   },
 
   newEvent: function(req, res) {
@@ -98,7 +94,7 @@ module.exports = {
         return res.negotiate(err);
       }
 
-      if (found.length == 0) {
+      if (found.length === 0) {
         err = 'no group is found with the group name:' + groupname;
         sails.log.error(err);
         return res.negotiate(err);
@@ -136,9 +132,10 @@ module.exports = {
         return res.negotiate(err);
 
       } else {
-        if (events.length != 0) {
+
+        if (events.length !== 0) {
           for (var i = 0; i < events[0].user.length; i++) {
-            if (user.id == events[0].user[i].id) {
+            if (user.id === events[0].user[i].id) {
               return res.redirect('event/show/' + eventid);
             }
           }
@@ -148,7 +145,10 @@ module.exports = {
               sails.log.error(err);
               return res.negotiate(err);
             } else {
-              console.log("user was added to event successfully:", s);
+
+              console.log('user was added to event successfully:',
+                s);
+
               return res.redirect('event/show/' + eventid);
             }
 
@@ -162,4 +162,25 @@ module.exports = {
 
     });
   },
+
+  upload: function(req, res) {
+    var icsFile = req.file('ics');
+
+    icsFile.upload({
+      dirname: sails.config.upload.calender
+    }, function(err, files) {
+      if (err) {
+        return res.negotiate(err);
+      }
+      var file = files[0].fd;
+      ICSParse.icsFiletoEvent(file, function(err, event) {
+        if (err) {
+          return res.negotiate(err);
+        }
+        res.json(event);
+      });
+    });
+
+  }
+
 };

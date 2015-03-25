@@ -3,7 +3,7 @@ var expect = require('chai').expect;
 var fs = require('fs');
 var path = require('path');
 
-describe('service ICS 2 Event', function() {
+describe('service ICS to Event', function() {
 
   before(function() {
     this.icsStringtoEvent = sails.services.icsparse.icsStringtoEvent;
@@ -21,9 +21,6 @@ describe('service ICS 2 Event', function() {
     ]);
     expect(event.start).to.deep.equal(new Date(2015, 3 - 1, 10, 17, 0));
     expect(event.end).to.deep.equal(new Date(2015, 3 - 1, 10, 16, 0));
-
-    console.log('logs', event);
-
   });
 
 });

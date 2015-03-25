@@ -25,7 +25,8 @@
     "chai": "~1.9.2",
     "mailin": "~1.0.0",
     "ldapjs": "~0.7.1",
-    "vdata-parser": "git+https://github.com/stormslowly/vdata-parser.git"
+    "vdata-parser": "git+https://github.com/stormslowly/vdata-parser.git",
+    "react-dropzone": "~1.0.1"
   },
   "scripts": {
     "start": "node app.js",
@@ -49,6 +50,9 @@
     "gulp-util": "~3.0.4",
     "gulp-less": "~3.0.2",
     "gulp-notify": "~2.2.0",
-    "gulp-react": "~3.0.1"
+    "gulp-react": "~3.0.1",
+    "reactify": "~1.1.0",
+    "gulp-browserify": "~0.5.1",
+    "gulp-rename": "~1.2.0"
   }
 }

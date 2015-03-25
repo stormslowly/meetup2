@@ -1,5 +1,7 @@
 'use strict';
 var icsParser = require('vdata-parser');
+var fs = require('fs');
+
 var pureKeys = function(vData) {
   for (var key in vData) {
     if (vData.hasOwnProperty(key)) {
@@ -41,9 +43,27 @@ var DT2Date = function(str) {
 
 module.exports = {
 
+  icsFiletoEvent: function(fileName, callback) {
+    var self = this;
+    fs.readFile(fileName, 'utf-8', function(err, content) {
+      if (err) {
+        return callback(err);
+      }
+
+      try {
+        var event = self.icsStringtoEvent(content);
+        callback(null, event);
+      } catch (err) {
+        callback(err);
+      }
+
+    });
+
+  },
+
+
   icsStringtoEvent: function(string) {
     var vEvent = icsParser.fromString(string).VCALENDAR.VEVENT;
-
     pureKeys(vEvent);
 
     return {

@@ -58,7 +58,7 @@ module.exports = {
             dn: entry.dn,
             fullname: entry.gecos,
             email: entry.mail
-          }, function(err, user) {
+          }, function(err) {
 
             if (err) {
               req.flash('error', 'Server got sick');
@@ -68,7 +68,7 @@ module.exports = {
             LDAPUtils.auth(entry.dn, req.body.password,
               function(err) {
                 if (err) {
-                  console.log('logs', err.message);
+                  sails.log.error('LDAP auth', err.message);
                   return loginFailed();
                 }
 
