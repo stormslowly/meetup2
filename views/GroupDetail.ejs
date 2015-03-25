@@ -237,7 +237,6 @@
     alert("You need login first");
     window.location.href="/login";
   <% } else{ %>
-    alert( <% user.fullname %>);
     window.location.href="/group/userjoin/"+ <%= group.id %>;
   <% } %>
  
@@ -248,7 +247,6 @@
   
 
     <% if ((user!=null)&&(events!=null)){ %>
-      alert( <% user.fullname %>);
       window.location.href="/event/userjoin/" +<%= events[0].id %>; 	
     <% }else{ %>
       alert("You need login first");

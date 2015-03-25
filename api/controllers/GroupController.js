@@ -5,6 +5,56 @@
  * @help        :: See http://links.sailsjs.org/docs/controllers
  */
 
+
+
+var add_group_user = function(groupid, user,cb) {
+
+  Group
+  .find({
+      id: groupid
+    }).populate('user')
+  .exec(function(err, groups) {
+      if (err) {
+        err = 'Failed to query database with groupid: ' + groupid;
+        sails.log.error(err);
+        return cb(err);
+
+      } else {
+
+        if (groups.length != 0) {
+          for (var i=0; i<groups[0].user.length; i++){
+            if (user.id == groups[0].user[i].id){
+              return cb(err);
+            }
+          }
+          groups[0].user.add(user);
+          groups[0].save(function(err, s) {
+            if (err){
+              console.log("user was failed to add to group:", err);
+              return cb(err);
+            }
+            else{
+              console.log("user was added to group:", s);
+              return cb(err);
+            }
+            
+          })
+
+        } else {
+          err = 'Failed to find group with groupid:' + groupid;
+          sails.log.error(err);
+          return cb(Error(err));
+
+        }
+
+      }
+
+    });
+
+
+
+};
+
 module.exports = {
 
 
@@ -47,9 +97,27 @@ module.exports = {
         sails.log.error(err);
         return res.negotiate(err);
       }
-      var linkid = 'group/show/' + created.id;
-      res.redirect(linkid);
+      else{
+        add_group_user(created.id, req.session.user, function(err){
+          if (err) {
+            if(err=="user existed already"){
+              return res.redirect('group/show/' + created.id);
+            }
+            else{
+              err = 'Failed to add user to group:' + req.session.user;
+              sails.log.error(err);
+              return res.negotiate(err);
+            }
+            
+          }
+          else{
+            return res.redirect('group/show/' + created.id);
+          }
 
+        })
+        
+      }
+      
     });
   },
 
@@ -136,37 +204,33 @@ module.exports = {
 
   },
 
-  AddUser: function(req, res) {
-    console.log('create new user for group');
+
+
+  addUser: function(req, res) {
+
     var user = req.session.user;
-    console.log(user);
     var groupid = req.param('id');
-    Group.find({
-      id: groupid
-    }).populate('user').exec(function(err, groups) {
-      if (err) {
-        err = 'Failed to query database with groupid: ' + groupid;
-        sails.log.error(err);
-        return res.negotiate(err);
 
-      } else {
+    add_group_user(groupid, user,function(err){
+        if (err) {
 
-        if (groups.length != 0) {
-          groups[0].user.add(user);
-          groups[0].save(function(err, s) {
-            console.log("user was added to group:", s);
-            return res.redirect('group/show/' + groupid);
-          })
+          if(err=="user existed already"){
+              return res.redirect('group/show/' + groupid);
+          }
+          else{
+            err = 'Failed to add user to group:' + user;
+            sails.log.error(err);
+            return res.negotiate(err);
+          }
 
-        } else {
-          err = 'Failed to find group with groupid:' + groupid;
-          sails.log.error(err);
-          return res.negotiate(err);
+        }
+        else{  
+          return res.redirect('group/show/' + groupid);
         }
 
-      }
-
     });
+
+  
   },
 
 

@@ -18,7 +18,6 @@ describe('Event uploader', function() {
       .attach('ics', path.join(__dirname, './services/invitation.ics'))
       .expect(200)
       .end(function(err, res) {
-        console.log('logs', res.body);
         expect(res.body).to.contain.keys(
           ['topic', 'desc', 'start', 'end']);
         done(err);
