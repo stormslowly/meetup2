@@ -89,7 +89,6 @@ module.exports = {
     newEvent.date = req.param('Date');
     newEvent.address = req.param('Address');
     var groupname = req.param('Group');
-    console.log('group name:', groupname);
 
     Group.find({
       name: groupname
@@ -106,7 +105,6 @@ module.exports = {
       }
 
       var groupid = found[0].id;
-      console.log('groupis is: ', groupid);
       newEvent.group = groupid;
 
       Event.create(newEvent, function(err, created) {
@@ -139,10 +137,22 @@ module.exports = {
 
       } else {
         if (events.length!=0){
+          for(var i=0; i<events[0].user.length; i++){
+            if (user.id == events[0].user[i].id){
+              return res.redirect('event/show/' + eventid);
+            }
+          }
           events[0].user.add(user);
           events[0].save(function(err, s) {
-          console.log("user was added to event successfully:", s);
-          return res.redirect('event/show/' + eventid);
+            if(err){
+              sails.log.error(err);
+              return res.negotiate(err);
+            }
+            else{
+              console.log("user was added to event successfully:", s);
+              return res.redirect('event/show/' + eventid);
+            }
+            
           });
         }
         else{

@@ -22,10 +22,8 @@ var add_group_user = function(groupid, user,cb) {
       } else {
 
         if (groups.length != 0) {
-          for (i=0; i<groups[0].user.length; i++){
+          for (var i=0; i<groups[0].user.length; i++){
             if (user.id == groups[0].user[i].id){
-              err = "user existed already";
-              console.log(err);
               return cb(err);
             }
           }
