@@ -3,6 +3,10 @@
 var gulp = require('gulp');
 var less = require('gulp-less');
 var gutil = require('gulp-util');
+var browserify = require('gulp-browserify');
+var rename = require("gulp-rename");
+
+var reactify = require('reactify');
 var autoprefixer = require('gulp-autoprefixer');
 var _notify = require('gulp-notify');
 var nn = require('node-notifier');
@@ -12,10 +16,20 @@ var notify = _notify.withReporter(function(options, callback) {
   new nn.Growl().notify(options, callback);
 });
 
+var paths = {
+  less: 'less/style.less',
+  jsx: 'views/jsx/**/*.jsx'
+
+};
+
+var dirs = {
+  css: 'public/stylesheets/'
+};
+
 gulp.task('default', ['less', 'mocha']);
 
 gulp.task('less', function() {
-  return gulp.src('less/style.less')
+  return gulp.src(paths.less)
     .pipe(less())
     .on('error', notify.onError({
       message: 'Error: <%= error.message %>',
@@ -29,17 +43,33 @@ gulp.task('less', function() {
       browsers: ['last 2 versions'],
       cascade: false
     }))
-    .pipe(gulp.dest('public/stylesheets/'))
+    .pipe(gulp.dest(dirs.css))
     .pipe(notify('Less success!'));
 });
 
 gulp.task('watch', function() {
-  gulp.watch('views/jsx/component/**/*.jsx', ['jsx']);
+  gulp.watch(paths.jsx, ['front:js']);
   gulp.watch(['api/**/*.js', 'test/**/*.js'], ['mocha']);
 });
 
+gulp.task('front:js', function() {
+
+  return gulp.src('views/jsx/app/*.jsx')
+    .pipe(browserify({
+      insertGlobals: false,
+      debug: false,
+      transform: [reactify]
+    }))
+    .pipe(rename(function(path) {
+      path.extname = '.js';
+    }))
+    .pipe(gulp.dest('assets/js/react/'));
+
+});
+
+
 gulp.task('jsx', function() {
-  return gulp.src('views/jsx/component/**/*.jsx')
+  return gulp.src(paths.jsx)
     .pipe(react())
     .on('error', notify.onError({
       message: 'Error: <%= error.message %>',

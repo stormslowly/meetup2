@@ -12,14 +12,18 @@
 
 module.exports = {
 
-  /***************************************************************************
-   * Set the default database connection for models in the development       *
-   * environment (see config/connections.js and config/models.js )           *
-   ***************************************************************************/
-
   // models: {
   //   connection: 'someMongodbServer'
   // }
 
   port: process.env.MEETUP_PORT || 1337,
+
+  blueprints: {
+    actions: true,
+
+  },
+
+  log: {
+    level: 'info'
+  }
 };
