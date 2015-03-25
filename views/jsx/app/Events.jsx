@@ -27,17 +27,21 @@ var DropzoneDemo = React.createClass({
   },
 
   render: function() {
-    return (
+
+    var uploadICS = (
       <div>
-            <Dropzone onDrop={this.onDrop} size={150} >
-              <div>Try dropping Caldender file(*.ics),
-              <br/> or click to select files to upload.</div>
-            </Dropzone>
+        <Dropzone onDrop={this.onDrop} size={150} >
+          <div>Try dropping Caldender file(*.ics),
+          <br/> or click to select files to upload.</div>
+        </Dropzone>
       </div>
-    );
+      );
+
+
+
+    return uploadICS;
   }
 });
 
 
-React.render(<DropzoneDemo />,
-  document.getElementById('createEvent'));
+React.render(<DropzoneDemo />, document.getElementById('createEvent'));

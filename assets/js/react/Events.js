@@ -19966,6 +19966,10 @@ var DropzoneDemo = React.createClass({displayName: "DropzoneDemo",
     var formData = new FormData();
     formData.append('ics', files[0]);
 
+    var icsfiles = files.filter(function(file){
+      return  file.name.indexOf('.ics');
+    })
+
     console.log('logs',formData);
     $.ajax({
       type: 'POST',
@@ -19982,20 +19986,24 @@ var DropzoneDemo = React.createClass({displayName: "DropzoneDemo",
   },
 
   render: function() {
-    return (
+
+    var uploadICS = (
       React.createElement("div", null, 
-            React.createElement(Dropzone, {onDrop: this.onDrop, size: 150}, 
-              React.createElement("div", null, "Try dropping Caldender file(*.ics),", 
-              React.createElement("br", null), " or click to select files to upload.")
-            )
+        React.createElement(Dropzone, {onDrop: this.onDrop, size: 150}, 
+          React.createElement("div", null, "Try dropping Caldender file(*.ics),", 
+          React.createElement("br", null), " or click to select files to upload.")
+        )
       )
-    );
+      );
+
+
+
+    return uploadICS;
   }
 });
 
 
-React.render(React.createElement(DropzoneDemo, null),
-  document.getElementById('createEvent'));
+React.render(React.createElement(DropzoneDemo, null), document.getElementById('createEvent'));
 
 
 },{"react":157,"react-dropzone":2}]},{},[158])

@@ -60,10 +60,19 @@ gulp.task('front:js', function() {
       debug: false,
       transform: [reactify]
     }))
+    .on('error', notify.onError({
+      message: 'mocha failed: <%= error.message %>',
+      emitError: true
+    }))
+    .on('error', function(e) {
+      gutil.log(e);
+      this.emit('end');
+    })
     .pipe(rename(function(path) {
       path.extname = '.js';
     }))
-    .pipe(gulp.dest('assets/js/react/'));
+    .pipe(gulp.dest('assets/js/react/'))
+    .pipe(notify('JSX complete!'));
 
 });
 
