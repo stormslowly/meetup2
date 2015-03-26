@@ -13,7 +13,8 @@ module.exports = {
 
         res.view('EventPublic', {
           title: 'Event Public',
-          groups: found
+          groups: found,
+          user: req.session.user,
         });
 
       });
@@ -69,7 +70,6 @@ module.exports = {
               event: eve,
               group: groups[0],
               user: user,
-              layout: null
             });
           }
         });

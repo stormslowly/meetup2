@@ -19,63 +19,13 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-default" style="margin-bottom:0px;">
-    <div class="container-fluid">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">Brand</a>
-      </div>
 
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav">
-          <li><a href="#">Start</a>
-          </li>
-        </ul>
-        <form class="navbar-form navbar-left" role="search">
-          <div class="form-group">
-            <input type="text" class="form-control" placeholder="Search Group">
-          </div>
-          <button type="submit" class="btn btn-default">Submit</button>
-        </form>
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="#">Log out</a>
-          </li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-              <span id="username">
-             <% if (user==null) { %>
-             <%= "Anonymous" %>
-             <% } else{ %>
-             <%= user.fullname %>
-             <% } %>
-           </span>
-            <span class="caret"></span></a>
-            <ul class="dropdown-menu" role="menu">
-              <li><a href="#">My Group</a>
-              </li>
-              <li><a href="#">My Event</a>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-      <!-- /.navbar-collapse -->
-    </div>
-    <!-- /.container-fluid -->
-  </nav>
 
   <div id="C_page" style="background-color:#f4f4f4">
-    <div id="page_content" class="container">
+    <div id="page_content" >
       <div class="row">
 
-        <div id="chapterHeader" style="margin-bottom:20px">
+        <div id="chapterHeader" class="col-md-12" style="margin-bottom:20px">
           <h1 id="group_h1" style="text-align:center;  padding-top:30px; padding-bottom:30px; background-color:#4C2099; margin-bottom:0px">
             <a href="" title="Clean Code Hangzhou - Hangzhou, China">
                 <span style="font-size: 42.0px"><%= group.name %></span>
@@ -113,10 +63,10 @@
           </div>
 
         </div>
-        <div id="C_context" style="min-height:2015px;">
+        <div id="C_context" class="col-md-12" style="min-height:2015px;">
 
-          <div id="C_Nav" class="col-md-3" style="border-left-width: 1px;border-left-style: solid;border-left-color: #000022; padding-left: 0px;">
-            <div id="nav_content" style="background-color:#ffffff;border-top-width: 1px; border-top-style: solid;border-top-color: #000022; border-bottom-width: 1px; border-bottom-style: solid;border-bottom-color: #000022;border-right-width: 1px; border-right-style: solid;border-right-color: #000022; padding-left:15px; padding-right:10px">
+          <div id="C_Nav" class="col-md-3" style="padding-left: 0px;">
+            <div id="nav_content" style="background-color:#ffffff;border-width: 1px; border-style: solid;border-color: #eee; padding-left:15px; padding-right:10px">
               <div id="group-info" style="padding-bottom:10px; padding-top:10px;">
                 <span>TC coach network is for everything related to competence </span>
               </div>
@@ -191,7 +141,7 @@
 					      <ul style="list-style-type:none; padding-left:5px">
 					      <% for(var i=0; i<events.length; i++) {%>
 
-					        <li class="group-calender" style="margin-bottom:40px">
+					        <li class="group-calender" style="margin-bottom:40px; width:95%">
 
 					          <div class="event-time" style="float:left; width:50%">
 					            <% var dd= events[i].date; %>
