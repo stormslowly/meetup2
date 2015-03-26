@@ -4,24 +4,21 @@ module.exports = {
 
   create: function(req, res) {
 
-    if (req.session.user !== null) {
-      Group.find({}, function(err, found) {
-        if (err) {
-          console.log('Something is wrong:', err);
-          return res.negotiate(err);
-        }
 
-        res.view('EventPublic', {
-          title: 'Event Public',
-          groups: found,
-          user: req.session.user,
-        });
+    Group.find({}, function(err, found) {
+      if (err) {
+        console.log('Something is wrong:', err);
+        return res.negotiate(err);
+      }
 
+      res.view('EventPublic', {
+        title: 'Event Public',
+        groups: found,
+        user: req.session.user,
       });
-    } else {
-      req.flash('error', 'User need login first');
-      return res.redirect('/login');
-    }
+
+    });
+
   },
 
   show: function(req, res) {
