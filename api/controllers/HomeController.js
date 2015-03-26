@@ -9,15 +9,17 @@
 module.exports = {
   index: function(req, res) {
 
+    var user = req.session.user;
 
-    Group.find({},function(err, groups){
+    Group.find({}, function(err, groups) {
 
       return res.view('meetups', {
-      meetups:groups,
-      linkname: 'show',
-      layout: 'layoutPromote.ejs'
+        meetups: groups,
+        linkname: 'show',
+        user: user,
+        layout: 'layoutPromote.ejs'
       });
-    });   
+    });
   },
 
   calender: function(req, res) {
