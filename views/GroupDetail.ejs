@@ -36,27 +36,16 @@
               <button type="button" class="btn btn-default" style="width:15%; border-color:#ffffff; color:#888" onClick="onChangePage()">Home</button>
               <button type="button" class="btn btn-default" style="width:15%; border-color:#ffffff; color:#888">Members</button>
               <button type="button" class="btn btn-default" style="width:15%; border-color:#ffffff; color:#888">Photos</button>
-              <button type="button" class="btn btn-default" style="width:15%; border-color:#ffffff; color:#888">Pages</button>
               <button type="button" class="btn btn-default" style="width:15%; border-color:#ffffff; color:#888">Discussions</button>
+              <button type="button" class="btn btn-default" style="width:15%; border-color:#ffffff; color:#888" onClick="new_event()">New Event</button>
+              
 
 
-              <div class="btn-group btn-group-lg" role="group">
-                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false" style="border-color:#ffffff; color:#888">
-                  More
-                  <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" role="menu">
-                  <li><a href="#">Dropdown link</a>
-                  </li>
-                  <li><a href="#">Dropdown link</a>
-                  </li>
-                </ul>
-              </div>
               <ul id="my-links" style="float:right; margin-top:6px; margin-right:6px; margin-bottom:6px; margin-left:4px; font-size:0; padding-left:0; list-style-position:outside; display:block; ">
-              <li id="join-link" style="position:relative; line-height:32px;padding:0;font-size:16px;list-style:none;  ">
-              <a href="#" onclick= "group_user_join()" style="text-decoration:none; color:#932A2A; font-weight:bold; padding-top: 10px; padding-right: 18px; padding-bottom: 10px; padding-left: 18px; background-color: #198963; border-radius:4px">Join us!
-              </a>
-              </li>
+                <li id="join-link" style="position:relative; line-height:32px;padding:0;font-size:16px;list-style:none;  ">
+                  <a href="#" onclick= "group_user_join()" style="text-decoration:none; color:#932A2A; font-weight:bold; padding-top: 10px; padding-right: 18px; padding-bottom: 10px; padding-left: 18px; background-color: #198963; border-radius:4px">Join us!
+                  </a>
+                </li>
               </ul>
 
             </div>
@@ -137,11 +126,11 @@
                     </div>
                 </div>
                 <div class ="tab-pane" id="GroupCalendar" style="background-color:#ffffff">
-					<div id="meetup-day-group" style="padding-top:20px; padding-bottom:50px">
+					<div id="group-event" style="padding-top:20px; padding-bottom:50px">
 					      <ul style="list-style-type:none; padding-left:5px">
 					      <% for(var i=0; i<events.length; i++) {%>
 
-					        <li class="group-calender" style="margin-bottom:40px; width:95%">
+					        <li class="group-events" style="margin-bottom:40px; width:95% ">
 
 					          <div class="event-time" style="float:left; width:50%">
 					            <% var dd= events[i].date; %>
@@ -177,15 +166,21 @@
 
 <script language="javascript">  
  
- function onChangePage() {
+function onChangePage() {
   window.location.href="/";
+}
+
+function new_event(){
+
+  window.location.href="/event/new?id=" + <%= group.id %>;
+
 }
 
  function group_user_join() {
   
   <% if ((user==null) || (group==null)){ %>
     alert("You need login first");
-    window.location.href="/login";
+    window.location.href="/";
   <% } else{ %>
     window.location.href="/group/userjoin/"+ <%= group.id %>;
   <% } %>
@@ -200,7 +195,7 @@
       window.location.href="/event/userjoin/" +<%= events[0].id %>; 	
     <% }else{ %>
       alert("You need login first");
-    	window.location.href="/login";
+    	window.location.href="/";
     <% } %>
 
  }

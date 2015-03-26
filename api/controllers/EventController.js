@@ -4,8 +4,11 @@ module.exports = {
 
   create: function(req, res) {
 
+    var groupid = req.param('id');
 
-    Group.find({}, function(err, found) {
+    Group.find({
+      id: groupid
+    }, function(err, found) {
       if (err) {
         console.log('Something is wrong:', err);
         return res.negotiate(err);
