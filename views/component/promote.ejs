@@ -3,15 +3,45 @@
 <div style="height:315px; background-image: url(/images/find.jpg); background-size: cover;">
 
   <div class="container">
-    <div id="what-is-it">
+    <div id="what-is-it" style="float:left; width:500px">
       <h1>Meetup is
         <span class='small-desc'>designed for us to find the interesting meeting for sharing and Learning
         </span>
       </h1>
-      <% if (!req.session.user) { %>
-        <a href="/login">Login as Intra ...
-        </a>
-      <% } %>
     </div>
+    <% if(!req.session.user) { %>
+    <div id="login_part" style="background-color: rgba(0, 0, 0, 0.478431); margin:10px;float:right;">
+      <div id="locate_login_form" style="padding:20px">
+        <form class="form-horizontal" method="post" action="/auth/login" id="LoginForm">
+          <div class="form-group">
+            <label for="inputUser" class="col-sm-3 control-label" style="color:#FAE50B">user</label>
+            <div class="col-sm-6">
+              <input type="text" class="form-control" id="inputUser" placeholder="User" name="uid">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputPassword" class="col-sm-3 control-label" style="color:#FAE50B">Password</label>
+            <div class="col-sm-6">
+              <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Password">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-offset-3 col-sm-7">
+              <div class="checkbox">
+                <label style="color:#FAE50B">
+                  <input type="checkbox"> Remember me
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-offset-3 col-sm-2">
+              <button type="submit" class="btn btn-default" form="LoginForm">Sign in</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <% } %>
   </div>
 </div>

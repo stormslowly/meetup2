@@ -29,6 +29,12 @@ module.exports.policies = {
   '*': ['poweredby'],
   'AuthController': {
     logout: ['sessionAuth']
+  },
+  'EventController': {
+    create: ['sessionAuth']
+  },
+  'GroupController': {
+    create: ['sessionAuth']
   }
 
   /***************************************************************************

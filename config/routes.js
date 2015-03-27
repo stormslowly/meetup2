@@ -53,6 +53,12 @@ module.exports.routes = {
 
   },
 
+  '/event/myevent': {
+    'controller': 'Event',
+    'action': 'ShowMyEvent'
+
+  },
+
   '/event/userjoin/:id': {
     'controller': 'Event',
     'action': 'AddUser'
@@ -63,6 +69,7 @@ module.exports.routes = {
     'controller': 'Event',
     'action': 'newEvent'
   },
+
 
   'POST /mailhook': {
     'controller': 'Mailhook',
@@ -84,6 +91,16 @@ module.exports.routes = {
     'controller': 'Group',
     'action': 'create'
 
+  },
+
+  '/group/mygroup': {
+    'controller': 'Group',
+    'action': 'ShowMyGroup'
+  },
+
+  '/group/members': {
+    'controller': 'Group',
+    'action': 'ShowMembers'
   },
 
   'POST /newGroup': {

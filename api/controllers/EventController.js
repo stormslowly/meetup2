@@ -4,23 +4,24 @@ module.exports = {
 
   create: function(req, res) {
 
-    if (req.session.user !== null) {
-      Group.find({}, function(err, found) {
-        if (err) {
-          console.log('Something is wrong:', err);
-          return res.negotiate(err);
-        }
+    var groupid = req.param('id');
 
-        res.view('EventPublic', {
-          title: 'Event Public',
-          groups: found
-        });
+    Group.find({
+      id: groupid
+    }, function(err, found) {
+      if (err) {
+        console.log('Something is wrong:', err);
+        return res.negotiate(err);
+      }
 
+      res.view('EventPublic', {
+        title: 'Event Public',
+        groups: found,
+        user: req.session.user,
       });
-    } else {
-      req.flash('error', 'User need login first');
-      return res.redirect('/login');
-    }
+
+    });
+
   },
 
   show: function(req, res) {
@@ -65,11 +66,10 @@ module.exports = {
           } else {
             console.log('group is', groups[0]);
 
-            res.view('detail', {
+            res.view('EventDetail', {
               event: eve,
               group: groups[0],
               user: user,
-              layout: null
             });
           }
         });
@@ -132,6 +132,7 @@ module.exports = {
         return res.negotiate(err);
 
       } else {
+
         if (events.length !== 0) {
           for (var i = 0; i < events[0].user.length; i++) {
             if (user.id === events[0].user[i].id) {
@@ -144,8 +145,10 @@ module.exports = {
               sails.log.error(err);
               return res.negotiate(err);
             } else {
+
               console.log('user was added to event successfully:',
                 s);
+
               return res.redirect('event/show/' + eventid);
             }
 
@@ -177,6 +180,30 @@ module.exports = {
         res.json(event);
       });
     });
+
+  },
+
+  ShowMyEvent: function(req, res) {
+
+    var user = req.session.user;
+
+    User.find({
+      id: user.id
+    }).populate('events').exec(function(err, users) {
+
+      if (err) {
+        return res.negotiate(err);
+
+      } else {
+        var events = users[0].events;
+        return res.view('calender', {
+          events: events,
+          user: user,
+        });
+      }
+
+    });
+
 
   }
 

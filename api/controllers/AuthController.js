@@ -15,12 +15,11 @@ module.exports = {
   },
 
   logout: function(req, res) {
-    var fullname = req.session.user.fullname;
+
     req.session.user = null;
 
-    res.view('logout', {
-      who: fullname
-    });
+    return res.redirect('/');
+
   },
 
   login: function(req, res) {
