@@ -19957,50 +19957,149 @@ module.exports = require('./lib/React');
 
 
 },{"./lib/React":30}],158:[function(require,module,exports){
-var React = require('react');
-var Dropzone = require('react-dropzone');
+'use strict';
+var React = require( 'react' );
+var Dropzone = require( 'react-dropzone' );
 
-var DropzoneDemo = React.createClass({displayName: "DropzoneDemo",
-  onDrop: function(files) {
-    console.log('Received files: ', files);
+
+var EventForm = React.createClass( {
+  displayName: 'EventForm',
+  render: function () {
+    return (
+    React.createElement("div", null, 
+      React.createElement("form", {className: "form-horizontal", method: "post", action: "/newEvent", id: "EventForm1"}, 
+
+        React.createElement("div", {className: "form-group"}, 
+          React.createElement("label", {for: "inputTopic", className: "col-sm-2 control-label"}, "Topic"), 
+          React.createElement("div", {className: "col-sm-8"}, 
+            React.createElement("input", {type: "text", className: "form-control", id: "inputTopic", name: "Topic", placeholder: ""})
+          )
+        ), 
+
+        React.createElement("div", {className: "form-group"}, 
+          React.createElement("label", {for: "inputOrganizer", className: "col-sm-2 control-label"}, "Organizer"), 
+          React.createElement("div", {className: "col-sm-8"}, 
+            React.createElement("select", {className: "form-control", id: "inputOrganizer", name: "Group", placeholder: ""}, 
+              React.createElement("option", null, "group1")
+            )
+
+          )
+        ), 
+
+        React.createElement("div", {className: "form-group"}, 
+          React.createElement("label", {for: "inputDate", className: "col-sm-2 control-label"}, "Date"), 
+          React.createElement("div", {className: "col-sm-8"}, 
+            React.createElement("input", {type: "text", className: "form-control", id: "inputDate", name: "Date", placeholder: ""})
+          )
+        ), 
+        React.createElement("div", {className: "form-group"}, 
+          React.createElement("label", {for: "inputAddress", className: "col-sm-2 control-label"}, "Address"), 
+          React.createElement("div", {className: "col-sm-8"}, 
+            React.createElement("input", {type: "text", className: "form-control", id: "inputAddress", name: "Address", placeholder: ""})
+          )
+        ), 
+        React.createElement("div", {className: "form-group"}, 
+          React.createElement("label", {for: "inputEvent", className: "col-sm-2 control-label"}, "Event"), 
+          React.createElement("div", {className: "col-sm-8"}, 
+            React.createElement("textarea", {className: "form-control col-sm-8", rows: "10", id: "inputEvent", name: "Event"})
+          )
+        ), 
+        React.createElement("div", {className: "form-group"}, 
+          React.createElement("div", {className: "col-sm-offset-2 col-sm-10"}, 
+            React.createElement("button", {type: "submit", className: "btn btn-default", form: "EventForm1"}, "Public")
+          )
+        )
+      ), 
+      React.createElement("form", {className: "form-horizontal", method: "post", action: "/newEvent", id: "EventForm1"}, 
+
+        React.createElement("div", {className: "form-group"}, 
+          React.createElement("label", {for: "inputTopic", className: "col-sm-2 control-label"}, "Topic"), 
+          React.createElement("div", {className: "col-sm-8"}, 
+            React.createElement("input", {type: "text", className: "form-control", id: "inputTopic", name: "Topic", placeholder: ""})
+          )
+        ), 
+
+        React.createElement("div", {className: "form-group"}, 
+          React.createElement("label", {for: "inputOrganizer", className: "col-sm-2 control-label"}, "Organizer"), 
+          React.createElement("div", {className: "col-sm-8"}, 
+            React.createElement("select", {className: "form-control", id: "inputOrganizer", name: "Group", placeholder: ""}, 
+              React.createElement("option", null, "group1")
+            )
+
+          )
+        ), 
+
+        React.createElement("div", {className: "form-group"}, 
+          React.createElement("label", {for: "inputDate", className: "col-sm-2 control-label"}, "Date"), 
+          React.createElement("div", {className: "col-sm-8"}, 
+            React.createElement("input", {type: "text", className: "form-control", id: "inputDate", name: "Date", placeholder: ""})
+          )
+        ), 
+        React.createElement("div", {className: "form-group"}, 
+          React.createElement("label", {for: "inputAddress", className: "col-sm-2 control-label"}, "Address"), 
+          React.createElement("div", {className: "col-sm-8"}, 
+            React.createElement("input", {type: "text", className: "form-control", id: "inputAddress", name: "Address", placeholder: ""})
+          )
+        ), 
+        React.createElement("div", {className: "form-group"}, 
+          React.createElement("label", {for: "inputEvent", className: "col-sm-2 control-label"}, "Event"), 
+          React.createElement("div", {className: "col-sm-8"}, 
+            React.createElement("textarea", {className: "form-control col-sm-8", rows: "10", id: "inputEvent", name: "Event"})
+          )
+        ), 
+        React.createElement("div", {className: "form-group"}, 
+          React.createElement("div", {className: "col-sm-offset-2 col-sm-10"}, 
+            React.createElement("button", {type: "submit", className: "btn btn-default", form: "EventForm1"}, "Public")
+          )
+        )
+      )
+    )
+    );
+  }
+} );
+
+
+
+var DropzoneDemo = React.createClass( {displayName: "DropzoneDemo",
+  onDrop: function ( files ) {
+    console.log( 'Received files: ', files );
     var formData = new FormData();
-    formData.append('ics', files[0]);
+    formData.append( 'ics', files[ 0 ] );
 
-    var icsfiles = files.filter(function(file){
-      return  file.name.indexOf('.ics');
-    })
-
-    console.log('logs',formData);
-    $.ajax({
+    // var icsfiles = files.filter(function(file){
+    //   return  file.name.indexOf('.ics');
+    // });
+    console.log( 'logs', formData );
+    $.ajax( {
       type: 'POST',
       url: '/event/upload',
       data: formData,
       processData: false,
       contentType: false,
-    }).done(function(msg) {
-      console.log('msg', msg);
-    }).fail(function() {
-      console.log('logs', arguments);
-    });
+    } ).done( function ( msg ) {
+      console.log( 'msg', msg );
+    } ).fail( function () {
+      console.log( 'logs', arguments );
+    } );
 
   },
-
-  render: function() {
-
+  render: function () {
     var uploadICS = (
-      React.createElement("div", null, 
-        React.createElement(Dropzone, {onDrop: this.onDrop, size: 150}, 
-          React.createElement("div", null, "Try dropping Caldender file(*.ics),", 
+    React.createElement("div", null, 
+      React.createElement(Dropzone, {onDrop: this.onDrop, size: 150}, 
+        React.createElement("div", null, "Try dropping Caldender file(*.ics),", 
           React.createElement("br", null), " or click to select files to upload.")
-        )
       )
-      );
+
+    )
+
+    );
     return uploadICS;
   }
-});
+} );
 
 
-React.render(React.createElement(DropzoneDemo, null), document.getElementById('createEvent'));
+React.render( React.createElement(DropzoneDemo, null), document.getElementById( 'createEvent' ) );
 
 
 },{"react":157,"react-dropzone":2}]},{},[158])

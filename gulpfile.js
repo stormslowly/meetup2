@@ -61,7 +61,7 @@ gulp.task('front:js', function() {
       transform: [reactify]
     }))
     .on('error', notify.onError({
-      message: 'mocha failed: <%= error.message %>',
+      message: 'front:js failed: <%= error.message %>',
       emitError: true
     }))
     .on('error', function(e) {
