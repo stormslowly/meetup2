@@ -226,5 +226,41 @@ module.exports = {
 
   },
 
+  ShowMyGroup: function(req, res) {
+
+    var user = req.session.user;
+
+    console.log(user);
+
+    User.find({
+      id: user.id
+    }).populate('group').exec(function(err, users) {
+
+      if (err) {
+        console.log('faild to find group');
+        sails.log.error(err);
+        return res.negotiate(err);
+      } else {
+
+        var groups = users[0].group;
+
+
+        res.view('meetups', {
+          meetups: groups,
+          linkname: 'show',
+          user: user,
+          layout: 'layoutPromote.ejs'
+        });
+
+      }
+
+    });
+
+  },
+
+  ShowMembers: function(req, res) {
+
+  },
+
 
 };

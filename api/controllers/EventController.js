@@ -181,6 +181,30 @@ module.exports = {
       });
     });
 
+  },
+
+  ShowMyEvent: function(req, res) {
+
+    var user = req.session.user;
+
+    User.find({
+      id: user.id
+    }).populate('events').exec(function(err, users) {
+
+      if (err) {
+        return res.negotiate(err);
+
+      } else {
+        var events = users[0].events;
+        return res.view('calender', {
+          events: events,
+          user: user,
+        });
+      }
+
+    });
+
+
   }
 
 };
