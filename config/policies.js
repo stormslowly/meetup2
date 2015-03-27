@@ -31,10 +31,12 @@ module.exports.policies = {
     logout: ['sessionAuth']
   },
   'EventController': {
-    create: ['sessionAuth']
+    create: ['sessionAuth'],
+    ShowMyEvent: ['sessionAuth']
   },
   'GroupController': {
-    create: ['sessionAuth']
+    create: ['sessionAuth'],
+    ShowMyGroup: ['sessionAuth'],
   }
 
   /***************************************************************************

@@ -110,7 +110,12 @@ module.exports.routes = {
 
   '/group/userjoin/:id': {
     'controller': 'Group',
-    'action': 'AddUser'
+    'action': 'addUser'
   },
+
+  '/group/userleft/:id': {
+    'controller': 'Group',
+    'action': 'removeUser'
+  }
 
 };
