@@ -52,6 +52,14 @@ module.exports = {
         return res.negotiate(err);
       }
 
+      var inevent = false;
+      for (var i = 0; i < events[0].user.length; i++) {
+
+        if (user.id == events[0].user[i].id) {
+          inevent = true;
+        }
+      }
+
       var eve = events[0];
 
       Group.find({
@@ -70,6 +78,7 @@ module.exports = {
               event: eve,
               group: groups[0],
               user: user,
+              inevent: inevent,
             });
           }
         });
@@ -118,7 +127,7 @@ module.exports = {
   },
 
 
-  AddUser: function(req, res) {
+  addUser: function(req, res) {
     console.log('create new user for event');
     var user = req.session.user;
     console.log(user);
@@ -160,6 +169,34 @@ module.exports = {
         }
       }
 
+    });
+  },
+
+  removeUser: function(req, res) {
+
+    var user = req.session.user;
+    var eventid = req.param('id');
+    Event.find({
+      id: eventid
+    }).populate('user').exec(function(err, events) {
+      if (err) {
+        err = 'Failed to query database with eventid: ' + eventid;
+        sails.log.error(err);
+        return res.negotiate(err);
+
+      } else {
+        events[0].user.remove(user);
+        events[0].save(function(err, s) {
+          if (err) {
+            sails.log.error(err);
+            return res.negotiate(err);
+          } else {
+
+            console.log('user was removed from event successfully');
+            return res.redirect('event/show/' + eventid);
+          }
+        });
+      }
     });
   },
 

@@ -168,17 +168,4 @@ function new_event(){
  }
 
 
- function event_user_join() {
-
-
-    <% if ((user!=null)&&(events!=null)){ %>
-      window.location.href="/event/userjoin/" +<%= events[0].id %>;
-    <% }else{ %>
-      alert("You need login first");
-    	window.location.href="/";
-    <% } %>
-
- }
-
-
 </script>
