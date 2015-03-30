@@ -53,6 +53,21 @@ module.exports = {
       }
 
       var inevent = false;
+      var ingroup = false;
+      var groupid = events[0].group.id;
+
+      Group.find({
+        id: groupid
+      }).populate('user').exec(function(err, groups) {
+        for (var i = 0; i < groups[0].user.length; i++) {
+
+          if (user.id == groups[0].user[i].id) {
+            ingroup = true;
+          }
+        }
+
+      });
+
       for (var i = 0; i < events[0].user.length; i++) {
 
         if (user.id == events[0].user[i].id) {
@@ -78,6 +93,7 @@ module.exports = {
               event: eve,
               group: groups[0],
               user: user,
+              ingroup: ingroup,
               inevent: inevent,
             });
           }
@@ -127,79 +143,6 @@ module.exports = {
   },
 
 
-  addUser: function(req, res) {
-    console.log('create new user for event');
-    var user = req.session.user;
-    console.log(user);
-    var eventid = req.param('id');
-    Event.find({
-      id: eventid
-    }).populate('user').exec(function(err, events) {
-      if (err) {
-        err = 'Failed to query database with eventid: ' + eventid;
-        sails.log.error(err);
-        return res.negotiate(err);
-
-      } else {
-
-        if (events.length !== 0) {
-          for (var i = 0; i < events[0].user.length; i++) {
-            if (user.id === events[0].user[i].id) {
-              return res.redirect('event/show/' + eventid);
-            }
-          }
-          events[0].user.add(user);
-          events[0].save(function(err, s) {
-            if (err) {
-              sails.log.error(err);
-              return res.negotiate(err);
-            } else {
-
-              console.log('user was added to event successfully:',
-                s);
-
-              return res.redirect('event/show/' + eventid);
-            }
-
-          });
-        } else {
-          err = 'Failed to find event with eventid:' + eventid;
-          sails.log.error(err);
-          return res.negotiate(err);
-        }
-      }
-
-    });
-  },
-
-  removeUser: function(req, res) {
-
-    var user = req.session.user;
-    var eventid = req.param('id');
-    Event.find({
-      id: eventid
-    }).populate('user').exec(function(err, events) {
-      if (err) {
-        err = 'Failed to query database with eventid: ' + eventid;
-        sails.log.error(err);
-        return res.negotiate(err);
-
-      } else {
-        events[0].user.remove(user);
-        events[0].save(function(err, s) {
-          if (err) {
-            sails.log.error(err);
-            return res.negotiate(err);
-          } else {
-
-            console.log('user was removed from event successfully');
-            return res.redirect('event/show/' + eventid);
-          }
-        });
-      }
-    });
-  },
-
   upload: function(req, res) {
     var icsFile = req.file('ics');
 
@@ -220,28 +163,6 @@ module.exports = {
 
   },
 
-  ShowMyEvent: function(req, res) {
 
-    var user = req.session.user;
-
-    User.find({
-      id: user.id
-    }).populate('events').exec(function(err, users) {
-
-      if (err) {
-        return res.negotiate(err);
-
-      } else {
-        var events = users[0].events;
-        return res.view('calender', {
-          events: events,
-          user: user,
-        });
-      }
-
-    });
-
-
-  }
 
 };

@@ -160,9 +160,9 @@ function new_event(){
 
   <% if (ingroup) {%>
     
-    window.location.href="/group/userleft/" + <%= group.id %>;
+    window.location.href="/user/leftgroup/" + <%= group.id %>;
   <% } else{ %>
-    window.location.href="/group/userjoin/"+ <%= group.id %>;
+    window.location.href="/user/joingroup/"+ <%= group.id %>;
   <% } %>
 
  }

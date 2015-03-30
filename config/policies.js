@@ -32,12 +32,20 @@ module.exports.policies = {
   },
   'EventController': {
     create: ['sessionAuth'],
-    ShowMyEvent: ['sessionAuth']
   },
   'GroupController': {
     create: ['sessionAuth'],
-    ShowMyGroup: ['sessionAuth'],
-  }
+  },
+  'UserController': {
+    create: ['sessionAuth'],
+    show_my_group: ['sessionAuth'],
+    show_my_event: ['sessionAuth'],
+    add_user_to_group: ['sessionAuth'],
+    remove_user_from_group: ['sessionAuth'],
+    add_user_to_event: ['sessionAuth'],
+    remove_user_from_event: ['sessionAuth'],
+
+  },
 
   /***************************************************************************
    *                                                                          *
