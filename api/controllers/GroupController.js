@@ -6,7 +6,6 @@
  */
 
 
-
 module.exports = {
 
 
@@ -50,21 +49,8 @@ module.exports = {
         sails.log.error(err);
         return res.negotiate(err);
       } else {
-        add_group_user(created.id, req.session.user, function(err) {
-          if (err) {
-            if (err == "user existed already") {
-              return res.redirect('group/show/' + created.id);
-            } else {
-              err = 'Failed to add user to group:' + req.session.user;
-              sails.log.error(err);
-              return res.negotiate(err);
-            }
 
-          } else {
-            return res.redirect('group/show/' + created.id);
-          }
-
-        })
+        return res.redirect('user/joingroup/' + created.id);
 
       }
 
