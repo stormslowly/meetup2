@@ -59,21 +59,30 @@ module.exports = {
       Group.find({
         id: groupid
       }).populate('user').exec(function(err, groups) {
-        for (var i = 0; i < groups[0].user.length; i++) {
+        if (user != null) {
+          for (var i = 0; i < groups[0].user.length; i++) {
 
-          if (user.id == groups[0].user[i].id) {
-            ingroup = true;
+            if (user.id == groups[0].user[i].id) {
+              ingroup = true;
+            }
           }
+
         }
+
 
       });
 
-      for (var i = 0; i < events[0].user.length; i++) {
+      if (user != null) {
 
-        if (user.id == events[0].user[i].id) {
-          inevent = true;
+        for (var i = 0; i < events[0].user.length; i++) {
+
+          if (user.id == events[0].user[i].id) {
+            inevent = true;
+          }
         }
       }
+
+
 
       var eve = events[0];
 

@@ -132,12 +132,17 @@ module.exports = {
 
         var inevent = false;
 
-        for (var i = 0; i < events[0].user.length; i++) {
+        if (user != null) {
+          for (var i = 0; i < events[0].user.length; i++) {
 
-          if (user.id == events[0].user[i].id) {
-            inevent = true;
+            if (user.id == events[0].user[i].id) {
+              inevent = true;
+            }
           }
+
         }
+
+
         res.view('GroupDetail', {
           RecentEvent: events[0],
           events: events,
