@@ -82,8 +82,6 @@ module.exports = {
         }
       }
 
-
-
       var eve = events[0];
 
       Group.find({
@@ -114,9 +112,19 @@ module.exports = {
 
     var newEvent = {};
 
+
     newEvent.topic = req.param('Topic');
     newEvent.desc = req.param('Event');
-    newEvent.date = req.param('Date');
+    var strDate1 = req.param('beginDate');
+    var kk1 = strDate1.split('-');
+    var strTime1 = req.param('BeginTime');
+    var tt1 = strTime1.split(':');
+    var strDate2 = req.param('endDate');
+    var kk2 = strDate2.split('-');
+    var strTime2 = req.param('EndTime');
+    var tt2 = strTime2.split(':');
+    newEvent.begindate = new Date(kk1[0], kk1[1] - 1, kk1[2], tt1[0], tt1[1]);
+    newEvent.enddate = new Date(kk2[0], kk2[1] - 1, kk2[2], tt2[0], tt2[1]);
     newEvent.address = req.param('Address');
     var groupname = req.param('Group');
 

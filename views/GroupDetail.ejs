@@ -89,9 +89,12 @@
           			<div id="event-content">
           				<div id="event_when">
                           <time itemprop="startDate" datetime="2015-03-14T09:30:00+08:00">
-                          <% var dd = RecentEvent.date %>
-                          <h3><%= dd.toLocaleDateString() %></h3>
-                          <p class="subtext"><%= dd.getHours() %>:<%= dd.getMinutes() %></p>
+                          <% var begindate = RecentEvent.begindate %>
+                          <h4 style="color:rbg(87,53,8);">Begin: <%= begindate.toLocaleDateString() %></h4>
+                          <p class="subtext"><%= begindate.toLocaleTimeString() %></p>
+                          <% var enddate = RecentEvent.enddate %>
+                          <h4 style = "color:rgb(87,53,8);">End: <%= enddate.toLocaleDateString() %></h4>
+                          <p class="subtext"><%= enddate.toLocaleTimeString() %></p>
                           </time>
                         </div>
 	                    <div id="event_where">
@@ -113,7 +116,7 @@
 					        <li class="group-events" style="margin-bottom:40px; width:95% ">
 
 					          <div class="event-time" style="float:left; width:50%">
-					            <% var dd= events[i].date; %>
+					            <% var dd= events[i].begindate; %>
 					            <h5><%= dd.toLocaleDateString() %></h5>
 					            <h5><%= dd.getHours() %>:<%= dd.getMinutes() %></h5>
 					          </div>
