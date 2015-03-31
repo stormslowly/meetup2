@@ -39,8 +39,6 @@ module.exports = {
       return res.redirect('/login');
     };
 
-    console.log(newGroup.date);
-
     console.log('To create new group');
 
     Group.create(newGroup, function(err, created) {
@@ -50,8 +48,17 @@ module.exports = {
         return res.negotiate(err);
       } else {
 
-        return res.redirect('user/joingroup/' + created.id);
+        res.setTimeout(0);
 
+        req.file('groupflag').upload({
+          dirname: require('path').join(sails.config.appPath, '/assets/images')
+        }, function(err, uploadedFiles) {
+          if (err) return res.negotiate(err);
+          if (uploadedFiles.length === 0) {
+            return res.badRequest('No file was uploaded');
+          }
+          return res.redirect('user/joingroup/' + created.id);
+        });
       }
 
     });
