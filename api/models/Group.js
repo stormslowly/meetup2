@@ -17,6 +17,7 @@ module.exports = {
       model: 'user'
     },
     createDate: 'date',
+    groupfd: 'string',
     user: {
       collection: 'User',
       via: 'group'

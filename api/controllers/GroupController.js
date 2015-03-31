@@ -51,13 +51,26 @@ module.exports = {
         res.setTimeout(0);
 
         req.file('groupflag').upload({
-          dirname: require('path').join(sails.config.appPath, '/assets/images')
+          dirname: require('path').join(sails.config.appPath, '/assets/images'),
         }, function(err, uploadedFiles) {
           if (err) return res.negotiate(err);
           if (uploadedFiles.length === 0) {
             return res.badRequest('No file was uploaded');
           }
-          return res.redirect('user/joingroup/' + created.id);
+          newFilefd = uploadedFiles[0].fd;
+          if (!newFilefd.match(/^\//)) {
+            newFilefd = require('path').basename(newFilefd);
+          }
+          Group.update(created.id, {
+            groupfd: newFilefd,
+          }).exec(function(err) {
+            if (err) {
+              return res.negotiate(err);
+            } else {
+              return res.redirect('user/joingroup/' + created.id);
+            }
+          })
+
         });
       }
 
