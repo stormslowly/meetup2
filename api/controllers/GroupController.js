@@ -1,12 +1,5 @@
-/**
- * GroupController
- *
- * @description :: Server-side logic for managing groups
- * @help        :: See http://links.sailsjs.org/docs/controllers
- */
-
-
-
+'use strict';
+/* global Group */
 var add_group_user = function(groupid, user, cb) {
 
   Group
@@ -21,19 +14,19 @@ var add_group_user = function(groupid, user, cb) {
 
       } else {
 
-        if (groups.length != 0) {
+        if (groups.length !== 0) {
           for (var i = 0; i < groups[0].user.length; i++) {
-            if (user.id == groups[0].user[i].id) {
+            if (user.id === groups[0].user[i].id) {
               return cb(err);
             }
           }
           groups[0].user.add(user);
           groups[0].save(function(err, s) {
             if (err) {
-              console.log("user was failed to add to group:", err);
+              console.log('user was failed to add to group:', err);
               return cb(err);
             } else {
-              console.log("user was added to group:", s);
+              console.log('user was added to group:', s);
               return cb(err);
             }
 
@@ -80,12 +73,12 @@ module.exports = {
     newGroup.desc = req.param('Desc');
     newGroup.date = new Date();
 
-    if (req.session.user != null) {
+    if (req.session.user !== null) {
       newGroup.owner = req.session.user;
     } else {
       req.flash('error', 'User need login first');
       return res.redirect('/login');
-    };
+    }
 
     console.log(newGroup.date);
 
@@ -99,7 +92,7 @@ module.exports = {
       } else {
         add_group_user(created.id, req.session.user, function(err) {
           if (err) {
-            if (err == "user existed already") {
+            if (err == 'user existed already') {
               return res.redirect('group/show/' + created.id);
             } else {
               err = 'Failed to add user to group:' + req.session.user;
@@ -111,7 +104,7 @@ module.exports = {
             return res.redirect('group/show/' + created.id);
           }
 
-        })
+        });
 
       }
 
@@ -140,14 +133,13 @@ module.exports = {
         sails.log.error(err);
         return res.negotiate(err);
       }
-      if (groups.length == 0) {
-        err = 'No group is found'
+      if (groups.length === 0) {
+        err = 'No group is found';
         sails.log.error(err);
         return res.negotiate(err);
       }
 
-      var gro = new Object();
-      gro = groups[0];
+      var gro = groups[0];
 
       Event.find({
         group: groupid
@@ -157,7 +149,7 @@ module.exports = {
           sails.log.error(err);
           return res.negotiate(err);
         }
-        if (events.length == 0) {
+        if (events.length === 0) {
           return res.view('GroupDetail', {
             RecentEvent: null,
             events: null,
@@ -178,23 +170,16 @@ module.exports = {
   },
 
 
-  /**
-   * `GroupController.search()`
-   */
-  search: function(req, res) {
-
-    Group.find({}, function(err, found) {
+  find: function(req, res) {
+    var limit = 100|| req.param('limit');
+    Group.find({})
+      .limit(limit)
+      .exec( function(err, groups) {
       if (err) {
-        console.log('Something is wrong:', err);
+        sails.log.error('GroupController.search:', err);
         return res.negotiate(err);
       }
-
-      return res.view('meetups', {
-        meetups: ['nokia', 'nodejs', 'python', 'lua', 'Golag', 'Linux'],
-        linkname: 'show',
-        layout: 'layoutPromote.ejs'
-      });
-
+      return res.json(groups);
     });
 
   },
@@ -209,7 +194,7 @@ module.exports = {
     add_group_user(groupid, user, function(err) {
       if (err) {
 
-        if (err == "user existed already") {
+        if (err == 'user existed already') {
           return res.redirect('group/show/' + groupid);
         } else {
           err = 'Failed to add user to group:' + user;

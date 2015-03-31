@@ -76,9 +76,9 @@ module.exports.routes = {
     'action': 'hook'
   },
 
-  '/group': {
+  'GET /api/group': {
     'controller': 'Group',
-    'action': 'search'
+    'action': 'find'
   },
 
   '/group/show/:id': {
