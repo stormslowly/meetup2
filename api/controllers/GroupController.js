@@ -1,3 +1,5 @@
+'use strict';
+/*global Group*/
 /**
  * GroupController
  *
@@ -14,6 +16,7 @@ module.exports = {
    * `GroupController.create()`
    */
   create: function(req, res) {
+
     res.view('NewGroup', {
       title: 'New Group',
       user: req.session.user,
@@ -32,12 +35,12 @@ module.exports = {
     newGroup.desc = req.param('Desc');
     newGroup.date = new Date();
 
-    if (req.session.user != null) {
+    if (req.session.user !== null) {
       newGroup.owner = req.session.user;
     } else {
       req.flash('error', 'User need login first');
       return res.redirect('/login');
-    };
+    }
 
     console.log('To create new group');
 
@@ -53,11 +56,13 @@ module.exports = {
         req.file('groupflag').upload({
           dirname: require('path').join(sails.config.appPath, '/assets/images'),
         }, function(err, uploadedFiles) {
-          if (err) return res.negotiate(err);
+          if (err) {
+            return res.negotiate(err);
+          }
           if (uploadedFiles.length === 0) {
             return res.badRequest('No file was uploaded');
           }
-          newFilefd = uploadedFiles[0].fd;
+          var newFilefd = uploadedFiles[0].fd;
           if (!newFilefd.match(/^\//)) {
             newFilefd = require('path').basename(newFilefd);
           }
@@ -69,7 +74,7 @@ module.exports = {
             } else {
               return res.redirect('user/joingroup/' + created.id);
             }
-          })
+          });
 
         });
       }
@@ -99,23 +104,23 @@ module.exports = {
         sails.log.error(err);
         return res.negotiate(err);
       }
-      if (groups.length == 0) {
-        err = 'No group is found'
+      if (groups.length === 0) {
+        err = 'No group is found';
         sails.log.error(err);
         return res.negotiate(err);
       }
 
       var ingroup = false;
 
-      if (user != null) {
+      if (user !== null) {
         for (var i = 0; i < groups[0].user.length; i++) {
-          if (user.id == groups[0].user[i].id) {
+          if (user.id === groups[0].user[i].id) {
             ingroup = true;
           }
         }
       }
 
-      var gro = new Object();
+      var gro = {};
       gro = groups[0];
 
       Event.find({
@@ -126,7 +131,7 @@ module.exports = {
           sails.log.error(err);
           return res.negotiate(err);
         }
-        if (events.length == 0) {
+        if (events.length === 0) {
           return res.view('GroupDetail', {
             RecentEvent: null,
             events: null,
@@ -138,10 +143,10 @@ module.exports = {
 
         var inevent = false;
 
-        if (user != null) {
+        if (user !== null) {
           for (var i = 0; i < events[0].user.length; i++) {
 
-            if (user.id == events[0].user[i].id) {
+            if (user.id === events[0].user[i].id) {
               inevent = true;
             }
           }
