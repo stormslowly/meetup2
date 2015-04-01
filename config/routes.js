@@ -53,16 +53,37 @@ module.exports.routes = {
 
   },
 
-  '/event/myevent': {
-    'controller': 'Event',
-    'action': 'ShowMyEvent'
+  '/user/myevent': {
+    'controller': 'User',
+    'action': 'show_my_event'
 
   },
 
-  '/event/userjoin/:id': {
-    'controller': 'Event',
-    'action': 'AddUser'
+  '/user/mygroup': {
+    'controller': 'User',
+    'action': 'show_my_group'
   },
+
+  '/user/joingroup/:id': {
+    'controller': 'User',
+    'action': 'add_user_to_group'
+  },
+
+  '/user/leftgroup/:id': {
+    'controller': 'User',
+    'action': 'remove_user_from_group'
+  },
+
+  '/user/joinevent/:id': {
+    'controller': 'User',
+    'action': 'add_user_to_event'
+  },
+
+  '/user/leftevent/:id': {
+    'controller': 'User',
+    'action': 'remove_user_from_event'
+  },
+
 
 
   'POST /newEvent': {
@@ -93,11 +114,6 @@ module.exports.routes = {
 
   },
 
-  '/group/mygroup': {
-    'controller': 'Group',
-    'action': 'ShowMyGroup'
-  },
-
   '/group/members': {
     'controller': 'Group',
     'action': 'ShowMembers'
@@ -108,9 +124,5 @@ module.exports.routes = {
     'action': 'newGroup'
   },
 
-  '/group/userjoin/:id': {
-    'controller': 'Group',
-    'action': 'AddUser'
-  },
 
 };

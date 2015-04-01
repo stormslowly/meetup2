@@ -52,6 +52,36 @@ module.exports = {
         return res.negotiate(err);
       }
 
+      var inevent = false;
+      var ingroup = false;
+      var groupid = events[0].group.id;
+
+      Group.find({
+        id: groupid
+      }).populate('user').exec(function(err, groups) {
+        if (user != null) {
+          for (var i = 0; i < groups[0].user.length; i++) {
+
+            if (user.id == groups[0].user[i].id) {
+              ingroup = true;
+            }
+          }
+
+        }
+
+
+      });
+
+      if (user != null) {
+
+        for (var i = 0; i < events[0].user.length; i++) {
+
+          if (user.id == events[0].user[i].id) {
+            inevent = true;
+          }
+        }
+      }
+
       var eve = events[0];
 
       Group.find({
@@ -70,6 +100,8 @@ module.exports = {
               event: eve,
               group: groups[0],
               user: user,
+              ingroup: ingroup,
+              inevent: inevent,
             });
           }
         });
@@ -80,9 +112,19 @@ module.exports = {
 
     var newEvent = {};
 
+
     newEvent.topic = req.param('Topic');
     newEvent.desc = req.param('Event');
-    newEvent.date = req.param('Date');
+    var strDate1 = req.param('beginDate');
+    var kk1 = strDate1.split('-');
+    var strTime1 = req.param('BeginTime');
+    var tt1 = strTime1.split(':');
+    var strDate2 = req.param('endDate');
+    var kk2 = strDate2.split('-');
+    var strTime2 = req.param('EndTime');
+    var tt2 = strTime2.split(':');
+    newEvent.begindate = new Date(kk1[0], kk1[1] - 1, kk1[2], tt1[0], tt1[1]);
+    newEvent.enddate = new Date(kk2[0], kk2[1] - 1, kk2[2], tt2[0], tt2[1]);
     newEvent.address = req.param('Address');
     var groupname = req.param('Group');
 
@@ -118,51 +160,6 @@ module.exports = {
   },
 
 
-  AddUser: function(req, res) {
-    console.log('create new user for event');
-    var user = req.session.user;
-    console.log(user);
-    var eventid = req.param('id');
-    Event.find({
-      id: eventid
-    }).populate('user').exec(function(err, events) {
-      if (err) {
-        err = 'Failed to query database with eventid: ' + eventid;
-        sails.log.error(err);
-        return res.negotiate(err);
-
-      } else {
-
-        if (events.length !== 0) {
-          for (var i = 0; i < events[0].user.length; i++) {
-            if (user.id === events[0].user[i].id) {
-              return res.redirect('event/show/' + eventid);
-            }
-          }
-          events[0].user.add(user);
-          events[0].save(function(err, s) {
-            if (err) {
-              sails.log.error(err);
-              return res.negotiate(err);
-            } else {
-
-              console.log('user was added to event successfully:',
-                s);
-
-              return res.redirect('event/show/' + eventid);
-            }
-
-          });
-        } else {
-          err = 'Failed to find event with eventid:' + eventid;
-          sails.log.error(err);
-          return res.negotiate(err);
-        }
-      }
-
-    });
-  },
-
   upload: function(req, res) {
     var icsFile = req.file('ics');
 
@@ -183,28 +180,6 @@ module.exports = {
 
   },
 
-  ShowMyEvent: function(req, res) {
 
-    var user = req.session.user;
-
-    User.find({
-      id: user.id
-    }).populate('events').exec(function(err, users) {
-
-      if (err) {
-        return res.negotiate(err);
-
-      } else {
-        var events = users[0].events;
-        return res.view('calender', {
-          events: events,
-          user: user,
-        });
-      }
-
-    });
-
-
-  }
 
 };

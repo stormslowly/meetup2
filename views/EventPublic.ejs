@@ -1,6 +1,6 @@
 
     <p>
-    <form class="form-horizontal" method="post" action="/newEvent" id="EventForm1" >
+    <form class="form-horizontal" method="post" action="/newEvent" id="EventForm1" style="margin-top:40px">
         
         <div class="form-group">
             <label for="inputTopic" class="col-sm-2 control-label">Topic</label>
@@ -22,11 +22,33 @@
         </div>
 
         <div class="form-group">
-            <label for="inputDate" class="col-sm-2 control-label">Date</label>
+            <label for="inputDate" class="col-sm-2 control-label">Begin Date</label>
             <div class="col-sm-8">
-                <input type="text" class="form-control" id="inputDate" name= "Date" placeholder="">
+                <input type="text" class="form-control" id="inputBeginDate" name= "beginDate" placeholder="">
             </div>
         </div>
+
+        <div class="form-group">
+            <label for="inputTime" class="col-sm-2 control-label">Begin Time</label>
+            <div class="col-sm-8">
+                <input type="time" readonly class="form-control" id="inputBeginTime" name= "BeginTime" placeholder="" onclick="_SetTime(this)">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="inputDate" class="col-sm-2 control-label">End Date</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="inputEndDate" name= "endDate" placeholder="">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="inputTime" class="col-sm-2 control-label">End Time</label>
+            <div class="col-sm-8">
+                <input type="time" readonly class="form-control" id="inputEndTime" name= "EndTime" placeholder="" onclick="_SetTime(this)">
+            </div>
+        </div>
+
         <div class="form-group">
             <label for="inputAddress" class="col-sm-2 control-label">Address</label>
             <div class="col-sm-8">

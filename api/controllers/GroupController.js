@@ -78,9 +78,7 @@ module.exports = {
     } else {
       req.flash('error', 'User need login first');
       return res.redirect('/login');
-    }
-
-    console.log(newGroup.date);
+    };
 
     console.log('To create new group');
 
@@ -90,22 +88,31 @@ module.exports = {
         sails.log.error(err);
         return res.negotiate(err);
       } else {
-        add_group_user(created.id, req.session.user, function(err) {
-          if (err) {
-            if (err == 'user existed already') {
-              return res.redirect('group/show/' + created.id);
-            } else {
-              err = 'Failed to add user to group:' + req.session.user;
-              sails.log.error(err);
-              return res.negotiate(err);
-            }
 
-          } else {
-            return res.redirect('group/show/' + created.id);
+        res.setTimeout(0);
+
+        req.file('groupflag').upload({
+          dirname: require('path').join(sails.config.appPath, '/assets/images'),
+        }, function(err, uploadedFiles) {
+          if (err) return res.negotiate(err);
+          if (uploadedFiles.length === 0) {
+            return res.badRequest('No file was uploaded');
           }
+          newFilefd = uploadedFiles[0].fd;
+          if (!newFilefd.match(/^\//)) {
+            newFilefd = require('path').basename(newFilefd);
+          }
+          Group.update(created.id, {
+            groupfd: newFilefd,
+          }).exec(function(err) {
+            if (err) {
+              return res.negotiate(err);
+            } else {
+              return res.redirect('user/joingroup/' + created.id);
+            }
+          })
 
         });
-
       }
 
     });
@@ -139,7 +146,18 @@ module.exports = {
         return res.negotiate(err);
       }
 
-      var gro = groups[0];
+      var ingroup = false;
+
+      if (user != null) {
+        for (var i = 0; i < groups[0].user.length; i++) {
+          if (user.id == groups[0].user[i].id) {
+            ingroup = true;
+          }
+        }
+      }
+
+      var gro = new Object();
+      gro = groups[0];
 
       Event.find({
         group: groupid
@@ -155,13 +173,30 @@ module.exports = {
             events: null,
             group: gro,
             user: user,
+            ingroup: ingroup,
           });
         }
+
+        var inevent = false;
+
+        if (user != null) {
+          for (var i = 0; i < events[0].user.length; i++) {
+
+            if (user.id == events[0].user[i].id) {
+              inevent = true;
+            }
+          }
+
+        }
+
+
         res.view('GroupDetail', {
           RecentEvent: events[0],
           events: events,
           group: gro,
           user: user,
+          ingroup: ingroup,
+          inevent: inevent,
         });
       });
     });

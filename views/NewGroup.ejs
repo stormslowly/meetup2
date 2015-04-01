@@ -1,22 +1,30 @@
 
     <p>
-    <form class="form-horizontal" method="post" action="/newGroup" id="GroupForm1" >
+    <form class="form-horizontal" enctype="multipart/form-data" method="post" action="/newGroup" id="GroupForm1" style="margin-top:40px;" >
         
         <div class="form-group">
-            <label for="inputName" class="col-sm-2 control-label">Name</label>
+            <label for="inputName" class="col-sm-3 control-label">Name</label>
             <div class="col-sm-8">
                 <input type="text" class="form-control" id="inputName" name= "Name" placeholder="">
             </div>
         </div>
         
         <div class="form-group">
-          <label for="inputDesc" class="col-sm-2 control-label">Group Description</label>
+          <label for="inputDesc" class="col-sm-3 control-label">Group Description</label>
           <div class="col-sm-8">
             <textarea class="form-control col-sm-8" rows="4" id="inputDesc" name="Desc"></textarea>
           </div>
         </div>
+        
         <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
+          <label for="inputPic" class="col-sm-3 control-label">Group Picture (360px*300px)</label>
+          <div class="col-sm-8">
+            <input type="file"  name="groupflag" multiple="multiple">
+          </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-3 col-sm-10">
                 <button type="submit" class="btn btn-default" form="GroupForm1">Public</button>
             </div>
         </div>

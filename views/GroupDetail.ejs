@@ -1,3 +1,4 @@
+
   <div id="C_page" style="background-color:#f4f4f4">
     <div id="page_content" >
       <div class="row">
@@ -20,7 +21,9 @@
 
               <ul id="my-links" style="float:right; margin-top:6px; margin-right:6px; margin-bottom:6px; margin-left:4px; font-size:0; padding-left:0; list-style-position:outside; display:block; ">
                 <li id="join-link" style="position:relative; line-height:32px;padding:0;font-size:16px;list-style:none;  ">
-                  <a href="#" onclick= "group_user_join()" style="text-decoration:none; color:#932A2A; font-weight:bold; padding-top: 10px; padding-right: 18px; padding-bottom: 10px; padding-left: 18px; background-color: #198963; border-radius:4px">Join us!
+                  <a href="#" onclick= "group_user_change()" style="text-decoration:none; color:#932A2A; font-weight:bold; padding-top: 10px; padding-right: 18px; padding-bottom: 10px; padding-left: 18px; background-color: #198963; border-radius:4px">
+                    <% if(!ingroup) {%>Join us! <%} else {%>
+                      Leave <% } %>
                   </a>
                 </li>
               </ul>
@@ -86,9 +89,12 @@
           			<div id="event-content">
           				<div id="event_when">
                           <time itemprop="startDate" datetime="2015-03-14T09:30:00+08:00">
-                          <% var dd = RecentEvent.date %>
-                          <h3><%= dd.toLocaleDateString() %></h3>
-                          <p class="subtext"><%= dd.getHours() %>:<%= dd.getMinutes() %></p>
+                          <% var begindate = RecentEvent.begindate %>
+                          <h4 style="color:rbg(87,53,8);">Begin: <%= begindate.toLocaleDateString() %></h4>
+                          <p class="subtext"><%= begindate.toLocaleTimeString() %></p>
+                          <% var enddate = RecentEvent.enddate %>
+                          <h4 style = "color:rgb(87,53,8);">End: <%= enddate.toLocaleDateString() %></h4>
+                          <p class="subtext"><%= enddate.toLocaleTimeString() %></p>
                           </time>
                         </div>
 	                    <div id="event_where">
@@ -110,7 +116,7 @@
 					        <li class="group-events" style="margin-bottom:40px; width:95% ">
 
 					          <div class="event-time" style="float:left; width:50%">
-					            <% var dd= events[i].date; %>
+					            <% var dd= events[i].begindate; %>
 					            <h5><%= dd.toLocaleDateString() %></h5>
 					            <h5><%= dd.getHours() %>:<%= dd.getMinutes() %></h5>
 					          </div>
@@ -153,28 +159,16 @@ function new_event(){
 
 }
 
- function group_user_join() {
+ function group_user_change() {
 
-  <% if ((user==null) || (group==null)){ %>
-    alert("You need login first");
-    window.location.href="/";
+  <% if (ingroup) {%>
+    
+    window.location.href="/user/leftgroup/" + <%= group.id %>;
   <% } else{ %>
-    window.location.href="/group/userjoin/"+ <%= group.id %>;
+    window.location.href="/user/joingroup/"+ <%= group.id %>;
   <% } %>
 
  }
 
-
- function event_user_join() {
-
-
-    <% if ((user!=null)&&(events!=null)){ %>
-      window.location.href="/event/userjoin/" +<%= events[0].id %>;
-    <% }else{ %>
-      alert("You need login first");
-    	window.location.href="/";
-    <% } %>
-
- }
 
 </script>

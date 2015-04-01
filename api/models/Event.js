@@ -12,7 +12,8 @@ module.exports = {
     topic: 'string',
     desc: 'string',
     address: 'string',
-    date: 'date',
+    begindate: 'date',
+    enddate: 'date',
     group: {
       model: 'group'
     },

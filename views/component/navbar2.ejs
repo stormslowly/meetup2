@@ -8,7 +8,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">Brand</a>
+        <a class="navbar-brand" href="/">Brand</a>
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
@@ -27,7 +27,7 @@
           <li><a href="/auth/logout">Log out</a>
           </li>
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+            <a data-target="#" href="www.nokia.com" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
               <span id="username">
              <% if (typeof user==="undefined" ){ %>
              Anonymous
@@ -38,9 +38,9 @@
            </span>
             <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
-              <li><a href="/group/mygroup">My Group</a>
+              <li><a href="/user/mygroup">My Group</a>
               </li>
-              <li><a href="/event/myevent">My Event</a>
+              <li><a href="/user/myevent">My Event</a>
               </li>
             </ul>
           </li>

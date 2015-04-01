@@ -31,11 +31,21 @@ module.exports.policies = {
     logout: ['sessionAuth']
   },
   'EventController': {
-    create: ['sessionAuth']
+    create: ['sessionAuth'],
   },
   'GroupController': {
-    create: ['sessionAuth']
-  }
+    create: ['sessionAuth'],
+  },
+  'UserController': {
+    create: ['sessionAuth'],
+    show_my_group: ['sessionAuth'],
+    show_my_event: ['sessionAuth'],
+    add_user_to_group: ['sessionAuth'],
+    remove_user_from_group: ['sessionAuth'],
+    add_user_to_event: ['sessionAuth'],
+    remove_user_from_event: ['sessionAuth'],
+
+  },
 
   /***************************************************************************
    *                                                                          *
