@@ -92,13 +92,16 @@ module.exports = {
         res.setTimeout(0);
 
         req.file('groupflag').upload({
-          dirname: require('path').join(sails.config.appPath, '/assets/images'),
+          dirname: require('path').join(sails.config.appPath,
+            '/assets/images'),
         }, function(err, uploadedFiles) {
-          if (err) return res.negotiate(err);
+          if (err) {
+            return res.negotiate(err);
+          }
           if (uploadedFiles.length === 0) {
             return res.badRequest('No file was uploaded');
           }
-          newFilefd = uploadedFiles[0].fd;
+          var newFilefd = uploadedFiles[0].fd;
           if (!newFilefd.match(/^\//)) {
             newFilefd = require('path').basename(newFilefd);
           }
@@ -110,11 +113,10 @@ module.exports = {
             } else {
               return res.redirect('user/joingroup/' + created.id);
             }
-          })
+          });
 
         });
       }
-
     });
   },
 
@@ -206,16 +208,16 @@ module.exports = {
 
 
   find: function(req, res) {
-    var limit = 100|| req.param('limit');
+    var limit = 100 || req.param('limit');
     Group.find({})
       .limit(limit)
-      .exec( function(err, groups) {
-      if (err) {
-        sails.log.error('GroupController.search:', err);
-        return res.negotiate(err);
-      }
-      return res.json(groups);
-    });
+      .exec(function(err, groups) {
+        if (err) {
+          sails.log.error('GroupController.search:', err);
+          return res.negotiate(err);
+        }
+        return res.json(groups);
+      });
 
   },
 
