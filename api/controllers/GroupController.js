@@ -8,6 +8,7 @@
  */
 
 
+
 module.exports = {
 
 
@@ -54,7 +55,8 @@ module.exports = {
         res.setTimeout(0);
 
         req.file('groupflag').upload({
-          dirname: require('path').join(sails.config.appPath, '/assets/images'),
+          dirname: require('path').join(sails.config.appPath,
+            '/assets/images'),
         }, function(err, uploadedFiles) {
           if (err) {
             return res.negotiate(err);
@@ -78,7 +80,6 @@ module.exports = {
 
         });
       }
-
     });
   },
 
@@ -169,24 +170,17 @@ module.exports = {
   },
 
 
-  /**
-   * `GroupController.search()`
-   */
-  search: function(req, res) {
-
-    Group.find({}, function(err, found) {
-      if (err) {
-        console.log('Something is wrong:', err);
-        return res.negotiate(err);
-      }
-
-      return res.view('meetups', {
-        meetups: ['nokia', 'nodejs', 'python', 'lua', 'Golag', 'Linux'],
-        linkname: 'show',
-        layout: 'layoutPromote.ejs'
+  find: function(req, res) {
+    var limit = 100 || req.param('limit');
+    Group.find({})
+      .limit(limit)
+      .exec(function(err, groups) {
+        if (err) {
+          sails.log.error('GroupController.search:', err);
+          return res.negotiate(err);
+        }
+        return res.json(groups);
       });
-
-    });
 
   },
 
