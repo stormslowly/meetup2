@@ -113,7 +113,7 @@ module.exports = {
 
       var ingroup = false;
 
-      if (user !== null) {
+      if ((user !== undefined) && (user !== null)) {
         for (var i = 0; i < groups[0].user.length; i++) {
           if (user.id === groups[0].user[i].id) {
             ingroup = true;
@@ -144,7 +144,7 @@ module.exports = {
 
         var inevent = false;
 
-        if (user !== null) {
+        if ((user !== undefined) && (user !== null)) {
           for (var i = 0; i < events[0].user.length; i++) {
 
             if (user.id === events[0].user[i].id) {
