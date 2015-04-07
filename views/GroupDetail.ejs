@@ -15,12 +15,17 @@
               <button type="button" class="btn btn-default" style="width:15%; border-color:#ffffff; color:#888">Members</button>
               <button type="button" class="btn btn-default" style="width:15%; border-color:#ffffff; color:#888">Photos</button>
               <button type="button" class="btn btn-default" style="width:15%; border-color:#ffffff; color:#888">Discussions</button>
-              <button type="button" class="btn btn-default" style="width:15%; border-color:#ffffff; color:#888" onClick="new_event()">New Event</button>
+            
 
 
 
-              <ul id="my-links" style="float:right; margin-top:6px; margin-right:6px; margin-bottom:6px; margin-left:4px; font-size:0; padding-left:0; list-style-position:outside; display:block; ">
-                <li id="join-link" style="position:relative; line-height:32px;padding:0;font-size:16px;list-style:none;  ">
+              <ul id="my-links" style="float:right; margin-top:6px; margin-right:6px; margin-bottom:6px; margin-left:4px; font-size:0; padding-left:0;  display:block; list-style-type:none">
+              <li id="join-link" style="position:relative; line-height:32px;padding:0;font-size:16px;list-style:none; float:left; margin-right:5px ">
+                  <a href="#" onclick= "new_event()" style="text-decoration:none; color:#932A2A; font-weight:bold; padding-top: 10px; padding-right: 18px; padding-bottom: 10px; padding-left: 18px; background-color: #198963; border-radius:4px">
+                    New Event
+                  </a>
+                </li>
+                <li id="join-link" style="position:relative; line-height:32px;padding:0;font-size:16px;list-style:none; float:left ">
                   <a href="#" onclick= "group_user_change()" style="text-decoration:none; color:#932A2A; font-weight:bold; padding-top: 10px; padding-right: 18px; padding-bottom: 10px; padding-left: 18px; background-color: #198963; border-radius:4px">
                     <% if(!ingroup) {%>Join us! <%} else {%>
                       Leave <% } %>
