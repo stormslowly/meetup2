@@ -84,10 +84,10 @@
                   <time itemprop="startDate" datetime="2015-03-14T09:30:00+08:00">
                     <% var begindate = event.begindate %>
                     <h4 style="color:rbg(87,53,8);">Begin: <%= begindate.toLocaleDateString() %></h4>
-                    <p class="subtext"><%= begindate.toLocaleTimeString() %></p>
+                    <p class="subtext"><%= begindate.getHours() %>:<%= begindate.getMinutes() %></p>
                     <% var enddate = event.enddate %>
                     <h4 style = "color:rgb(87,53,8);">End: <%= enddate.toLocaleDateString() %></h4>
-                    <p class="subtext"><%= enddate.toLocaleTimeString() %></p>
+                    <p class="subtext"><%= enddate.getHours() %>:<%= enddate.getMinutes() %></p>
                   </time>
                 </div>
                 <div id="event_where">

@@ -1,51 +1,13 @@
 'use strict';
-/* global Group */
-var add_group_user = function(groupid, user, cb) {
-
-  Group
-    .find({
-      id: groupid
-    }).populate('user')
-    .exec(function(err, groups) {
-      if (err) {
-        err = 'Failed to query database with groupid: ' + groupid;
-        sails.log.error(err);
-        return cb(err);
-
-      } else {
-
-        if (groups.length !== 0) {
-          for (var i = 0; i < groups[0].user.length; i++) {
-            if (user.id === groups[0].user[i].id) {
-              return cb(err);
-            }
-          }
-          groups[0].user.add(user);
-          groups[0].save(function(err, s) {
-            if (err) {
-              console.log('user was failed to add to group:', err);
-              return cb(err);
-            } else {
-              console.log('user was added to group:', s);
-              return cb(err);
-            }
-
-          })
-
-        } else {
-          err = 'Failed to find group with groupid:' + groupid;
-          sails.log.error(err);
-          return cb(Error(err));
-
-        }
-
-      }
-
-    });
+/*global Group*/
+/**
+ * GroupController
+ *
+ * @description :: Server-side logic for managing groups
+ * @help        :: See http://links.sailsjs.org/docs/controllers
+ */
 
 
-
-};
 
 module.exports = {
 
@@ -55,6 +17,7 @@ module.exports = {
    * `GroupController.create()`
    */
   create: function(req, res) {
+
     res.view('NewGroup', {
       title: 'New Group',
       user: req.session.user,
@@ -78,7 +41,7 @@ module.exports = {
     } else {
       req.flash('error', 'User need login first');
       return res.redirect('/login');
-    };
+    }
 
     console.log('To create new group');
 
@@ -150,15 +113,15 @@ module.exports = {
 
       var ingroup = false;
 
-      if (user != null) {
+      if ((user !== undefined) && (user !== null)) {
         for (var i = 0; i < groups[0].user.length; i++) {
-          if (user.id == groups[0].user[i].id) {
+          if (user.id === groups[0].user[i].id) {
             ingroup = true;
           }
         }
       }
 
-      var gro = new Object();
+      var gro = {};
       gro = groups[0];
 
       Event.find({
@@ -181,10 +144,10 @@ module.exports = {
 
         var inevent = false;
 
-        if (user != null) {
+        if ((user !== undefined) && (user !== null)) {
           for (var i = 0; i < events[0].user.length; i++) {
 
-            if (user.id == events[0].user[i].id) {
+            if (user.id === events[0].user[i].id) {
               inevent = true;
             }
           }
@@ -222,63 +185,6 @@ module.exports = {
   },
 
 
-
-  addUser: function(req, res) {
-
-    var user = req.session.user;
-    var groupid = req.param('id');
-
-    add_group_user(groupid, user, function(err) {
-      if (err) {
-
-        if (err == 'user existed already') {
-          return res.redirect('group/show/' + groupid);
-        } else {
-          err = 'Failed to add user to group:' + user;
-          sails.log.error(err);
-          return res.negotiate(err);
-        }
-
-      } else {
-        return res.redirect('group/show/' + groupid);
-      }
-
-    });
-
-
-  },
-
-  ShowMyGroup: function(req, res) {
-
-    var user = req.session.user;
-
-    console.log(user);
-
-    User.find({
-      id: user.id
-    }).populate('group').exec(function(err, users) {
-
-      if (err) {
-        console.log('faild to find group');
-        sails.log.error(err);
-        return res.negotiate(err);
-      } else {
-
-        var groups = users[0].group;
-
-
-        res.view('meetups', {
-          meetups: groups,
-          linkname: 'show',
-          user: user,
-          layout: 'layoutPromote.ejs'
-        });
-
-      }
-
-    });
-
-  },
 
   ShowMembers: function(req, res) {
 
