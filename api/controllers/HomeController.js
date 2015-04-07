@@ -11,7 +11,7 @@ module.exports = {
 
     var user = req.session.user;
 
-    Group.find({}, function(err, groups) {
+    Group.find({}).populate('owner').populate('user').exec(function(err, groups) {
 
       return res.view('meetups', {
         meetups: groups,

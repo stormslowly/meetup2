@@ -4,9 +4,9 @@
       <div class="row">
 
         <div id="chapterHeader" class="col-md-12" style="margin-bottom:20px">
-          <h1 id="group_h1" style="text-align:center;  padding-top:30px; padding-bottom:30px; background-color:#4C2099; margin-bottom:0px">
+          <h1 id="group_h1" style="text-align:center;  padding-top:40px; padding-bottom:40px; background-color:#4C2099; margin-bottom:0px">
             <a href="" title="Clean Code Hangzhou - Hangzhou, China">
-                <span style="font-size: 42.0px"><%= group.name %></span>
+                <span style="font-size: 42.0px; color:azure;"><%= group.name %></span>
             </a>
           </h1>
           <div id="chapter-navigation" style="width:100%; background-color:#ffffff">
@@ -15,13 +15,18 @@
               <button type="button" class="btn btn-default" style="width:15%; border-color:#ffffff; color:#888">Members</button>
               <button type="button" class="btn btn-default" style="width:15%; border-color:#ffffff; color:#888">Photos</button>
               <button type="button" class="btn btn-default" style="width:15%; border-color:#ffffff; color:#888">Discussions</button>
-              <button type="button" class="btn btn-default" style="width:15%; border-color:#ffffff; color:#888" onClick="new_event()">New Event</button>
+            
 
 
 
-              <ul id="my-links" style="float:right; margin-top:6px; margin-right:6px; margin-bottom:6px; margin-left:4px; font-size:0; padding-left:0; list-style-position:outside; display:block; ">
-                <li id="join-link" style="position:relative; line-height:32px;padding:0;font-size:16px;list-style:none;  ">
-                  <a href="#" onclick= "group_user_change()" style="text-decoration:none; color:#932A2A; font-weight:bold; padding-top: 10px; padding-right: 18px; padding-bottom: 10px; padding-left: 18px; background-color: #198963; border-radius:4px">
+              <ul id="my-links" style="float:right; margin-top:6px; margin-right:6px; margin-bottom:6px; margin-left:4px; font-size:0; padding-left:0;  display:block; list-style-type:none">
+              <li id="join-link" style="position:relative; line-height:32px;padding:0;font-size:16px;list-style:none; float:left; margin-right:5px ">
+                  <a href="#" onclick= "new_event()" style="text-decoration:none; color:#932A2A; font-weight:bold; padding-top: 10px; padding-right: 18px; padding-bottom: 10px; padding-left: 18px; background-color: #F2BB0C; border-radius:4px">
+                    New Event
+                  </a>
+                </li>
+                <li id="join-link" style="position:relative; line-height:32px;padding:0;font-size:16px;list-style:none; float:left ">
+                  <a href="#" onclick= "group_user_change()" style="text-decoration:none; color:#932A2A; font-weight:bold; padding-top: 10px; padding-right: 18px; padding-bottom: 10px; padding-left: 18px; background-color: #F2BB0C; border-radius:4px">
                     <% if(!ingroup) {%>Join us! <%} else {%>
                       Leave <% } %>
                   </a>
@@ -53,24 +58,22 @@
                     <span style="text-align:right; float:none">3</span>
                   </a>
                 </li>
-                <li style="border-top-width:1px; border-top-style:solid; border-top-color:#eee; padding-top:6px; margin-left:0px;">
-                  <a href="">
-                    <span style="width:71%; float:left;">Our calender</span>
-                  </a>
-                </li>
+                
 
 
               </ul>
 
               <div id="meta-organizers" style="padding-top:30px;">
                 <h4><span>Organizer: </span></h4>
-                <h5><a href="#"><%= group.owner.fullname %></a></h5>
-                <button type="button" class="btn btn-default" aria-label="Contact">
-                  <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+                <h5><%= group.owner.fullname %>
+                <button type="button" class="btn btn-default" aria-label="Contact" >
+                <a href="mailto:<%= group.owner.email%>?Subject=Hello again" target="_top">
+                  <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>
                 </button>
+                </h5>
               </div>
               <div id="event-tag" style="padding-top:30px;">
-                <h5>We're about:</h5>
+                <h5>We're about:<%= group.desc %></h5>
               </div>
             </div>
 

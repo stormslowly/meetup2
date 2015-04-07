@@ -52,33 +52,32 @@ module.exports = {
         return res.negotiate(err);
       } else {
 
-        res.setTimeout(0);
-
-        req.file('groupflag').upload({
-          dirname: require('path').join(sails.config.appPath,
-            '/assets/images'),
-        }, function(err, uploadedFiles) {
+        var fs = require('fs');
+        var postData = req.param('Pic');
+        var dataBuffer = new Buffer(postData, 'base64');
+        var filename = require('path').join(sails.config.appPath, '/assets/images/') + created.id + '.jpg';
+        console.log(filename);
+        fs.writeFile(filename, dataBuffer, function(err) {
           if (err) {
-            return res.negotiate(err);
+            console.log('err');
+          } else {
+            console.log('file saved successfully');
+            Group.update(created.id, {
+              groupfd: '/images/' + created.id + '.jpg',
+            }).exec(function(err, updated) {
+              if (err) {
+                return res.negotiate(err);
+              } else {
+                var redirectstr = '/user/joingroup/' + updated[0].id;
+                console.log('redirectstr', redirectstr);
+                return res.json(200, {
+                  redirect: redirectstr
+                });
+              }
+            });
           }
-          if (uploadedFiles.length === 0) {
-            return res.badRequest('No file was uploaded');
-          }
-          var newFilefd = uploadedFiles[0].fd;
-          if (!newFilefd.match(/^\//)) {
-            newFilefd = require('path').basename(newFilefd);
-          }
-          Group.update(created.id, {
-            groupfd: newFilefd,
-          }).exec(function(err) {
-            if (err) {
-              return res.negotiate(err);
-            } else {
-              return res.redirect('user/joingroup/' + created.id);
-            }
-          });
-
         });
+
       }
     });
   },

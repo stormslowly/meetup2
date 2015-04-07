@@ -25,8 +25,175 @@
 
         <div class="form-group">
             <div class="col-sm-offset-3 col-sm-10">
-                <button type="submit" class="btn btn-default" form="GroupForm1">Public</button>
+                <button type="button" class="btn btn-default" form="GroupForm1" onclick="drawpict()">Public</button>
             </div>
         </div>
     </form>
+<div class="container">
+<div class="row">
+<div class="span12">
+<div class="jc-demo-box">
+
+
+
+<img id="originalimg" src="" style="display:none">
+  <div id="preview-pane">
+    <div class="preview-container">
+      <img id="destimg" src="" class="jcrop-preview" alt="Preview" style="display:none" />
+    </div>
+  </div>
+
+ 
+
+
+
+
+</div>
+</div>
+</div>
+</div>
+
+    <canvas id="canvas" style="visibility:hidden"></canvas>
+
+<script language="Javascript">
+
+var ori_width;
+var ori_height;
+var dimg_width;
+var dimg_height;
+var dimg_x;
+var dimg_y;
+var const_pic_width = 600;
+
+$(document).ready(function() {
+    $("#originalimg").load(function() {
+        var img = document.getElementById('originalimg');
+        ori_width = img.naturalWidth;
+        ori_height = img.naturalHeight;
+        var new_width = const_pic_width;
+        var new_height = Math.round((const_pic_width * ori_height)/ori_width);
+        $('#originalimg').css({'width': new_width, 'height': new_height});
+
+        
+
+        var jcrop_api,
+        boundx,
+        boundy,
+
+        // Grab some information about the preview pane
+        $preview = $('#preview-pane'),
+        $pcnt = $('#preview-pane .preview-container'),
+        $pimg = $('#preview-pane .preview-container img'),
+
+        xsize = $pcnt.width(),
+        ysize = $pcnt.height();
+        
+    
+        console.log('init',[xsize,ysize]);
+        $('#originalimg').Jcrop({
+          onChange: updatePreview,
+          onSelect: updatePreview,
+          aspectRatio: xsize / ysize
+        },function(){
+          // Use the API to get the real image size
+          var bounds = this.getBounds();
+          boundx = bounds[0];
+          boundy = bounds[1];
+          console.log('boundx:',boundx);
+          console.log('boundy:',boundy);
+          //Store the API in the jcrop_api variable
+          jcrop_api = this;
+
+          // Move the preview into the jcrop container for css positioning
+          $preview.appendTo(jcrop_api.ui.holder);
+        });
+
+        function updatePreview(c)
+        {
+          if (parseInt(c.w) > 0)
+          {
+            var rx = xsize / c.w;
+            var ry = ysize / c.h;
+            dimg_width = Math.round(rx*boundx);
+            dimg_height = Math.round(ry*boundy);
+            dimg_x = Math.round(rx*c.x);
+            dimg_y = Math.round(ry*c.y);
+
+            $pimg.css({
+              width: dimg_width + 'px',
+              height: dimg_height + 'px',
+              marginLeft: '-' + dimg_x + 'px',
+              marginTop: '-' + dimg_y + 'px'
+            });
+          }
+        }
+
+
+    });
+});
+
+$('#GroupForm1 input[name=groupflag]').change( function(event) {
+
+    var tmppath = URL.createObjectURL(event.target.files[0]);
+    $('img').fadeIn('fast').attr('src',tmppath);
+           
+});
+    
+
+
+    function drawpict(){
+
+        var img = document.getElementById('destimg');
+        var canvas = document.getElementById('canvas');
+
+        var xsize = $('#preview-pane .preview-container').width();
+        var ysize = $('#preview-pane .preview-container').height();
+        canvas.width = xsize;
+        canvas.height = ysize;
+        
+        var cxt = canvas.getContext('2d');
+        var img_x = Math.round(dimg_x*ori_width/dimg_width);
+        var img_y = Math.round(dimg_y*ori_height/dimg_height);
+        var img_width = Math.round(xsize*ori_width/dimg_width);
+        var img_height = Math.round(ysize*ori_height/dimg_height);
+        
+        cxt.drawImage(img, img_x, img_y, img_width, img_height, 0, 0, xsize, ysize);
+        sendImg();
+    }
+
+    function sendImg(){
+        var cvs = document.getElementById('canvas');
+        var data = cvs.toDataURL('image/jpeg');
+        if(data.length<48){
+            console.log('data error.');
+        return;
+        }
+        //图片的base64 string格式是data:/image/jpeg;base64,xxxxxxxxxxx
+        //是以data:/image/jpeg;base64,开头的，我们在服务端写入图片数据的时候不需要这个头！
+        //所以在这里只拿头后面的string
+        data = data.split(',')[1];
+        var groupname = $('#GroupForm1 input[name=Name]').val();
+        var groupdesc = $('#GroupForm1 textarea[name=Desc]').val();
+        $.post('/newGroup',{
+
+            Name:groupname,
+            Desc:groupdesc,
+            Pic:data,
+            
+        },function(data){
+
+        if (data.redirect) {
+                window.location.href = data.redirect;
+            }
+
+            if(data.status===200){
+                location.href = data.location;
+            }else{
+                console.log('commit image failed.');
+            }
+        },'json');
+
+    }
+
+</script>
 

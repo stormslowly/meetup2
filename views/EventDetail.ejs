@@ -4,11 +4,11 @@
       <div class="row">
 
         <div id="chapterHeader" class= "col-md-12" style="margin-bottom:20px">
-          <h1 id="group_h1" style="text-align:center;  padding-top:30px; padding-bottom:30px; background-color:#4C2099; margin-bottom:0px">
+          <h1 id="group_h1" style="text-align:center;  padding-top:40px; padding-bottom:40px; background-color:#4C2099; margin-bottom:0px">
             <% var strhref= "/group/show/" %>
             <% strhref = strhref + group.id %>
             <a href = <%= strhref %> title="Clean Code Hangzhou - Hangzhou, China">
-                <span style="font-size: 42.0px"><%= group.name %></span>
+                <span style="font-size: 42.0px; color:#D7DA66;"><%= group.name %></span>
             </a>
           </h1>
           <div id="chapter-navigation" style="width:100%; background-color:#ffffff">
@@ -22,7 +22,7 @@
 
               <ul id="my-links" style="float:right; margin-top:6px; margin-right:6px; margin-bottom:6px; margin-left:4px; font-size:0; padding-left:0; list-style-position:outside; display:block; ">
               <li id="join-link" style="position:relative; line-height:32px;padding:0;font-size:16px;list-style:none;  ">
-              <a href="#" onclick= "group_user_change(); return false;" style="text-decoration:none; color:#932A2A; font-weight:bold; padding-top: 10px; padding-right: 18px; padding-bottom: 10px; padding-left: 18px; background-color: #198963; border-radius:4px"><% if(!ingroup) {%>Join us! <%} else {%>Leave<% }%>
+              <a href="#" onclick= "group_user_change(); return false;" style="text-decoration:none; color:#932A2A; font-weight:bold; padding-top: 10px; padding-right: 18px; padding-bottom: 10px; padding-left: 18px; background-color: #F2BB0C; border-radius:4px"><% if(!ingroup) {%>Join us! <%} else {%>Leave<% }%>
               </a>
               </li>
               </ul>
@@ -52,12 +52,7 @@
                     <span style="text-align:right; float:none">3</span>
                   </a>
                 </li>
-                <li style="border-top-width:1px; border-top-style:solid; border-top-color:#eee; padding-top:6px; margin-left:0px;">
-                  <a href="">
-                    <span style="width:71%; float:left;">Our calender</span>
-                  </a>
-                </li>
-
+                
 
               </ul>
 
