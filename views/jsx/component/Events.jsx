@@ -1,14 +1,14 @@
 var ICSUploader = React.createClass({
   displayName: 'ICSUploader',
 
-  getInitialState: function () {
-      return {
+  getInitialState: function() {
+    return {
 
-      };
+    };
   },
 
   ondragover: function() {
-    console.log('logs','dragover');
+    console.log('logs', 'dragover');
     this.className = 'hover';
     return false;
   },
@@ -24,20 +24,22 @@ var ICSUploader = React.createClass({
   render: function() {
     return (
       <div>
-        <div id="holder" onDragOver={this.ondragover} ></div>
-        <p id = "upload" className = "hidden" >
-          <label>Drag&drop not supported, but you can still upload via this input field:<br/>
-            <input type="file"/>
+        <div id="holder" onDragOver={this.ondragover}></div>
+        <p id="upload" className="hidden">
+          <label>Drag&drop not supported, but you can still upload via this input field:
+            <br/>
+            <input type="file" />
           </label>
         </p>
-        <p id = "filereader" > File API & FileReader API not supported < /p >
-        <p id = "formdata" > XHR2s FormData is not supported </p>
-        <p id = "progress" > XHR2s upload progress isnt supported </p >
-        <p> Upload progress:
-          <progress id="uploadprogress" min="0" max="100" value="0">0</progress>
-        </p>
-        <p> Drag an image from your desktop on to the drop zone above to see the browser both render the preview, but also upload automatically to this server.
-        </p >
+        <p id="filereader"> File API & FileReader API not supported
+          </p>
+            <p id="formdata"> XHR2s FormData is not supported </p>
+            <p id="progress"> XHR2s upload progress isnt supported </p>
+            <p> Upload progress:
+              <progress id="uploadprogress" min="0" max="100" value="0">0</progress>
+            </p>
+            <p> Drag an image from your desktop on to the drop zone above to see the browser both render the preview, but also upload automatically to this server.
+            </p>
       </div>
     );
   }
@@ -53,7 +55,7 @@ $(function() {
       filereader: typeof FileReader != 'undefined',
       dnd: 'draggable' in document.createElement('span'),
       formdata: !!window.FormData,
-      progress: "upload" in new XMLHttpRequest
+      progress: "upload" in newXMLHttpRequest
     },
     support = {
       filereader: document.getElementById('filereader'),
