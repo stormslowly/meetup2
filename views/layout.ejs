@@ -30,14 +30,52 @@
     <link href="/vender/bootstrap/dist/fonts/glyphicons-halflings-regular.woff">
     <link rel="stylesheet" href="/vender/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="/vender/bootstrap/dist/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="/vender/PickMeUp/css/pickmeup.css" type="text/css" />
+    <link rel="stylesheet" href="/css/pickmeup/pickmeup.css" type="text/css" />
+    <link rel="stylesheet" href="/css/jcrop/jquery.Jcrop.css">
         <!--STYLES-->
         <link rel="stylesheet" href="/styles/importer.css">
         <!--STYLES END-->
     <script src="/vender/jquery/dist/jquery.min.js"></script>
-    <script type="text/javascript" src="/vender/PickMeUp/js/jquery.pickmeup.js"></script>
+    <script type="text/javascript" src="/js/pickmeup/jquery.pickmeup.js"></script>
     <script type="text/javascript" src="/js/react/dateselect.js"></script>
     <script type="text/javascript" src="/js/react/setTime.js"></script>
+    <script type="text/javascript" src="/js/jcrop/jquery.Jcrop.js"></script> 
+
+
+<style type="text/css">
+
+/* Apply these styles only when #preview-pane has
+   been placed within the Jcrop widget */
+.jcrop-holder #preview-pane {
+  display: block;
+  position: absolute;
+  z-index: 2000;
+  top: 10px;
+  right: -700px;
+  padding: 6px;
+  border: 1px rgba(0,0,0,.4) solid;
+  background-color: white;
+
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+
+  -webkit-box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* The Javascript code will set the aspect ratio of the crop
+   area based on the size of the thumbnail preview,
+   specified here */
+#preview-pane .preview-container {
+  width: 360px;
+  height: 300px;
+  overflow: hidden;
+}
+
+</style>
+
 
 
 
