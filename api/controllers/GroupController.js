@@ -55,16 +55,15 @@ module.exports = {
         var fs = require('fs');
         var postData = req.param('Pic');
         var dataBuffer = new Buffer(postData, 'base64');
-        var filename = './assets/images/' + created.id + '.jpg';
+        var filename = require('path').join(sails.config.appPath, '/assets/images') + created.id + '.jpg';
         console.log(filename);
         fs.writeFile(filename, dataBuffer, function(err) {
           if (err) {
             console.log('err');
           } else {
             console.log('file saved successfully');
-            var savedfd = 'images/' + created.id + '.jpg';
             Group.update(created.id, {
-              groupfd: savedfd,
+              groupfd: '/images/' + created.id + '.jpg',
             }).exec(function(err, updated) {
               if (err) {
                 return res.negotiate(err);
