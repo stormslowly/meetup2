@@ -171,7 +171,6 @@ $('#GroupForm1 input[name=groupflag]').change( function(event) {
         //图片的base64 string格式是data:/image/jpeg;base64,xxxxxxxxxxx
         //是以data:/image/jpeg;base64,开头的，我们在服务端写入图片数据的时候不需要这个头！
         //所以在这里只拿头后面的string
-        //当然这一步可以在服务端做，但让闲着蛋疼的客户端帮着做一点吧~~~（稍微减轻一点服务器压力）
         data = data.split(',')[1];
         var groupname = $('#GroupForm1 input[name=Name]').val();
         var groupdesc = $('#GroupForm1 textarea[name=Desc]').val();
