@@ -55,7 +55,7 @@ module.exports = {
         var fs = require('fs');
         var postData = req.param('Pic');
         var dataBuffer = new Buffer(postData, 'base64');
-        var filename = require('path').join(sails.config.appPath, '/assets/images') + created.id + '.jpg';
+        var filename = require('path').join(sails.config.appPath, '/assets/images/') + created.id + '.jpg';
         console.log(filename);
         fs.writeFile(filename, dataBuffer, function(err) {
           if (err) {
