@@ -19,8 +19,8 @@ describe('service ICS to Event', function() {
     expect(event).to.have.keys(['topic', 'desc', 'end', 'start',
       'address'
     ]);
-    expect(event.start).to.deep.equal(new Date(2015, 3 - 1, 10, 17, 0));
-    expect(event.end).to.deep.equal(new Date(2015, 3 - 1, 10, 16, 0));
+    expect(event.start).to.deep.equal(new Date(2015, 3 - 1, 10, 16, 0));
+    expect(event.end).to.deep.equal(new Date(2015, 3 - 1, 10, 17, 0));
   });
 
 });

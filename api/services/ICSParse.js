@@ -21,10 +21,11 @@ var textify = function(string) {
     .replace(/\\,/g, ',');
 };
 
-var reg = /^(\d{4})(\d{2})(\d{2})T(\d{2})(\d{2})(\d{2})\w{1}$/;
+var reg = /^(\d{4})(\d{2})(\d{2})T(\d{2})(\d{2})(\d{2})\w*$/;
 var timeOffsetInMinutes = new Date().getTimezoneOffset();
 
 var DT2Date = function(str) {
+
 
   var matchs = reg.exec(str);
   matchs = matchs.slice(1);
@@ -69,8 +70,8 @@ module.exports = {
     return {
       topic: vEvent.SUMMARY,
       desc: textify(vEvent.DESCRIPTION),
-      start: DT2Date(vEvent.DTEND),
-      end: DT2Date(vEvent.DTSTART),
+      start: DT2Date(vEvent.DTSTART),
+      end: DT2Date(vEvent.DTEND),
       address: textify(vEvent.LOCATION)
     };
 

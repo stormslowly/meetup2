@@ -26,7 +26,7 @@ var dirs = {
   css: 'public/stylesheets/'
 };
 
-gulp.task('default', ['less', 'mocha']);
+gulp.task('default', ['less', 'mocha','front:js']);
 
 gulp.task('less', function() {
   return gulp.src(paths.less)
