@@ -45,7 +45,7 @@ describe('sails session hack', function() {
       supertest(app)
         .get('/auth/logout')
         .set('Cookie', cookie)
-        .expect(200)
+        .expect(302)
         .end(done);
 
     });
