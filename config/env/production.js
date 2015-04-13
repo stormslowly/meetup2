@@ -17,15 +17,15 @@ module.exports = {
    * environment (see config/connections.js and config/models.js )           *
    ***************************************************************************/
 
-  // models: {
-  //   connection: 'someMysqlServer'
-  // },
+  models: {
+    connection: 'mysql'
+  },
 
   /***************************************************************************
    * Set the port in the production environment to 80                        *
    ***************************************************************************/
 
-  port: process.env.MEETUP_PORT || 1337,
+  port: process.env.MEETUP_PORT || 1339,
 
   /***************************************************************************
    * Set the log level in production environment to "silent"                 *
@@ -34,5 +34,11 @@ module.exports = {
   // log: {
   //   level: "silent"
   // }
+
+  session: {
+    secret: '5d939dc3d713d8532c1545bde818a665',
+    adapter: 'redis',
+  },
+
 
 };
