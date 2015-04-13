@@ -12,12 +12,12 @@ var DropzoneDemo = React.createClass({
     var self = this;
     $.getJSON('/api/group')
       .done(function(res, xhr) {
-        console.log('res', res);
+        console.log('resxxxx', res);
         self.replaceState({
           groups: res,
           step: 1
         });
-        console.log('logs', self.state.event);
+        console.log('logsgroup', self.state.groups);
       })
       .fail(function(res) {
         console.error('getJSON', err.status, res.statusText, res.responseText);
@@ -50,12 +50,41 @@ var DropzoneDemo = React.createClass({
 
       self.replaceState({
         event: event,
-        step: 2
+        step: 2,
+        groups: self.state.groups
       });
+      self.calenderFile = files[0];
       console.log('after drop', self.state.groups);
     };
     reader.readAsText(files[0], 'utf-8');
   },
+
+  postClaneder: function(e) {
+    e.preventDefault();
+
+    console.log('logsxxx', React.findDOMNode(this.refs.theInput));
+
+
+    console.log('logs', e);
+    console.log('post', this.calenderFile);
+    var formData = new FormData();
+    formData.append('ics', this.calenderFile);
+    formData.append('group', $('#group').val());
+    $.ajax({
+      type: 'POST',
+      url: '/event/s',
+      data: formData,
+      processData: false,
+      contentType: false
+    }).done(function(res, xhr) {
+      console.log('msg', res, xhr);
+    }).fail(function() {
+      console.log('logs', arguments);
+    });
+
+  },
+
+
   render: function() {
     var view;
     if (this.state.step === 1) {
@@ -64,7 +93,8 @@ var DropzoneDemo = React.createClass({
                   <br/> or click to select files to upload.</div>
               </Dropzone>);
     } else {
-      view = <EventForm event={this.state.event} groups={this.state.groups} />
+      console.log('debug', this.state.groups);
+      view = <EventForm event={this.state.event} onClick={this.postClaneder} groups={this.state.groups} />
     }
 
     return view;
