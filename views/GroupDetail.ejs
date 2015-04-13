@@ -42,7 +42,7 @@
           <div id="C_Nav" class="col-md-3" style="padding-left: 0px;">
             <div id="nav_content" style="background-color:#ffffff;border-width: 1px; border-style: solid;border-color: #eee; padding-left:15px; padding-right:10px">
               <div id="group-info" style="padding-bottom:10px; padding-top:10px;">
-                <span>TC coach network is for everything related to competence </span>
+                <span><%= group.desc %> </span>
               </div>
 
               <ul class="dividedList" style="list-style-type:none; padding:0px;">
@@ -72,9 +72,22 @@
                 </button>
                 </h5>
               </div>
-              <div id="event-tag" style="padding-top:30px;">
+
+              <div id="group-tag" style="padding-top:30px;">
                 <h5>We're about:<%= group.desc %></h5>
               </div>
+
+              <% if ((typeof user!=="undefined" ) && ( user!==null) &&(user.uid==group.owner.uid)){ %>
+
+              <div id="group-edit-delete" style="padding-top:30px; padding-bottom:30px">
+                  <button type="button" class="btn btn-default" onclick= "edit_group()">Edit Group</button>
+                  <button type="button" class="btn btn-default" onclick= "delete_group()">Delete Group</button>
+              </div>
+             
+             <% } %>
+             
+              
+
             </div>
 
           </div>
@@ -162,6 +175,7 @@ function new_event(){
 
 }
 
+
  function group_user_change() {
 
   <% if (ingroup) {%>
@@ -172,6 +186,15 @@ function new_event(){
   <% } %>
 
  }
+
+function edit_group(){
+  window.location.href="/group/edit?id=" + <%= group.id %>;
+}
+
+function delete_group(){
+  window.location.href="/group/delete?id=" + <%= group.id %>;
+
+}
 
 
 </script>

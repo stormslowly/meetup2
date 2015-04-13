@@ -24,6 +24,27 @@ module.exports = {
     });
   },
 
+  /**
+   * `GroupController.create()`
+   */
+  edit: function(req, res) {
+
+    res.view('NewGroup', {
+      title: 'Edit Group',
+      user: req.session.user,
+    });
+  },
+
+  /**
+   * `GroupController.create()`
+   */
+  delete: function(req, res) {
+
+    res.view('NewGroup', {
+      title: 'Delete Group',
+      user: req.session.user,
+    });
+  },
 
   /**
    * `GroupController.newGroup()`

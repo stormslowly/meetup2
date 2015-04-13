@@ -114,6 +114,18 @@ module.exports.routes = {
 
   },
 
+  '/group/edit': {
+    'controller': 'Group',
+    'action': 'edit'
+
+  },
+
+  '/group/delete': {
+    'controller': 'Group',
+    'action': 'delete'
+
+  },
+
   '/group/members': {
     'controller': 'Group',
     'action': 'ShowMembers'
