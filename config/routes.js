@@ -124,5 +124,10 @@ module.exports.routes = {
     'action': 'newGroup'
   },
 
+  'POST /event/s': {
+    'controller': 'Event',
+    'action': 'upload'
+  }
+
 
 };

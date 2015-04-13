@@ -174,7 +174,26 @@ module.exports = {
         if (err) {
           return res.negotiate(err);
         }
-        res.json(event);
+
+        var groupId = req.param('group');
+
+        Event.create({
+            topic: event.topic,
+            desc: event.desc,
+            begindate: event.start,
+            enddate: event.end,
+            address: event.adress,
+            calenderFile: file,
+            group: {
+              id: groupId
+            }
+          })
+          .then(function(obj) {
+            res.json(obj);
+          }).catch(function(e) {
+            res.negotiate(e);
+          });
+
       });
     });
 
