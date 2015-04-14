@@ -65,13 +65,21 @@ module.exports = {
    */
   delete: function(req, res) {
 
-    var action = 'delete';
+    var groupid = req.param('id');
 
-    res.view('NewGroup', {
-      title: 'Delete Group',
-      user: req.session.user,
-      action: action,
+    Group.destroy({
+      id: groupid
+    }).exec(function(err, deleted) {
+      if (err) {
+        sails.log.error(err);
+        return res.negotiate(err);
+
+      } else {
+        return res.redirect('/');
+      }
     });
+
+
   },
 
   /**
