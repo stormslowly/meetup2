@@ -18,9 +18,12 @@ module.exports = {
    */
   create: function(req, res) {
 
+    var action = 'new';
+
     res.view('NewGroup', {
       title: 'New Group',
       user: req.session.user,
+      action: action,
     });
   },
 
@@ -29,9 +32,14 @@ module.exports = {
    */
   edit: function(req, res) {
 
+    var action = 'edit';
+    var groupid = req.param('id');
+
     res.view('NewGroup', {
       title: 'Edit Group',
       user: req.session.user,
+      action: action,
+      groupid: groupid,
     });
   },
 
@@ -40,9 +48,12 @@ module.exports = {
    */
   delete: function(req, res) {
 
+    var action = 'delete';
+
     res.view('NewGroup', {
       title: 'Delete Group',
       user: req.session.user,
+      action: action,
     });
   },
 
@@ -105,13 +116,47 @@ module.exports = {
 
 
   /**
-   * `GroupController.update()`
+   * `GroupController.updateGroup()`
    */
-  update: function(req, res) {
-    return res.json({
-      todo: 'update() is not implemented yet!'
+  updateGroup: function(req, res) {
+
+    var groupid = req.param('id');
+
+    console.log('To update group:', groupid);
+
+    var fs = require('fs');
+    var postData = req.param('Pic');
+    var dataBuffer = new Buffer(postData, 'base64');
+    var filename = require('path').join(sails.config.appPath, '/assets/images/') + groupid + '.jpg';
+    console.log(filename);
+    fs.writeFile(filename, dataBuffer, function(err) {
+      if (err) {
+        console.log('err');
+      } else {
+        console.log('file saved successfully');
+
+        Group.update(groupid, {
+          name: req.param('Name'),
+          desc: req.param('Desc'),
+          owner: req.session.user,
+          groupfd: '/images/' + groupid + '.jpg',
+        }).exec(function(err, updated) {
+          if (err) {
+            return res.negotiate(err);
+          } else {
+            var redirectstr = '/group/show/' + updated[0].id;
+            console.log('redirectstr', redirectstr);
+            return res.json(200, {
+              redirect: redirectstr
+            });
+          }
+        });
+
+
+      }
     });
   },
+
 
   show: function(req, res) {
 

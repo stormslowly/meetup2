@@ -28,7 +28,13 @@
           
         <div class="form-group">
             <div class="col-sm-offset-3 col-sm-10">
-                <button type="button" class="btn btn-default" form="GroupForm1" onclick="drawpict()">Public</button>
+              <% if(action=='new') { %>
+                <button type="button" class="btn btn-default" form="GroupForm1" onclick="newgroup()">Public</button>
+              <% }else if( action=='edit') { %>
+                <button type="button" class="btn btn-default" form="GroupForm1" onclick="editgroup(<%=groupid%>)">Update</button>
+              <% }else if(action=='delete') { %>
+                <button type="button" class="btn btn-default" form="GroupForm1" onclick="deletegroup(<%=groupid%>)">Delete</button>
+              <% } %>
             </div>
 
         </div>
@@ -161,7 +167,24 @@ $(document).ready(function() {
 });
 
 
-    
+    function newgroup(){
+      var posturl = '/newGroup';
+      drawpict();
+      send_group_info(posturl);
+    }
+
+    function editgroup(groupid){
+      var posturl = '/editGroup/' +groupid;
+      drawpict();
+      send_group_info(posturl);
+    }
+
+    function deletegroup(groupid){
+      var posturl = '/deleteGroup' +groupid;
+      drawpict();
+      send_group_info(posturl);
+    }
+
 
 
     function drawpict(){
@@ -181,10 +204,9 @@ $(document).ready(function() {
         var img_height = Math.round(ysize*ori_height/dimg_height);
         
         cxt.drawImage(img, img_x, img_y, img_width, img_height, 0, 0, xsize, ysize);
-        sendImg();
     }
 
-    function sendImg(){
+    function send_group_info(strposturl){
         var cvs = document.getElementById('canvas');
         var data = cvs.toDataURL('image/jpeg');
         if(data.length<48){
@@ -197,7 +219,7 @@ $(document).ready(function() {
         data = data.split(',')[1];
         var groupname = $('#GroupForm1 input[name=Name]').val();
         var groupdesc = $('#GroupForm1 textarea[name=Desc]').val();
-        $.post('/newGroup',{
+        $.post(strposturl,{
 
             Name:groupname,
             Desc:groupdesc,

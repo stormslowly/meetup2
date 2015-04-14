@@ -136,6 +136,16 @@ module.exports.routes = {
     'action': 'newGroup'
   },
 
+  'POST /editGroup/:id': {
+    'controller': 'Group',
+    'action': 'updateGroup'
+  },
+
+  'POST /deleteGroup/:id': {
+    'controller': 'Group',
+    'action': 'deleteGroup'
+  },
+
   'POST /event/s': {
     'controller': 'Event',
     'action': 'upload'
