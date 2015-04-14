@@ -34,13 +34,30 @@ module.exports = {
 
     var action = 'edit';
     var groupid = req.param('id');
+    var groupname, groupdesc;
 
-    res.view('NewGroup', {
-      title: 'Edit Group',
-      user: req.session.user,
-      action: action,
-      groupid: groupid,
+
+    Group.find({
+      id: groupid
+    }).populate('owner').exec(function(err, groups) {
+      if (err) {
+        sails.log.error(err);
+        return res.negotiate(err);
+
+      } else {
+        groupname = groups[0].name;
+        groupdesc = groups[0].desc;
+        res.view('NewGroup', {
+          title: 'Edit Group',
+          user: req.session.user,
+          action: action,
+          groupid: groupid,
+          groupname: groupname,
+          groupdesc: groupdesc,
+        });
+      }
     });
+
   },
 
   /**
