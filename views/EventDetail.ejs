@@ -72,28 +72,29 @@
           <div id="C_Content" class="col-md-7" style="padding-left:0px">
             <div id="event-details" style="background-color:#ffffff">
               <div id="event_title">
-                <h2 style="margin-top:1px"> <%= event.topic %></h2>
+                <h2 style="margin-top:1px; color:rgba(255, 116, 0, 0.88)"> <%= event.topic %></h2>
               </div>
               <div id="event-content">
                 <div id="event_when">
                   <time itemprop="startDate" datetime="2015-03-14T09:30:00+08:00">
                     <% var begindate = event.begindate %>
-                    <h4 style="color:rbg(87,53,8);">Begin: <%= begindate.toLocaleDateString() %></h4>
-                    <p class="subtext"><%= begindate.getHours() %>:<%= begindate.getMinutes() %></p>
+                    <span>From:<%= begindate.toLocaleDateString() %></span><h4 style="color:rgb(87,53,8);">  <%= begindate.getHours() %>:<%= begindate.getMinutes() %></h4>
                     <% var enddate = event.enddate %>
-                    <h4 style = "color:rgb(87,53,8);">End: <%= enddate.toLocaleDateString() %></h4>
-                    <p class="subtext"><%= enddate.getHours() %>:<%= enddate.getMinutes() %></p>
+                    <span>To:<%= enddate.toLocaleDateString() %></span><h4 style = "color:rgb(87,53,8);"> <%= enddate.getHours() %>:<%= enddate.getMinutes() %></h4>
+                    
                   </time>
                 </div>
                 <div id="event_where">
-                  <h3><%= event.address %></h3>
+                  <span>Address: </span><h4 style = "color:rgb(87,53,8);"><%= event.address %></h4>
                 </div>
+                
 
                 <div class="divide_line" id="divide_line" style="padding-bottom:20px; padding-top:10px; display:block; width:100%; line-height:38px; height:0px; border-top-width: thin;border-top-color: #eee;border-top-style: solid;">
                 </div>
 
                 <pre id="event_detail_content" style = "background-color:#fff; border-style:none"><%= event.desc %> 
                 </pre>
+                <button type="button" onclick="event_update(<%= event.id %>)">Edit</button>
               </div>
             </div>
           </div>
@@ -152,6 +153,10 @@
     window.location.href="/user/joinevent/" + <%= event.id %>;
     <% } %>
      
+ }
+
+ function event_update(event_id){
+  window.location.href="/event/edit/" + <%= event.id %>;
  }
   
 </script> 

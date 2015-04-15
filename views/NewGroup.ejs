@@ -38,10 +38,8 @@
             <div class="col-sm-offset-3 col-sm-10">
               <% if(action=='new') { %>
                 <button type="button" class="btn btn-default" form="GroupForm1" onclick="newgroup()">Public</button>
-              <% }else if( action=='edit') { %>
+              <% }else{ %>
                 <button type="button" class="btn btn-default" form="GroupForm1" onclick="editgroup(<%=groupid%>)">Update</button>
-              <% }else if(action=='delete') { %>
-                <button type="button" class="btn btn-default" form="GroupForm1" onclick="deletegroup(<%=groupid%>)">Delete</button>
               <% } %>
             </div>
 
@@ -186,13 +184,6 @@ $(document).ready(function() {
       drawpict();
       send_group_info(posturl);
     }
-
-    function deletegroup(groupid){
-      var posturl = '/deleteGroup' +groupid;
-      drawpict();
-      send_group_info(posturl);
-    }
-
 
 
     function drawpict(){
