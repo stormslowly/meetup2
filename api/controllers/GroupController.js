@@ -100,7 +100,6 @@ module.exports = {
       return res.redirect('/login');
     }
 
-    console.log('To create new group');
 
     Group.create(newGroup, function(err, created) {
 
@@ -113,12 +112,12 @@ module.exports = {
         var postData = req.param('Pic');
         var dataBuffer = new Buffer(postData, 'base64');
         var filename = require('path').join(sails.config.appPath, '/assets/images/') + created.id + '.jpg';
-        console.log(filename);
+
         fs.writeFile(filename, dataBuffer, function(err) {
           if (err) {
             console.log('err');
           } else {
-            console.log('file saved successfully');
+
             Group.update(created.id, {
               groupfd: '/images/' + created.id + '.jpg',
             }).exec(function(err, updated) {
@@ -126,7 +125,6 @@ module.exports = {
                 return res.negotiate(err);
               } else {
                 var redirectstr = '/user/joingroup/' + updated[0].id;
-                console.log('redirectstr', redirectstr);
                 return res.json(200, {
                   redirect: redirectstr
                 });
@@ -147,13 +145,11 @@ module.exports = {
 
     var groupid = req.param('id');
 
-    console.log('To update group:', groupid);
-
     var fs = require('fs');
     var postData = req.param('Pic');
     var dataBuffer = new Buffer(postData, 'base64');
     var filename = require('path').join(sails.config.appPath, '/assets/images/') + groupid + '.jpg';
-    console.log(filename);
+
     fs.writeFile(filename, dataBuffer, function(err) {
       if (err) {
         console.log('err');
@@ -170,7 +166,6 @@ module.exports = {
             return res.negotiate(err);
           } else {
             var redirectstr = '/group/show/' + updated[0].id;
-            console.log('redirectstr', redirectstr);
             return res.json(200, {
               redirect: redirectstr
             });

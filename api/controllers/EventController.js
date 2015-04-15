@@ -84,15 +84,9 @@ module.exports = {
   show: function(req, res) {
 
     var eventId = req.param('id');
-    console.log('eventId is:', eventId);
 
     var user = req.session.user;
 
-    if (user === null) {
-      console.log('session user is null');
-    }
-
-    console.log('user is:', user);
 
     Event.find({
       id: eventId
@@ -151,7 +145,6 @@ module.exports = {
             sails.log.error(err);
             return res.negotiate(err);
           } else {
-            console.log('group is', groups[0]);
 
             res.view('EventDetail', {
               event: eve,
@@ -218,7 +211,7 @@ module.exports = {
 
   updateEvent: function(req, res) {
 
-    console.log('to update event');
+
     var strDate1 = req.param('beginDate');
     var kk1 = strDate1.split('-');
     var strTime1 = req.param('BeginTime');
@@ -231,6 +224,7 @@ module.exports = {
     var enddate = new Date(kk2[0], kk2[1] - 1, kk2[2], tt2[0], tt2[1]);
     var groupname = req.param('Group');
     var eventid = req.param('id');
+
 
     Group.find({
       name: groupname

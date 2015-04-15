@@ -26,17 +26,25 @@
         <div class="form-group">
             <label for="inputDate" class="col-sm-2 control-label">Begin Date</label>
             <div class="col-sm-8">
-                <input type="text" class="form-control" id="inputBeginDate" name= "beginDate" value="<%= begindate.toLocaleDateString() %>" placeholder="">
+            <%if (begindate!='') {%>
+            <% var bgdate = begindate.getFullYear()  + '-' + (begindate.getMonth() + 1) + '-' + begindate.getDate() %>
+                <input type="text" readonly="readonly" class="form-control" id="inputBeginDate" name= "beginDate" value="<%=bgdate%>" placeholder="">
+            <%}else{%>
+                <input type="text" class="form-control" id="inputBeginDate" name= "beginDate" value="" placeholder="">
+            <%} %>
             </div>
         </div>
 
         <div class="form-group">
             <label for="inputTime" class="col-sm-2 control-label">Begin Time</label>
             <div class="col-sm-8">
-            <% var hh= begindate.getHours() %>
+            <% var hh='' %>
+            <% if (begindate!='') {%>
+            <% hh= begindate.getHours() %>
             <% if (hh<10) {hh='0'+hh} %>
             <% var mm= begindate.getMinutes() %>
             <% if (mm<10) {mm='0'+mm} %>
+            <% } %>
                 <input type="time" class="form-control" id="inputBeginTime" name= "BeginTime" value="<%= hh %>:<%= mm %>" placeholder="" onclick="_SetTime(this)">
             </div>
         </div>
@@ -44,17 +52,25 @@
         <div class="form-group">
             <label for="inputDate" class="col-sm-2 control-label">End Date</label>
             <div class="col-sm-8">
-                <input type="text" class="form-control" id="inputEndDate" name= "endDate" value="<%= enddate.toLocaleDateString() %>" placeholder="">
+            <%if (enddate!=''){%>
+                <% var todate =  enddate.getFullYear()+'-'+(enddate.getMonth() + 1)+'-'+enddate.getDate() %>
+                <input type="text" readonly="readonly" class="form-control" id="inputEndDate" name= "endDate" value="<%=todate%>" placeholder="">
+            <%}else{%>
+                <input type="text" class="form-control" id="inputEndDate" name= "endDate" value="" placeholder="">
+            <%}%>
             </div>
         </div>
 
         <div class="form-group">
             <label for="inputTime" class="col-sm-2 control-label">End Time</label>
             <div class="col-sm-8">
+            <% hh='' %>
+            <% if (enddate!=''){%>
             <% hh= enddate.getHours() %>
             <% if (hh<10) {hh='0'+hh} %>
             <% mm= enddate.getMinutes() %>
             <% if (mm<10) {mm='0'+mm} %>
+            <% } %>
                 <input type="time" class="form-control" id="inputEndTime" name= "EndTime" value="<%=hh%>:<%=mm%>" placeholder="" onclick="_SetTime(this)">
             </div>
         </div>
@@ -82,4 +98,6 @@
             </div>
         </div>
     </form>
+
+    
 
