@@ -22,7 +22,7 @@ module.exports = {
         console.log('Something is wrong:', err);
         return res.negotiate(err);
       } else {
-        res.view('EventPublic', {
+        res.view('EventManager', {
           title: 'Edit Event',
           user: req.session.user,
           action: action,
@@ -63,7 +63,7 @@ module.exports = {
         var group = [];
         group.push(owngroup);
 
-        res.view('EventPublic', {
+        res.view('EventManager', {
           title: 'Edit Event',
           user: req.session.user,
           action: action,

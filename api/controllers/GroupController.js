@@ -20,7 +20,7 @@ module.exports = {
 
     var action = 'new';
 
-    res.view('NewGroup', {
+    res.view('GroupManager', {
       title: 'New Group',
       user: req.session.user,
       action: action,
@@ -47,7 +47,7 @@ module.exports = {
       } else {
         groupname = groups[0].name;
         groupdesc = groups[0].desc;
-        res.view('NewGroup', {
+        res.view('GroupManager', {
           title: 'Edit Group',
           user: req.session.user,
           action: action,
