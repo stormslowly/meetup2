@@ -26,10 +26,17 @@ module.exports = {
       return res.redirect('/login');
     };
 
-    req.validate({
-      uid: 'string',
-      password: 'string'
-    });
+    try {
+      req.validate({
+        uid: 'string',
+        password: 'string'
+      });
+
+    } catch (err) {
+      return res.send(400, err);
+    }
+
+
 
     User.findOne({
       uid: req.body.uid
