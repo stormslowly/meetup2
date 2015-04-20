@@ -53,6 +53,22 @@ module.exports.routes = {
 
   },
 
+  '/event/edit/:id': {
+    'controller': 'Event',
+    'action': 'edit'
+  },
+
+  'POST /event/update/:id': {
+    'controller': 'Event',
+    'action': 'updateEvent'
+  },
+
+  'POST /newEvent': {
+    'controller': 'Event',
+    'action': 'newEvent'
+  },
+
+
   '/user/myevent': {
     'controller': 'User',
     'action': 'show_my_event'
@@ -86,12 +102,6 @@ module.exports.routes = {
 
 
 
-  'POST /newEvent': {
-    'controller': 'Event',
-    'action': 'newEvent'
-  },
-
-
   'POST /mailhook': {
     'controller': 'Mailhook',
     'action': 'hook'
@@ -114,6 +124,18 @@ module.exports.routes = {
 
   },
 
+  '/group/edit': {
+    'controller': 'Group',
+    'action': 'edit'
+
+  },
+
+  '/group/delete/:id': {
+    'controller': 'Group',
+    'action': 'delete'
+
+  },
+
   '/group/members': {
     'controller': 'Group',
     'action': 'ShowMembers'
@@ -123,6 +145,12 @@ module.exports.routes = {
     'controller': 'Group',
     'action': 'newGroup'
   },
+
+  'POST /editGroup/:id': {
+    'controller': 'Group',
+    'action': 'updateGroup'
+  },
+
 
   'POST /event/s': {
     'controller': 'Event',

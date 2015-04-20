@@ -5,14 +5,22 @@
         <div class="form-group">
             <label for="inputName" class="col-sm-3 control-label">Name</label>
             <div class="col-sm-8">
+              <% if(action=='new') { %>
                 <input type="text" class="form-control" id="inputName" name= "Name" placeholder="">
+              <% }else { %>
+                <input type="text" class="form-control" id="inputName" name= "Name" placeholder="" value="<%= groupname %>" >
+              <% } %>
             </div>
         </div>
         
         <div class="form-group">
           <label for="inputDesc" class="col-sm-3 control-label">Group Description</label>
           <div class="col-sm-8">
+            <% if(action=='new') { %>
             <textarea class="form-control col-sm-8" rows="4" id="inputDesc" name="Desc"></textarea>
+              <% }else { %>
+            <textarea class="form-control col-sm-8" rows="4" id="inputDesc" name="Desc"><%= groupdesc %></textarea>
+              <% } %>
           </div>
         </div>
         
@@ -20,13 +28,21 @@
           <label for="inputPic" class="col-sm-3 control-label">Group Picture (360px*300px)</label>
           <div class="col-sm-8">
             <input type="file"  name="groupflag" multiple="multiple">
-          </div>
+          </div>  
         </div>
 
+        
+
+          
         <div class="form-group">
             <div class="col-sm-offset-3 col-sm-10">
-                <button type="button" class="btn btn-default" form="GroupForm1" onclick="drawpict()">Public</button>
+              <% if(action=='new') { %>
+                <button type="button" class="btn btn-default" form="GroupForm1" onclick="newgroup()">Public</button>
+              <% }else{ %>
+                <button type="button" class="btn btn-default" form="GroupForm1" onclick="editgroup(<%=groupid%>)">Update</button>
+              <% } %>
             </div>
+
         </div>
     </form>
 <div class="container">
@@ -35,18 +51,11 @@
 <div class="jc-demo-box">
 
 
-
-<img id="originalimg" src="" style="display:none">
-  <div id="preview-pane">
-    <div class="preview-container">
-      <img id="destimg" src="" class="jcrop-preview" alt="Preview" style="display:none" />
-    </div>
-  </div>
-
- 
+<img id="originalimg" src="/images/find.jpg" style="display:none">
+<div id="for_preview">
 
 
-
+</div>
 
 </div>
 </div>
@@ -66,19 +75,32 @@ var dimg_y;
 var const_pic_width = 600;
 
 $(document).ready(function() {
+
+    var jcrop_api, boundx, boundy;
+
+    var preview_html = '<div id="preview-pane" >';
+    preview_html += '<div class="preview-container">';
+    preview_html+='<img id="destimg" src="" class="jcrop-preview" alt="Preview" style="display:none">';
+    preview_html += '</div></div>';
+
+    $('#for_preview').html(preview_html);
+
     $("#originalimg").load(function() {
         var img = document.getElementById('originalimg');
         ori_width = img.naturalWidth;
         ori_height = img.naturalHeight;
         var new_width = const_pic_width;
         var new_height = Math.round((const_pic_width * ori_height)/ori_width);
-        $('#originalimg').css({'width': new_width, 'height': new_height});
+        console.log('new_width:',new_width);
+        console.log('new_height',new_height);
+        $('#originalimg').css({
+          'width': new_width+'px', 
+          'height': new_height+'px'
+        });
 
         
 
-        var jcrop_api,
-        boundx,
-        boundy,
+        
 
         // Grab some information about the preview pane
         $preview = $('#preview-pane'),
@@ -87,6 +109,9 @@ $(document).ready(function() {
 
         xsize = $pcnt.width(),
         ysize = $pcnt.height();
+
+        console.log('xsize', xsize);
+        console.log('ysize', ysize);
         
     
         console.log('init',[xsize,ysize]);
@@ -101,11 +126,13 @@ $(document).ready(function() {
           boundy = bounds[1];
           console.log('boundx:',boundx);
           console.log('boundy:',boundy);
+
           //Store the API in the jcrop_api variable
           jcrop_api = this;
 
           // Move the preview into the jcrop container for css positioning
           $preview.appendTo(jcrop_api.ui.holder);
+          
         });
 
         function updatePreview(c)
@@ -127,18 +154,36 @@ $(document).ready(function() {
             });
           }
         }
-
-
     });
-});
 
-$('#GroupForm1 input[name=groupflag]').change( function(event) {
 
-    var tmppath = URL.createObjectURL(event.target.files[0]);
-    $('img').fadeIn('fast').attr('src',tmppath);
+     $('#GroupForm1 input[name=groupflag]').change( function(event) {
+      jcrop_api.destroy();
+      var preview_html = '<div id="preview-pane" >';
+      preview_html += '<div class="preview-container">';
+      preview_html+='<img id="destimg" src="" class="jcrop-preview" alt="Preview" style="display:none">';
+      preview_html += '</div></div>';
+      $('#for_preview').html(preview_html);
+      var tmppath = URL.createObjectURL(event.target.files[0]);
+      $('img').fadeIn('fast').attr('src',tmppath);
            
 });
-    
+
+
+});
+
+
+    function newgroup(){
+      var posturl = '/newGroup';
+      drawpict();
+      send_group_info(posturl);
+    }
+
+    function editgroup(groupid){
+      var posturl = '/editGroup/' +groupid;
+      drawpict();
+      send_group_info(posturl);
+    }
 
 
     function drawpict(){
@@ -158,10 +203,9 @@ $('#GroupForm1 input[name=groupflag]').change( function(event) {
         var img_height = Math.round(ysize*ori_height/dimg_height);
         
         cxt.drawImage(img, img_x, img_y, img_width, img_height, 0, 0, xsize, ysize);
-        sendImg();
     }
 
-    function sendImg(){
+    function send_group_info(strposturl){
         var cvs = document.getElementById('canvas');
         var data = cvs.toDataURL('image/jpeg');
         if(data.length<48){
@@ -174,7 +218,7 @@ $('#GroupForm1 input[name=groupflag]').change( function(event) {
         data = data.split(',')[1];
         var groupname = $('#GroupForm1 input[name=Name]').val();
         var groupdesc = $('#GroupForm1 textarea[name=Desc]').val();
-        $.post('/newGroup',{
+        $.post(strposturl,{
 
             Name:groupname,
             Desc:groupdesc,

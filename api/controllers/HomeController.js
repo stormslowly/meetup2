@@ -12,13 +12,21 @@ module.exports = {
     var user = req.session.user;
 
     Group.find({}).populate('owner').populate('user').exec(function(err, groups) {
+      if (err) {
+        sails.log.error(err);
+        return res.negotiate(err);
 
-      return res.view('meetups', {
-        meetups: groups,
-        linkname: 'show',
-        user: user,
-        layout: 'layoutPromote.ejs'
-      });
+      } else {
+        return res.view('meetups', {
+          meetups: groups,
+          linkname: 'show',
+          user: user,
+          layout: 'layoutPromote.ejs'
+        });
+
+      }
+
+
     });
   },
 

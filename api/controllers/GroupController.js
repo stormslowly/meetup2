@@ -18,12 +18,69 @@ module.exports = {
    */
   create: function(req, res) {
 
-    res.view('NewGroup', {
+    var action = 'new';
+
+    res.view('GroupManager', {
       title: 'New Group',
       user: req.session.user,
+      action: action,
     });
   },
 
+  /**
+   * `GroupController.create()`
+   */
+  edit: function(req, res) {
+
+    var action = 'edit';
+    var groupid = req.param('id');
+    var groupname, groupdesc;
+
+
+    Group.find({
+      id: groupid
+    }).populate('owner').exec(function(err, groups) {
+      if (err) {
+        sails.log.error(err);
+        return res.negotiate(err);
+
+      } else {
+        groupname = groups[0].name;
+        groupdesc = groups[0].desc;
+        res.view('GroupManager', {
+          title: 'Edit Group',
+          user: req.session.user,
+          action: action,
+          groupid: groupid,
+          groupname: groupname,
+          groupdesc: groupdesc,
+        });
+      }
+    });
+
+  },
+
+  /**
+   * `GroupController.create()`
+   */
+  delete: function(req, res) {
+
+    var groupid = req.param('id');
+
+    Group.destroy({
+      id: groupid
+    }).exec(function(err, deleted) {
+      if (err) {
+        sails.log.error(err);
+        return res.negotiate(err);
+
+      } else {
+        return res.redirect('/');
+      }
+    });
+
+
+  },
 
   /**
    * `GroupController.newGroup()`
@@ -43,7 +100,6 @@ module.exports = {
       return res.redirect('/login');
     }
 
-    console.log('To create new group');
 
     Group.create(newGroup, function(err, created) {
 
@@ -56,12 +112,12 @@ module.exports = {
         var postData = req.param('Pic');
         var dataBuffer = new Buffer(postData, 'base64');
         var filename = require('path').join(sails.config.appPath, '/assets/images/') + created.id + '.jpg';
-        console.log(filename);
+
         fs.writeFile(filename, dataBuffer, function(err) {
           if (err) {
             console.log('err');
           } else {
-            console.log('file saved successfully');
+
             Group.update(created.id, {
               groupfd: '/images/' + created.id + '.jpg',
             }).exec(function(err, updated) {
@@ -69,7 +125,6 @@ module.exports = {
                 return res.negotiate(err);
               } else {
                 var redirectstr = '/user/joingroup/' + updated[0].id;
-                console.log('redirectstr', redirectstr);
                 return res.json(200, {
                   redirect: redirectstr
                 });
@@ -84,13 +139,44 @@ module.exports = {
 
 
   /**
-   * `GroupController.update()`
+   * `GroupController.updateGroup()`
    */
-  update: function(req, res) {
-    return res.json({
-      todo: 'update() is not implemented yet!'
+  updateGroup: function(req, res) {
+
+    var groupid = req.param('id');
+
+    var fs = require('fs');
+    var postData = req.param('Pic');
+    var dataBuffer = new Buffer(postData, 'base64');
+    var filename = require('path').join(sails.config.appPath, '/assets/images/') + groupid + '.jpg';
+
+    fs.writeFile(filename, dataBuffer, function(err) {
+      if (err) {
+        console.log('err');
+      } else {
+        console.log('file saved successfully');
+
+        Group.update(groupid, {
+          name: req.param('Name'),
+          desc: req.param('Desc'),
+          owner: req.session.user,
+          groupfd: '/images/' + groupid + '.jpg',
+        }).exec(function(err, updated) {
+          if (err) {
+            return res.negotiate(err);
+          } else {
+            var redirectstr = '/group/show/' + updated[0].id;
+            return res.json(200, {
+              redirect: redirectstr
+            });
+          }
+        });
+
+
+      }
     });
   },
+
 
   show: function(req, res) {
 
