@@ -12,13 +12,17 @@ module.exports = {
     topic: 'string',
     desc: 'string',
     address: 'string',
-    begindate: 'date',
-    enddate: 'date',
+    begindate: {
+      type: 'datetime'
+    },
+    enddate: {
+      type: 'datetime'
+    },
     group: {
       model: 'group'
     },
     user: {
-      collection: 'User',
+      collection: 'user',
       via: 'events',
       dominant: true
     }
