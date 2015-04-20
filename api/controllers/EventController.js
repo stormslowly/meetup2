@@ -277,7 +277,7 @@ module.exports = {
             desc: event.desc,
             begindate: event.start,
             enddate: event.end,
-            address: event.adress,
+            address: event.address,
             calenderFile: file,
             group: {
               id: groupId

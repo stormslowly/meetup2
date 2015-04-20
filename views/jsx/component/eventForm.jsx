@@ -8,7 +8,7 @@ var EventForm = React.createClass({
     console.log('logsgroupOptions', groupOptions);
     var groupOptions = groups.map(function(group, i) {
       console.log('log group', group);
-      return (<option kye={ i } value={i}>
+      return (<option key={ i } value={group.id}>
                 {group.name}
               </option>)
     });
