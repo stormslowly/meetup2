@@ -130,9 +130,9 @@ module.exports.routes = {
 
   },
 
-  '/group/delete/:id': {
+  '/group/remove/:id': {
     'controller': 'Group',
-    'action': 'delete'
+    'action': 'remove'
 
   },
 

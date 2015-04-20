@@ -63,9 +63,11 @@ module.exports = {
   /**
    * `GroupController.create()`
    */
-  delete: function(req, res) {
+  remove: function(req, res) {
 
     var groupid = req.param('id');
+
+    console.log('groupid:', groupid);
 
     Group.destroy({
       id: groupid
