@@ -50,3 +50,11 @@ And you can edit `.bowerrc` to set the proxy for `bower`, below is one example:
   "https-proxy": "http://10.144.1.10:8080"
 }
 ```
+
+# How to contribute
+
+This project is internal open source project. We welcome anyone to join this project, try to make this project to be cool. You can give contribute via coding or reporting bugs. 
+Please contact Shu, Pengfei (Nokia - CN/Hangzhou) or Wang, Gang-Layner (Nokia - CN/Hangzhou) to join this project. 
+
+## Technical required: 
+This project is based on sails and Nodejs, so some basic knowledge about Javascript, Nodejs and Sails are needed. The database used in this project is Mysql.  
