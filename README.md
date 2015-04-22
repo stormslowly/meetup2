@@ -57,4 +57,8 @@ This project is internal open source project. We welcome anyone to join this pro
 Please contact Shu, Pengfei (Nokia - CN/Hangzhou) or Wang, Gang-Layner (Nokia - CN/Hangzhou) to join this project. 
 
 ## Technical required: 
-This project is based on sails and Nodejs, so some basic knowledge about Javascript, Nodejs and Sails are needed. The database used in this project is Mysql.  
+This project is based on sails and Nodejs, so some basic knowledge about Javascript, Nodejs and Sails are needed. The database used in this project is Mysql.
+
+# How to use
+Please visit: http://hzegsav40:1339/, and use the NOKIA intera account and password to login the system. Now you can public group and event. 
+Also you can select your favorite group and event to join. 
