@@ -58,6 +58,7 @@ Move to the project root directory, and run below commands to install other pack
 management tool which can handle the package dependence well.
 
 ``` bash
+$ npm -g install bower
 $ npm i
 ```
 
