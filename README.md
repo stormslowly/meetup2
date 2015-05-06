@@ -74,6 +74,12 @@ So mysql and sails-mysql shall be installed when it is running in production mod
 
 - `npm install sails-mysql`
 
+**Step5** In this project, we use mocha [ http://mochajs.org/ ] for unit test. Unit test is a good way to protect your code. To install mocha:
+
+``` bash
+$ npm install -g mocha
+```
+
 ### Run in local environment:
 In local, you can run 'sails lift' or 'sails console' in the root directory of this project to startup the server. Suppose the port 1337 used by server to listen the connect request, then you can visit the server in 
 browser with url 'http://localhost:1337'. 
@@ -83,8 +89,6 @@ You can run 'sails lift --silly', then all detail log will be printed in console
 
 
 
-Now it has been deployed in the server hzegsav40. You can visit it via http://hzegsav40:1339/, and use the NOKIA intera account and password to login the system. Now you can public group and event. 
-Also you can select your favorite group and event to join. Please use chorme to visit this web.
 
 ### Files Tree
 
@@ -129,3 +133,6 @@ running by [pm2](https://github.com/Unitech/pm2)
 $ sudo npm install pm2 -g
 $ NODE_ENV=production pm2 -i 1 --name meetup start app.js
 ```
+
+Now it has been deployed in the server hzegsav40. You can visit it via http://hzegsav40:1339/, and use the NOKIA intera account and password to login the system. Now you can public group and event. 
+Also you can select your favorite group and event to join. Please use chorme to visit this web.
