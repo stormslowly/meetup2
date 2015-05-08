@@ -51,9 +51,14 @@
 <div class="jc-demo-box">
 
 
-<img id="originalimg" src="/images/find.jpg" style="display:none">
+<img id="originalimg" src="/images/find.jpg">
 <div id="for_preview">
 
+<div id="preview-pane" >
+<div class="preview-container">
+<img id="destimg" src="/images/find.jpg" lass="jcrop-preview" alt="Preview" style="display:block">
+</div>
+</div>
 
 </div>
 
@@ -78,15 +83,9 @@ $(document).ready(function() {
 
     var jcrop_api, boundx, boundy;
 
-    var preview_html = '<div id="preview-pane" >';
-    preview_html += '<div class="preview-container">';
-    preview_html+='<img id="destimg" src="" class="jcrop-preview" alt="Preview" style="display:none">';
-    preview_html += '</div></div>';
 
-    $('#for_preview').html(preview_html);
-
-    $("#originalimg").load(function() {
-        var img = document.getElementById('originalimg');
+    $('#originalimg').bind("load", function(){
+      var img = document.getElementById('originalimg');
         ori_width = img.naturalWidth;
         ori_height = img.naturalHeight;
         var new_width = const_pic_width;
@@ -154,11 +153,18 @@ $(document).ready(function() {
             });
           }
         }
+    }).each(function(){
+      if(this.complete)
+        $(this).load();
     });
 
+   
 
      $('#GroupForm1 input[name=groupflag]').change( function(event) {
-      jcrop_api.destroy();
+      
+      if(jcrop_api){
+        jcrop_api.destroy();
+      }
       var preview_html = '<div id="preview-pane" >';
       preview_html += '<div class="preview-container">';
       preview_html+='<img id="destimg" src="" class="jcrop-preview" alt="Preview" style="display:none">';
