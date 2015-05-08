@@ -76,8 +76,9 @@ var DropzoneDemo = React.createClass({
       data: formData,
       processData: false,
       contentType: false
-    }).done(function(res, xhr) {
-      console.log('msg', res, xhr);
+    }).done(function(res, textStatus, xhr) {
+      console.log('msg', res);
+      window.location.href = 'event/show/' + res.id
     }).fail(function() {
       console.log('logs', arguments);
     });

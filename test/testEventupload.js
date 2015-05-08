@@ -1,6 +1,5 @@
 'use strict';
 
-var expect = require('chai').expect;
 var request = require('supertest');
 var path = require('path');
 describe('Event uploader', function() {
@@ -16,12 +15,21 @@ describe('Event uploader', function() {
     request(app)
       .post('/event/upload')
       .attach('ics', path.join(__dirname, './services/invitation.ics'))
+      .field('group', 1)
       .expect(200)
-      .end(function(err, res) {
-        expect(res.body).to.contain.keys(
-          ['topic', 'desc', 'start', 'end']);
-        done(err);
-      });
+      .end(done);
+  });
+
+
+  it('should return error when no ics attached', function(done) {
+    request(app)
+      .post('/event/upload')
+      .send({
+        group: 1
+      })
+      .expect(400)
+      .expect(/No ICS file/)
+      .end(done);
   });
 
 });

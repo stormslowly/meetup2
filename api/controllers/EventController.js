@@ -276,6 +276,11 @@ module.exports = {
       if (err) {
         return res.negotiate(err);
       }
+
+      if (files.length === 0) {
+        return res.badRequest('No ICS file uploaded');
+      }
+
       var file = files[0].fd;
       ICSParse.icsFiletoEvent(file, function(err, event) {
         if (err) {
