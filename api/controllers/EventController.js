@@ -84,7 +84,6 @@ module.exports = {
   show: function(req, res) {
 
     var eventId = req.param('id');
-
     var user = req.session.user;
 
 
@@ -107,55 +106,44 @@ module.exports = {
       var ingroup = false;
       var groupid = events[0].group.id;
 
-      Group.find({
-        id: groupid
-      }).populate('user').exec(function(err, groups) {
-        if ((user !== undefined) && (user !== null)) {
-          for (var i = 0; i < groups[0].user.length; i++) {
-
-            if (user.id === groups[0].user[i].id) {
-              ingroup = true;
-            }
-          }
-
-        }
-
-
-      });
-
       if ((user !== undefined) && (user !== null)) {
 
         for (var i = 0; i < events[0].user.length; i++) {
-
           if (user.id === events[0].user[i].id) {
             inevent = true;
           }
         }
       }
 
-      var eve = events[0];
-
       Group.find({
-          id: eve.group.id
-        })
-        .populate('owner')
-        .populate('user')
-        .exec(function(err, groups) {
-          if (err) {
-            sails.log.error(err);
-            return res.negotiate(err);
-          } else {
+        id: groupid
+      }).populate('owner').populate('user').exec(function(err, groups) {
 
-            res.view('EventDetail', {
-              event: eve,
-              group: groups[0],
-              user: user,
-              ingroup: ingroup,
-              inevent: inevent,
-            });
+        if (err) {
+          sails.log.error(err);
+          return res.negotiate(err);
+        } else {
+
+          if ((user !== undefined) && (user !== null)) {
+            for (var i = 0; i < groups[0].user.length; i++) {
+              if (user.id === groups[0].user[i].id) {
+                ingroup = true;
+              }
+            }
           }
-        });
+
+          res.view('EventDetail', {
+            event: events[0],
+            group: groups[0],
+            user: user,
+            ingroup: ingroup,
+            inevent: inevent,
+          });
+        }
+      });
+
     });
+
   },
 
   newEvent: function(req, res) {
